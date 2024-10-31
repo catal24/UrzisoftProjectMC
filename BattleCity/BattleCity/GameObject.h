@@ -3,20 +3,24 @@ class GameObject
 {
 
 public:
-    int getXStart() const { return m_xStart; }
-    void setXStart(int xStart) { m_xStart = xStart; }
 
-    int getYStart() const { return m_yStart; }
-    void setYStart(int yStart) { m_yStart = yStart; }
+    GameObject(int xStart = 0, int yStart = 0, int id = 0, bool isBreakable = false, bool isVisible = true);
 
-    int getId() const { return m_id; }
-    void setId(int id) { m_id = id; }
+    int getXStart() const;
+    void setXStart(int xStart);
 
-    bool isBreakable() const { return m_isBreakable; }
-    void setBreakable(bool isBreakable) { m_isBreakable = isBreakable; }
 
-    bool isVisible() const { return m_isVisible; }
-    void setVisible(bool isVisible) { m_isVisible = isVisible; }
+    int getYStart() const;
+    void setYStart(int yStart);
+
+    int getId() const;
+    void setId(int id);
+
+    bool isBreakable() const;
+    void setBreakable(bool isBreakable);
+
+    bool isVisible() const;
+    void setVisible(bool isVisible);
 
 protected:
 	int m_xStart;
