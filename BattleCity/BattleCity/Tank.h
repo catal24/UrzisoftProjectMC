@@ -1,5 +1,6 @@
 #pragma once
 #include "GameObject.h"
+#include "Bullet.h"
 class Tank :public GameObject
 {
 public:
@@ -22,8 +23,6 @@ public:
 	int m_lives;
 	int m_speed;
 	bool m_isDead;
-	
-
 
 };
 
