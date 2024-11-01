@@ -2,12 +2,24 @@
 #include <string>
 #include "Tank.h"
 class Player
-{
-private:
+{public:
+	Player(std::string name, int id, int credits=0, int rank=0);
+	~Player() {}
+
+	void SetName(std::string name);
+	void SetId(int id);
+	void SetCredits(int credits);
+	void SetRank(int rank);
+	std::string GetName(std::string name)const;
+	int GetId(int id)const;
+	int GetCredits(int credits)const;
+	int GetRank(int rank)const;
+
+	private:
 	std::string m_name;
-	int id;
-	int credits;
-	int rank;
-	Tank tank;
+	int m_id;
+	int m_credits;
+	int m_rank;
+	Tank m_tank;
 };
 

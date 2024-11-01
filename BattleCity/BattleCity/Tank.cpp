@@ -3,49 +3,54 @@
 
 
 
-Tank::Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed,bool isDead)
-{
-	GameObject(xStart, yStart, id, isBreakable, isVisible);
-	m_lives = lives;
-	m_speed=speed;
-	m_isDead = false;
-}
+Tank::Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed,bool isDead):
+	GameObject(xStart, yStart, id, isBreakable, isVisible),
+	m_lives(lives),
+	m_speed(speed),
+	m_isDead(isDead),
+	m_bullet (1, 10)
+	{}
 
-void Tank::setSpeed(int amount)
+
+void Tank::SetSpeed(int amount)
 {
 	m_speed = amount;
 }
 
-void Tank::setLives(int amount)
+void Tank::SetLives(int amount)
 {
 	m_lives = amount;
 }
 
-void Tank::setIsDead()
+void Tank::SetIsDead()
 {
 	m_isDead = true;
 }
 
-int Tank::getSpeed() const
+int Tank::GetSpeed() const
 {
 	return m_speed;
 }
 
-int Tank::getLives() const
+int Tank::GetLives() const
 {
 	return m_lives;
 }
 
-bool Tank::getIsDead() const
+bool Tank::GetIsDead() const
 {
 	return m_isDead;
 }
 
 void Tank::die()
 {
-	setLives(m_lives - 1);
-	if (m_isDead > 0)
+	m_lives-= 1;
+	if (m_lives> 0)
 		respawn();
 	else
-		setIsDead();
+		m_isDead = true;
+}
+
+void Tank::respawn()
+{
 }
