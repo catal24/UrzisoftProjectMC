@@ -29,6 +29,7 @@ namespace battlecity
 	private:
 		static const size_t kSize{ kWidth * kHeight };
 		std::array<std::optional<Tank>, kSize> m_tanks;
+		int m_numberOfWalls;
 	};
 
 	export std::ostream& operator <<(std::ostream& out, const Tank& board);
