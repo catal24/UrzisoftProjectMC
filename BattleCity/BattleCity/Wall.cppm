@@ -1,33 +1,27 @@
 export module Wall;
 import <iostream>;
-import <optional>;
-
-export import "map";
 
 namespace battlecity
 {
     export class Wall
     {
-
-
     public:
-        Wall(bool destructible = true, bool hasBomb = false)
-            : m_destructible{ destructible }, m_hasBomb{ hasBomb } {}
         
-       
-        bool IsDestructible() const { return m_destructible; }
-        bool HasBomb() const { return m_hasBomb; }
+        Wall(bool destructible = true, bool hasBomb = false);
 
         
-        void SetDestructible(bool destructible) { m_destructible = destructible; }
-        void SetBomb(bool hasBomb) { m_hasBomb = hasBomb; }
+        bool IsDestructible() const;
+        bool HasBomb() const;
 
         
+        void SetDestructible(bool destructible);
+        void SetBomb(bool hasBomb);
 
     private:
         bool m_destructible;
         bool m_hasBomb;
     };
 
-   
+    
+    
 }
