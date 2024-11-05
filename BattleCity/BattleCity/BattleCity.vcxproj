@@ -130,8 +130,10 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="map.cppm" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="Wall.cppm" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Bomb.h" />
