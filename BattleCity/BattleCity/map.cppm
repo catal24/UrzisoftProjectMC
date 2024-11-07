@@ -2,6 +2,7 @@ export module map;
 import <iostream>;
 import <array>;
 import <optional>;
+#include <vector>;
 
 export import "Tank.h";
 
@@ -10,25 +11,40 @@ namespace battlecity
 	export class Map
 	{
 	public:
-		static const size_t kWidth{ 600 };
-		static const size_t kHeight{ 400 };
-		using Position = std::pair<size_t, size_t>;
+		int width;
+		int height;
+		std::vector<std::vector<char>> map;
+
 
 	public:
 		Map() = default;
 
-		//getter
-		const std::optional<Tank> &operator [](const Position& position)const;
-		//getter and/or setter
-		std::optional<Tank> &operator [](const Position& position);
+		Map(int width, int height)
+		{
+			map.resize(height);
+			for (int i = 0; i < height; i++)
+			{
+				map[i].resize(width);
+				for (int j = 0; j < width; j--)
+				{
+					if (i == 0 || i == (height - 1)||j==0||j==(width-1))
+					{
+						map[i][j] = '#';
+					}
+					else
+						map[i][j] = ' ';
+				}
+			}
+		};
 
 		int GetNumberOfWalls();
 
-		int SetNumberOfWalls(int numberOfWalls);
+		void drawMap();
+
+		void SetNumberOfWalls(int numberOfWalls);
 
 	private:
-		static const size_t kSize{ kWidth * kHeight };
-		std::array<std::optional<Tank>, kSize> m_tanks;
+	
 		int m_numberOfWalls;
 	};
 

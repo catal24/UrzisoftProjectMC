@@ -1,29 +1,40 @@
-module map;
-using namespace battlecity;
+#include "Map.h";
 
-const std::optional<Tank>& Map::operator[](const Position& position) const
+
+Map::Map(int width, int height)
 {
-	const auto& [line, column] = position;
-	return m_tanks[line * kWidth + column];
+	m_width = width;
+	m_height = height;
+	m_map.resize(height);
+	
+	for (int i = 0; i < height; i++)
+	{
+		m_map[i].resize(width);
+		
+		for (int j = 0; j < width; j++)
+		{
+			if (i == 0 || i == (height - 1) || j == 0 || j == (width - 1))
+			{
+				m_map[i][j] = '#';
+			}
+			else
+				m_map[i][j] = ' ';
+		}
+	}
+	
 }
 
-std::optional<Tank>& battlecity::Map::operator[](const Position& position)
+void Map::drawMap()
 {
-	return const_cast<std::optional<Tank>&>(std::as_const(*this)[position]);
+	
+	for (int i = 0; i < m_height; i++)
+	{
+		for (int j = 0; j < m_width; j++)
+		{
+			
+			std::cout << m_map[i][j];
+		}
+		std::cout << std::endl;
+	}
 }
 
-int battlecity::Map::GetNumberOfWalls()
-{
-	return m_numberOfWalls;
-}
-
-int battlecity::Map::SetNumberOfWalls(int numberOfWalls)
-{
-	m_numberOfWalls = numberOfWalls;
-}
-
-
-std::ostream& operator<<(std::ostream& out, const Tank& board)
-{
-	// TODO: insert return statement here
-}

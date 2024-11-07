@@ -1,5 +1,9 @@
 #include "Bullet.h"
 
+Bullet::Bullet()
+{
+}
+
 int Bullet::getLevel() const
 {
 	return m_level;

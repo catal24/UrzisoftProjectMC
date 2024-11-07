@@ -11,6 +11,11 @@ Tank::Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int
 	m_bullet (1, 10)
 	{}
 
+Tank::Tank()
+{
+
+}
+
 
 void Tank::SetSpeed(int amount)
 {
@@ -53,4 +58,9 @@ void Tank::die()
 
 void Tank::respawn()
 {
+}
+
+void Tank::draw(int xStart, int yStart)
+{
+
 }

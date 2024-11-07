@@ -4,6 +4,7 @@
 class Bullet:public GameObject
 {
 public:
+
     enum Axis {
         X_AXIS,
         Y_AXIS
@@ -11,7 +12,7 @@ public:
 
     Bullet(int level, int speed)
         : m_level(level), m_speed(speed) {}
-
+    Bullet();
 
     int getLevel() const;
     int getSpeed() const;
