@@ -6,7 +6,7 @@ class Tank :public GameObject
 {
 public:
 	
-	Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives=3, int speed=5, bool isDead = false, Axis axis=left, Bullet bullet);
+	Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives=3, int speed=5, bool isDead = false, Axis axis=left);
 
 	Tank() = default;
 
@@ -33,7 +33,7 @@ public:
 	int m_lives;
 	int m_speed;
 	bool m_isDead;
-	Bullet m_bullet;
+
 	
 
 

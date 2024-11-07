@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 
+
 class Bullet:public GameObject
 {
 public:
@@ -12,7 +13,7 @@ public:
 
 public:
     Bullet() = default;
-    Bullet(int id = 0, int xStart = 0, int yStart = 0, bool isBreakable = false, bool isVisible = true, int level, int speed, Axis axis);
+    Bullet(int id = 0, int xStart = 0, int yStart = 0, bool isBreakable = false, bool isVisible = true, int level=0, int speed=0, Axis axis = Axis::X_AXIS);
         
     
 
