@@ -33,6 +33,20 @@ void Tank::SetIsDead()
 	m_isDead = true;
 }
 
+void Tank::moveTank(char dir)
+{
+	if (dir == 'w') {
+		m_xStart--;
+		m_axis = Axis::up;
+	}
+	else if (dir == 's')
+	{
+		m_xStart++;
+		m_axis = Axis::down;
+	}
+	
+}
+
 int Tank::GetSpeed() const
 {
 	return m_speed;

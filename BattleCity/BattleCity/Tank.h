@@ -18,6 +18,7 @@ public:
 	void SetSpeed(int amount);
 	void SetLives(int amount);
 	void SetIsDead();
+	void moveTank(char dir);
 	int GetSpeed()const;
 	int GetLives()const;
 	bool GetIsDead()const;
