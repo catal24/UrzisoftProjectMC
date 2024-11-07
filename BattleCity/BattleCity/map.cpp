@@ -7,27 +7,16 @@ void setTextColor(int color) {
 
 Map::Map(int width, int height)
 {
+
+	/*
+	aici se va citi din fisier o matrice si pe baza matricei
+	celulele cu 0 vor fi initializate ca obiecte din clasa Road
+	iar celulele corespunzatoare cu 1 voar fi initializate cu ob din clasa Wall
+	
+	*/
 	m_width = width;
 	m_height = height;
-	m_map.resize(height);
 	
-	
-
-	for (int i = 0; i < height; i++)
-	{
-		m_map[i].resize(width);
-		
-		for (int j = 0; j < width; j++)
-		{
-			if (i == 0 || i == (height - 1) || j == 0 || j == (width - 1))
-			{
-				m_map[i][j] = '#';
-			}
-			else
-				m_map[i][j] = ' ';
-		}
-	}
-
 	
 	
 }
@@ -39,41 +28,14 @@ void Map::drawMap()
 	{
 		for (int j = 0; j < m_width; j++)
 		{
-			if (m_map[i][j] == (char)254u)
-			{
-				setTextColor(3);
-				std::cout << m_map[i][j];
-				setTextColor(7);
-			}
+			if (m_map[i][j]->isVisible())
+				m_map[i][j]->draw();
 			else
-				std::cout << m_map[i][j];
+				std::cout << " ";
 		}
 		std::cout << std::endl;
 	}
 }
 
-void Map::addTank(Tank t)
-{
-	
-	int x = t.getXStart()-1;
-	int y = t.getYStart()-1;
-	m_map[x+1][y+1] = (char)254u;
-	m_map[x+2][y+2] = (char)254u;
-	m_map[x+0][y+0] = (char)254u;
-	m_map[x+0][y+2] = (char)254u;
-	m_map[x+0][y+1] = (char)254u;
-	m_map[x+2][y+1] = (char)254u;
-	m_map[x+1][y+2] = (char)254u;
-	m_map[x+1][y+0] = (char)254u;
-	m_map[x+2][y+0] = (char)254u;
-	if(t.GetAxis()==Axis::right)
-		m_map[x+1][y+3] = (char)254u;
-	else if (t.GetAxis() == Axis::left)
-		m_map[x + 1][y - 1] = (char)254u;
-	else if (t.GetAxis() == Axis::down)
-		m_map[x + 3][y +1] = (char)254u;
-	else if (t.GetAxis() == Axis::up)
-		m_map[x - 1][y + 1] = (char)254u;
 
-}
 

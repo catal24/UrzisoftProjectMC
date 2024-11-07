@@ -3,6 +3,7 @@
 #include <vector>
 #include<windows.h>
 #include "Tank.h"
+import Wall;
 
 class Map
 {
@@ -14,12 +15,11 @@ public:
 
 	void drawMap();
 
-	void addTank(Tank t);
 
 private:
 	int m_width;
 	int m_height;
-	std::vector<std::vector<char>> m_map;
+	std::vector<std::vector<GameObject*>> m_map;
 
 };
 

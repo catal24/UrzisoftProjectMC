@@ -25,7 +25,7 @@ public:
 	Axis GetAxis()const;
 	void die();
 	void respawn();
-	void draw(int xStart,int yStart);
+	void draw() override;
 
 
 	private:

@@ -19,3 +19,8 @@ void Bullet::setSpeed(int speed)
 	m_speed = speed;
 }
 
+void Bullet::draw()
+{
+	std::cout << "*";
+}
+
