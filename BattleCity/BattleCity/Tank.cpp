@@ -3,13 +3,13 @@
 
 
 
-Tank::Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed,bool isDead, Axis axis):
+Tank::Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed,bool isDead, Axis axis, Bullet bullet):
 	GameObject(xStart, yStart, id, isBreakable, isVisible),
-	m_lives(lives),
-	m_speed(speed),
-	m_isDead(isDead),
-	m_bullet (1, 10),
-	m_axis(axis)
+	m_lives{ lives },
+	m_speed{ speed },
+	m_isDead{ isDead },
+	m_bullet{ bullet },
+	m_axis{ axis }
 	{}
 
 Tank::Tank()
