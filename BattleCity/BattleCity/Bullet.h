@@ -38,6 +38,7 @@ public:
     bool isVisible() const;
     void setVisible(bool isVisible);
 
+    void draw()override;
 private:
     int m_id;
     Axis m_axis;

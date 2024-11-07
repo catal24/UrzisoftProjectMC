@@ -1,4 +1,5 @@
 #pragma once
+#include<iostream>
 class GameObject
 {
 
@@ -22,9 +23,11 @@ public:
     bool isVisible() const;
     void setVisible(bool isVisible);
 
+   virtual void draw()=0;
+
 protected:
-	int m_xStart;
-	int m_yStart;
+	int m_x;
+	int m_y;
 	int m_id;
 	bool m_isBreakable;
 	bool m_isVisible;
