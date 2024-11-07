@@ -3,12 +3,13 @@
 
 
 
-Tank::Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed,bool isDead):
+Tank::Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed,bool isDead, Axis axis):
 	GameObject(xStart, yStart, id, isBreakable, isVisible),
 	m_lives(lives),
 	m_speed(speed),
 	m_isDead(isDead),
-	m_bullet (1, 10)
+	m_bullet (1, 10),
+	m_axis(axis)
 	{}
 
 Tank::Tank()
@@ -42,9 +43,15 @@ int Tank::GetLives() const
 	return m_lives;
 }
 
+
 bool Tank::GetIsDead() const
 {
 	return m_isDead;
+}
+
+Axis Tank::GetAxis() const
+{
+	return m_axis;
 }
 
 void Tank::die()
@@ -62,5 +69,5 @@ void Tank::respawn()
 
 void Tank::draw(int xStart, int yStart)
 {
-
+	
 }
