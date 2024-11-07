@@ -36,12 +36,12 @@ void Tank::SetIsDead()
 void Tank::moveTank(char dir)
 {
 	if (dir == 'w') {
-		m_x--;
+		m_xStart--;
 		m_axis = Axis::up;
 	}
 	else if (dir == 's')
 	{
-		m_x++;
+		m_xStart++;
 		m_axis = Axis::down;
 	}
 	
@@ -81,7 +81,7 @@ void Tank::respawn()
 {
 }
 
-void Tank::draw()
+void Tank::draw(int xStart, int yStart)
 {
-	std::cout << (char) 254u;
+	
 }

@@ -19,8 +19,6 @@ public:
 
     void setSpeed(int speed);
 
-    void draw()override;
-
 private:
 	int m_level;
 	int m_speed;

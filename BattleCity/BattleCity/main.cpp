@@ -12,10 +12,13 @@ int main()
 	//map.drawMap();
 	Tank tanc(4,4,0,false,true,3,5,false,right);
 	
-	tanc.draw();
+	
 	
 	
 
+	tanc.moveTank('w');
+	map.addTank(tanc);
+	map.drawMap();
 
 	return 0;
 }

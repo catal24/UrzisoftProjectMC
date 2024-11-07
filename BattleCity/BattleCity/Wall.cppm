@@ -1,9 +1,9 @@
 export module Wall;
 import <iostream>;
-import "GameObject.h";
+
 namespace battlecity
 {
-    export class Wall:GameObject
+    export class Wall
     {
     public:
         
