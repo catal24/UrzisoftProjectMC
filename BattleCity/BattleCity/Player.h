@@ -1,6 +1,6 @@
 #pragma once
 #include <string>
-#include "Tank.h"
+#include "Vehicle.h"
 class Player
 {public:
 	Player(std::string name, int id, int credits=0, int rank=0);
@@ -20,6 +20,6 @@ class Player
 	int m_id;
 	int m_credits;
 	int m_rank;
-	Tank m_tank;
+	Vehicle m_tank;
 };
 

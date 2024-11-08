@@ -1,5 +1,5 @@
 #include "Player.h"
-#include "Tank.h"
+#include "Vehicle.h"
 Player::Player(std::string name, int id, int credits, int rank):
 	m_name(name), 
 	m_id(id),

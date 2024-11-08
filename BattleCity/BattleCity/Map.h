@@ -2,7 +2,7 @@
 #include <iostream>
 #include <vector>
 #include<windows.h>
-#include "Tank.h"
+#include "Vehicle.h"
 #include "Wall.h"
 
 class Map

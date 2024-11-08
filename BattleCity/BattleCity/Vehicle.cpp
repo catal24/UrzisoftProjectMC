@@ -1,9 +1,9 @@
-#include "Tank.h"
+#include "Vehicle.h"
 
 
 
 
-Tank::Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed,bool isDead, Axis axis):
+Vehicle::Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed,bool isDead, Axis axis):
 	GameObject(xStart, yStart, id, isBreakable, isVisible),
 	m_lives{ lives },
 	m_speed{ speed },
@@ -14,22 +14,22 @@ Tank::Tank(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int
 
 
 
-void Tank::SetSpeed(int amount)
+void Vehicle::SetSpeed(int amount)
 {
 	m_speed = amount;
 }
 
-void Tank::SetLives(int amount)
+void Vehicle::SetLives(int amount)
 {
 	m_lives = amount;
 }
 
-void Tank::SetIsDead()
+void Vehicle::SetIsDead()
 {
 	m_isDead = true;
 }
 
-void Tank::moveTank(char dir)
+void Vehicle::moveTank(char dir)
 {
 	if (dir == 'w') {
 		m_x--;
@@ -43,28 +43,28 @@ void Tank::moveTank(char dir)
 	
 }
 
-int Tank::GetSpeed() const
+int Vehicle::GetSpeed() const
 {
 	return m_speed;
 }
 
-int Tank::GetLives() const
+int Vehicle::GetLives() const
 {
 	return m_lives;
 }
 
 
-bool Tank::GetIsDead() const
+bool Vehicle::GetIsDead() const
 {
 	return m_isDead;
 }
 
-Axis Tank::GetAxis() const
+Axis Vehicle::GetAxis() const
 {
 	return m_axis;
 }
 
-void Tank::die()
+void Vehicle::die()
 {
 	m_lives-= 1;
 	if (m_lives> 0)
@@ -73,11 +73,11 @@ void Tank::die()
 		m_isDead = true;
 }
 
-void Tank::respawn()
+void Vehicle::respawn()
 {
 }
 
-void Tank::draw()
+void Vehicle::draw()
 {
 	std::cout << (char)254u;
 }
