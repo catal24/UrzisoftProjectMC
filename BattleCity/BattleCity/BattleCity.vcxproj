@@ -137,7 +137,7 @@
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Road.cpp" />
-    <ClCompile Include="Tank.cpp" />
+    <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="Wall.cpp" />
   </ItemGroup>
   <ItemGroup>
@@ -149,8 +149,11 @@
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Road.h" />
-    <ClInclude Include="Tank.h" />
+    <ClInclude Include="Vehicle.h" />
     <ClInclude Include="Wall.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Map1.txt" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

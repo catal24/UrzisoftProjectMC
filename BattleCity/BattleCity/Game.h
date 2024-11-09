@@ -10,7 +10,7 @@ class Game
 	void gameInit();
 
 private:
-	Map map = Map(50,20);
+	
 
 
 };

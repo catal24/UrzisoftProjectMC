@@ -11,7 +11,7 @@ class Map
 public:
 	Map() = default;
 
-	Map(int width, int height);
+	Map(std::vector<std::vector<int>> mat);
 
 	void drawMap();
 

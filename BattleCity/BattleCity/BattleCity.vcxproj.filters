@@ -21,9 +21,6 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Tank.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="Bullet.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -45,12 +42,12 @@
     <ClCompile Include="Road.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="Vehicle.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="GameObject.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="Tank.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="Bullet.h">
@@ -77,5 +74,13 @@
     <ClInclude Include="Road.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="Vehicle.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <Text Include="Map1.txt">
+      <Filter>Header Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

@@ -5,7 +5,7 @@
 class Wall : public GameObject
 {
 public:
-	Wall() = default;
+	
 	Wall(int id = 0, int xStart = 0, int yStart = 0, bool isVisible = true, bool isBreakable = true, bool hasBomb = false);
 
 	bool IsBreakable()const;
@@ -28,6 +28,8 @@ public:
 
 	bool isVisible() const;
 	void setVisible(bool isVisible);
+
+	void draw()override;
 
 private:
 	int m_id;

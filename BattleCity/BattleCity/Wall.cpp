@@ -49,3 +49,8 @@ void Wall::setBreakable(bool isBreakable) { m_isBreakable = isBreakable; }
 
 bool Wall::isVisible() const { return m_isVisible; }
 void Wall::setVisible(bool isVisible) { m_isVisible = isVisible; }
+
+void Wall::draw()
+{
+	std::cout << "#";
+}
