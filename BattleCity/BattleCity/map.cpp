@@ -50,3 +50,8 @@ void Map::drawMap()
 	}
 }
 
+std::vector<std::vector<GameObject*>>& Map::getMap()
+{
+	return m_map; 
+}
+

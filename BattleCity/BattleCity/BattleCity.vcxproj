@@ -133,6 +133,7 @@
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
+    <ClCompile Include="GameScene.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
@@ -146,6 +147,7 @@
     <ClInclude Include="Bullet.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />
+    <ClInclude Include="GameScene.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Road.h" />

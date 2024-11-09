@@ -15,6 +15,7 @@ public:
 
 	void drawMap();
 
+	std::vector<std::vector<GameObject*>>& getMap();
 
 private:
 	int m_width;
