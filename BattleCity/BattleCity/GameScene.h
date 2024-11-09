@@ -1,8 +1,9 @@
 #pragma once
 #include "Map.h"
-#include <typeinfo>;
-#include "Road.h";
+#include "Road.h"
+#include <typeinfo>
 #include <cstdlib>
+
 class GameScene
 {
 public:
