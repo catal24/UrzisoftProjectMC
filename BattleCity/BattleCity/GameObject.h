@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include <windows.h>
 class GameObject
 {
 
@@ -9,7 +10,7 @@ public:
 
     int getXStart() const;
     void setXStart(int xStart);
-
+    void setTextColor(int color);
 
     int getYStart() const;
     void setYStart(int yStart);

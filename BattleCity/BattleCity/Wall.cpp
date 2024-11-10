@@ -52,5 +52,7 @@ void Wall::setVisible(bool isVisible) { m_isVisible = isVisible; }
 
 void Wall::draw()
 {
-	std::cout << "#";
+	this->setTextColor(3);
+	std::cout << (char)254u;
+	this->setTextColor(7);
 }
