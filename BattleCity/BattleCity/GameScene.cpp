@@ -1,5 +1,17 @@
 #include "GameScene.h"
 
+void moveCursor(int x, int y) {
+    // Make the cursor invisible
+    HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO cursorInfo;
+    GetConsoleCursorInfo(hConsole, &cursorInfo);
+    cursorInfo.bVisible = FALSE; 
+    SetConsoleCursorInfo(hConsole, &cursorInfo);
+    //Go to x, y position to draw
+    COORD coord = { static_cast<SHORT>(x), static_cast<SHORT>(y) };
+    SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), coord);
+
+}
 
 void clearConsole() {
     system("cls");
@@ -19,10 +31,11 @@ void GameScene::addObj(GameObject* obj)
 
 void GameScene::removeObj(int x,int y)
 {   
-    //delete  m_map.getMap()[x][y];
+    moveCursor(y, x);
+   
     m_map.getMap()[x][y] = nullptr;
     m_map.getMap()[x][y] = new Road;
-
+    m_map.getMap()[x][y]->draw();
 }
 
 bool GameScene::checkObj(int x, int y)
@@ -37,12 +50,15 @@ void GameScene::moveObject(GameObject* obj, int x, int y)
 {
     if (checkObj(x, y))
     {
-      
         removeObj(obj->getXStart(), obj->getYStart());
 
         m_map.getMap()[x][y] = obj;
+        moveCursor(y, x);
+        m_map.getMap()[x][y]->draw();
         obj->setXStart(x);
         obj->setYStart(y);
+
+        
        
     }
     else
@@ -55,5 +71,11 @@ void GameScene::drawTest()
 {
     clearConsole();
     m_map.drawMap();
+}
+
+void GameScene::drawQueue(std::queue<GameObject*>& q)
+{
+    q.front()->draw();
+    q.pop();
 }
 

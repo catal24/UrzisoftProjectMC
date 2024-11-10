@@ -31,14 +31,6 @@ int main()
     {1,0,0,0,0,0,1,1,1,1,1,1,1,1,0,0,0,0,0,1},
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
     };
-    /*Vehicle v;
-    GameScene g(a);
-    g.addObj(&v);
-    g.drawTest();
-    //g.removeObj(&v);
-    g.moveObject(&v, 1, 1);
-    g.drawTest();
-    */
     Game g(a);
     g.startGame();
 	return 0;

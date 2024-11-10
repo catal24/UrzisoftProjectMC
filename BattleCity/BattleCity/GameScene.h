@@ -3,6 +3,7 @@
 #include "Road.h"
 #include <typeinfo>
 #include <cstdlib>
+#include <queue>
 
 class GameScene
 {
@@ -19,6 +20,8 @@ public:
 	void moveObject(GameObject* obj, int x, int y);
 
 	void drawTest();
+
+	void drawQueue(std::queue<GameObject*>& q);
 
 protected:
 	Map m_map;
