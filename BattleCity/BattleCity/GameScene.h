@@ -1,6 +1,7 @@
 #pragma once
 #include "Map.h"
 #include "Road.h"
+#include "Bomb.h"
 #include <typeinfo>
 #include <cstdlib>
 #include <queue>

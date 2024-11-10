@@ -70,6 +70,7 @@ void GameScene::moveObject(GameObject* obj, int x, int y)
 void GameScene::drawTest()
 {
     clearConsole();
+    m_map.generateRandomBombsOnWalls(20);
     m_map.drawMap();
 }
 

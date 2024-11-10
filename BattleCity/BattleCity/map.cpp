@@ -1,5 +1,7 @@
-#include "Map.h";
-#include "Road.h";
+#include "Map.h"
+#include "Road.h"
+#include "Bomb.h"
+#include <ctime>
 
 void setTextColor(int color) {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
@@ -18,9 +20,15 @@ Map::Map(std::vector<std::vector<int>> mat)
 		for (int j = 0; j < m_width; j++)
 		{
 			if (mat[i][j] == 0)
+			{
 				m_map[i][j] = new Road;
+				m_numberOfRoads++;
+			}
 			else
+			{
 				m_map[i][j] = new Wall;
+				m_numberOfWalls++;
+			}
 		}
 	}
 	/*
@@ -53,5 +61,25 @@ void Map::drawMap()
 std::vector<std::vector<GameObject*>>& Map::getMap()
 {
 	return m_map; 
+}
+
+void Map::generateRandomBombsOnWalls(int numBombs)
+{
+	srand(time(nullptr));
+
+	int count = 0;
+	while (count < numBombs)
+	{
+		int i = rand() % m_height;
+		int j = rand() % m_width;
+
+		if (dynamic_cast<Wall*>(m_map[i][j]) != nullptr)
+		{
+			delete m_map[i][j];
+			m_map[i][j] = new Bomb(i,j,0,false,true,1);
+			count++;
+		}
+	}
+
 }
 
