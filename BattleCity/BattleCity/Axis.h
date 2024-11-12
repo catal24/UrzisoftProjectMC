@@ -1,6 +1,12 @@
+// Axis.h
+#ifndef AXIS_H
+#define AXIS_H
+
 enum Axis {
-	left,
-	right,
-	up,
-	down
+    left,
+    right,
+    up,
+    down
 };
+
+#endif // AXIS_H

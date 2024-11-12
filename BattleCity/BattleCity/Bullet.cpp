@@ -21,6 +21,11 @@ int Bullet::getSpeed() const
 	return m_speed;
 }
 
+Axis Bullet::getAxis() const
+{
+	return m_axis;
+}
+
 void Bullet::setSpeed(int speed)
 {
 	m_speed = speed;

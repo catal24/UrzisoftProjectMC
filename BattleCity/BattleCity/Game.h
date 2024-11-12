@@ -7,7 +7,7 @@
 #include "GameScene.h";
 #include <conio.h> 
 #include <windows.h>
-
+#include "Axis.h"
 class Game
 {
 public:
@@ -18,6 +18,6 @@ private:
 	Vehicle m_v;
 	std::vector<std::vector<int>> m_initMap;
 	GameScene m_scene;
-
+	std::vector<Bullet> bullets;
 };
 

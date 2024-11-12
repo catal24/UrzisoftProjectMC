@@ -6,14 +6,14 @@ class Vehicle :public GameObject
 {
 public:
 	
-	Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives=3, int speed=5, bool isDead = false, Axis axis=left);
+	Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives=3, int speed=5, bool isDead = false, Axis axis=Axis::left);
 
 	Vehicle() = default;
 
 	~Vehicle() {}
 	
 	
-
+	Bullet shootBullet();
 
 	void SetSpeed(int amount);
 	void SetLives(int amount);

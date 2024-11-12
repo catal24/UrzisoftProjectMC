@@ -1,24 +1,22 @@
 #pragma once
 #include "GameObject.h"
-
+#include "Axis.h"
 
 class Bullet:public GameObject
 {
 public:
 
-    enum class Axis {
-        X_AXIS,
-        Y_AXIS
-    };
 
 public:
     Bullet() = default;
-    Bullet(int id = 0, int xStart = 0, int yStart = 0, bool isBreakable = false, bool isVisible = true, int level=0, int speed=0, Axis axis = Axis::X_AXIS);
+    Bullet(int id = 0, int xStart = 0, int yStart = 0, bool isBreakable = false, bool isVisible = true, int level=0, int speed=0, Axis axis = Axis::left);
         
     
 
     int getLevel() const;
     int getSpeed() const;
+
+    Axis getAxis() const;
 
     void setSpeed(int speed);
 
