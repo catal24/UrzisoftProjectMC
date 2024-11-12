@@ -4,7 +4,6 @@
 
 class Bullet:public GameObject
 {
-public:
 
 
 public:

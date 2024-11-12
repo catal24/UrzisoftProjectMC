@@ -19,15 +19,28 @@ Bullet Vehicle::shootBullet()
 	int bulletX = m_x;
 	int bulletY = m_y;
 
-	std::cout << "Shooting in direction: " << static_cast<int>(m_axis) << std::endl;
+//	std::cout << "Shooting in direction: " << static_cast<int>(m_axis) << std::endl;
 	switch (m_axis) {
-	case Axis::up: bulletX--; break;
-	case Axis::down: bulletX++; break;
-	case Axis::left: bulletY--; break;
-	case Axis::right: bulletY++; break;
+	case Axis::up: bulletX; break;
+	case Axis::down: bulletX; break;
+	case Axis::left: bulletY; break;
+	case Axis::right: bulletY; break;
 	}
 	return Bullet(0, bulletX, bulletY, false, true, 1, 1, m_axis);
 	
+}
+
+void Vehicle::setAxis(char ax)
+{
+	if (ax == 'w')
+		m_axis = Axis::up;
+	else if (ax == 's')
+		m_axis = Axis::down;
+	else if (ax == 'd')
+		m_axis = Axis::right;
+	else if (ax == 'a')
+		m_axis = Axis::left;
+
 }
 
 void Vehicle::SetSpeed(int amount)
@@ -50,11 +63,15 @@ void Vehicle::moveTank(char dir)
 	if (dir == 'w') {
 		m_x--;   
 		m_axis = Axis::up;
+		std::cout << "move direction up " << static_cast<int>(m_axis) << std::endl;
+
 		
 	}
 	else if (dir == 's') {
 		m_x++;   
 		m_axis = Axis::down;
+		std::cout << "move direction down" << static_cast<int>(m_axis) << std::endl;
+
 		
 	}
 	else if (dir == 'a') {

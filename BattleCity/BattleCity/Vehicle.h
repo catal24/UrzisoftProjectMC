@@ -13,7 +13,10 @@ public:
 	~Vehicle() {}
 	
 	
+
 	Bullet shootBullet();
+
+	void setAxis(char ax);
 
 	void SetSpeed(int amount);
 	void SetLives(int amount);

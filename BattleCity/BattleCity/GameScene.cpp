@@ -57,8 +57,6 @@
             m_map.getMap()[x][y]->draw();
             obj->setXStart(x);
             obj->setYStart(y);
-
-        
        
         }
         else

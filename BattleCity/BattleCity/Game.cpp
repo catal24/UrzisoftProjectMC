@@ -20,15 +20,22 @@ void Game::startGame()
             char key = _getch();
             if (key == 'w' || key == 'W') {
                 m_scene.moveObject(&m_v, m_v.getXStart() - 1, m_v.getYStart());
+                m_v.setAxis(key);
+
             }
             else if (key == 's' || key == 'S') {
                 m_scene.moveObject(&m_v, m_v.getXStart() + 1, m_v.getYStart());
+                m_v.setAxis(key);
             }
             else if (key == 'a' || key == 'A') {
                 m_scene.moveObject(&m_v, m_v.getXStart(), m_v.getYStart() - 1);
+                m_v.setAxis(key);
+
             }
             else if (key == 'd' || key == 'D') {
                 m_scene.moveObject(&m_v, m_v.getXStart(), m_v.getYStart() + 1);
+                m_v.setAxis(key);
+
             }
             else if (key == ' ') {  
                 
