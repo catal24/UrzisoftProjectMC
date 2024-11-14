@@ -73,11 +73,26 @@ void Map::generateRandomBombsOnWalls(int numBombs)
 		int i = rand() % m_height;
 		int j = rand() % m_width;
 
-		if (dynamic_cast<Wall*>(m_map[i][j]) != nullptr)
+		if (dynamic_cast<Wall*>(m_map[i][j]) != nullptr && dynamic_cast<Bomb*>(m_map[i][j]) == nullptr)
 		{
-			delete m_map[i][j];
-			m_map[i][j] = new Bomb(i,j,0,false,true,1);
-			count++;
+			bool hasAdjacentRoad = false; //verificam daca are un drum invecinat
+
+			if (i > 0 && dynamic_cast<Road*>(m_map[i - 1][j]) != nullptr) 
+				hasAdjacentRoad = true; // sus
+			if (i < m_height - 1 && dynamic_cast<Road*>(m_map[i + 1][j]) != nullptr) 
+				hasAdjacentRoad = true; // jos
+			if (j > 0 && dynamic_cast<Road*>(m_map[i][j - 1]) != nullptr) 
+				hasAdjacentRoad = true; // stanga
+			if (j < m_width - 1 && dynamic_cast<Road*>(m_map[i][j + 1]) != nullptr) 
+				hasAdjacentRoad = true; // dreapta
+
+
+			if (hasAdjacentRoad)
+			{
+				delete m_map[i][j];
+				m_map[i][j] = new Bomb(i, j, 0, false, true, 1);
+				count++;
+			}
 		}
 	}
 
