@@ -1,17 +1,17 @@
 ﻿#include "Game.h"
 
 
-Game::Game(std::vector<std::vector<int>> m_initMap)
-	:m_scene(m_initMap), m_v(2, 2, 0, false, true)
+Game::Game(std::vector<std::vector<int>> m_initMap, Difficulty difficulty)
+    :m_scene{ new GameScene{m_initMap} }, m_v(2, 2, 0, false, true), m_difficulty{ difficulty }
 {
-    m_scene.addObj(&m_v);
+    m_scene->addObj(&m_v);
 }
 
 void Game::startGame()
 {
     bool isStart = true;
     std::queue<GameObject*> q;
-    m_scene.drawTest();
+    m_scene->drawTest(*this);
     while (isStart) {
         Sleep(50);  // Sleep pentru a controla viteza jocului
 
@@ -19,21 +19,21 @@ void Game::startGame()
         if (_kbhit()) {
             char key = _getch();
             if (key == 'w' || key == 'W') {
-                m_scene.moveObject(&m_v, m_v.getXStart() - 1, m_v.getYStart());
+                m_scene->moveObject(&m_v, m_v.getXStart() - 1, m_v.getYStart());
                 m_v.setAxis(key);
 
             }
             else if (key == 's' || key == 'S') {
-                m_scene.moveObject(&m_v, m_v.getXStart() + 1, m_v.getYStart());
+                m_scene->moveObject(&m_v, m_v.getXStart() + 1, m_v.getYStart());
                 m_v.setAxis(key);
             }
             else if (key == 'a' || key == 'A') {
-                m_scene.moveObject(&m_v, m_v.getXStart(), m_v.getYStart() - 1);
+                m_scene->moveObject(&m_v, m_v.getXStart(), m_v.getYStart() - 1);
                 m_v.setAxis(key);
 
             }
             else if (key == 'd' || key == 'D') {
-                m_scene.moveObject(&m_v, m_v.getXStart(), m_v.getYStart() + 1);
+                m_scene->moveObject(&m_v, m_v.getXStart(), m_v.getYStart() + 1);
                 m_v.setAxis(key);
 
             }
@@ -56,8 +56,8 @@ void Game::startGame()
             }
 
             
-            if (m_scene.checkObj(newX, newY)) {
-                m_scene.moveObject(&(*it), newX, newY);
+            if (m_scene->checkObj(newX, newY)) {
+                m_scene->moveObject(&(*it), newX, newY);
                 ++it;  
             }
             else {
@@ -69,4 +69,14 @@ void Game::startGame()
         
          
     }
+}
+
+Game::Difficulty Game::GetDifficulty()
+{
+    return m_difficulty;
+}
+
+void Game::SetDifficulty(Difficulty difficulty)
+{
+    m_difficulty = difficulty;
 }

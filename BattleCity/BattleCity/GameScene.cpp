@@ -65,10 +65,27 @@
         }
     }
 
-    void GameScene::drawTest()
+    void GameScene::drawTest(Game g)
     {
         clearConsole();
-        m_map.generateRandomBombsOnWalls(20);
+        switch (g.GetDifficulty())
+        {
+        case Game::Difficulty::EASY:
+            m_map.generateRandomBombsOnWalls(7);
+            break;
+        case Game::Difficulty::MEDIUM:
+            m_map.generateRandomBombsOnWalls(10);
+            break;
+        case Game::Difficulty::HARD:
+            m_map.generateRandomBombsOnWalls(15);
+            break;
+        case Game::Difficulty::EXTREME:
+            m_map.generateRandomBombsOnWalls(20);
+            break;
+        default:
+            break;
+        }
+    
         m_map.drawMap();
     }
 

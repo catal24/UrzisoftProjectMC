@@ -2,9 +2,12 @@
 #include "Map.h"
 #include "Road.h"
 #include "Bomb.h"
+#include "Game.h"
 #include <typeinfo>
 #include <cstdlib>
 #include <queue>
+
+class Game;
 
 class GameScene
 {
@@ -20,7 +23,7 @@ public:
 
 	void moveObject(GameObject* obj, int x, int y);
 
-	void drawTest();
+	void drawTest(Game g);
 
 	void drawQueue(std::queue<GameObject*>& q);
 
