@@ -4,7 +4,7 @@
 #include <iostream>
 
 Vehicle::Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed,bool isDead, Axis axis):
-	GameObject(xStart, yStart, id, isBreakable, isVisible),
+	GameObject{ xStart, yStart, id, isBreakable, isVisible },
 	m_lives{ lives },
 	m_speed{ speed },
 	m_isDead{ isDead },

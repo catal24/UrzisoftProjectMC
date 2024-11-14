@@ -2,7 +2,7 @@
 
 
 Game::Game(std::vector<std::vector<int>> m_initMap, Difficulty difficulty)
-    :m_scene{ new GameScene{m_initMap} }, m_v(2, 2, 0, false, true), m_difficulty{ difficulty }
+    :m_scene{ new GameScene{m_initMap} }, m_v{ 2, 2, 0, false, true }, m_difficulty{ difficulty }
 {
     m_scene->addObj(&m_v);
 }

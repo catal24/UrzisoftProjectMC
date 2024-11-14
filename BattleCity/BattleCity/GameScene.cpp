@@ -18,7 +18,7 @@
     }
 
     GameScene::GameScene(std::vector<std::vector<int>> m)
-        : m_map(m) 
+        : m_map{ m }
     {
     
     }

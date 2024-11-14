@@ -1,7 +1,12 @@
 #include "GameObject.h"
 
 GameObject::GameObject(int xStart, int yStart, int id, bool isBreakable, bool isVisible)
-    : m_x(xStart), m_y(yStart), m_id(id), m_isBreakable(isBreakable), m_isVisible(isVisible) {}
+    : m_x{ xStart }, 
+    m_y{ yStart }, 
+    m_id{ id }, 
+    m_isBreakable{ isBreakable }, 
+    m_isVisible{ isVisible } 
+{}
 
 
 
