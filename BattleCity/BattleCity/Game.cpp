@@ -2,11 +2,13 @@
 
 
 Game::Game(std::vector<std::vector<int>> m_initMap, Difficulty difficulty)
-    :m_scene{ new GameScene{m_initMap} }, m_v{ 2, 2, 0, false, true }, m_difficulty{ difficulty }
+    :m_scene{ new GameScene{m_initMap} }, m_playerCount{ 1 }, m_difficulty{ difficulty }
 {
+    m_v = { m_scene->GetStartingPositions()[m_playerCount-1].first, 
+        m_scene->GetStartingPositions()[m_playerCount-1].second,0,false,true};
     m_scene->addObj(&m_v);
 }
-
+//spawn the vehicle at a dafault location
 void Game::startGame()
 {
     bool isStart = true;

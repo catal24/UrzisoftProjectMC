@@ -35,5 +35,6 @@ private:
 	std::vector<std::vector<int>> m_initMap;
 	GameScene* m_scene;
 	std::vector<Bullet> bullets;
+	int m_playerCount;
 };
 

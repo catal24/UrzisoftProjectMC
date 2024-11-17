@@ -7,6 +7,7 @@
 #include <cstdlib>
 #include <queue>
 
+
 class Game;
 
 class GameScene
@@ -26,11 +27,13 @@ public:
 	void drawTest(Game g);
 
 	void drawQueue(std::queue<GameObject*>& q);
+	std::vector<std::pair<int,int>> GetStartingPositions();
 
 	GameObject* getObjectAt(int x, int y);
 
 protected:
 	Map m_map;
+	std::vector<std::pair<int, int>> m_startingPositions = { {1,1},{18,18},{1,18},{18,1} };
 	
 };
 

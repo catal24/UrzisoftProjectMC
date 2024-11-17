@@ -95,6 +95,12 @@
         q.pop();
     }
 
+    std::vector<std::pair<int,int>> GameScene::GetStartingPositions()
+	{
+		return m_startingPositions;
+	
+    }
+
     GameObject* GameScene::getObjectAt(int x, int y)
     {
         if (x >= 0 && x < m_map.GetHeight() && y >= 0 && y < m_map.GetWidth()) {
