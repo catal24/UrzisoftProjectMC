@@ -61,33 +61,6 @@ void Game::startGame()
 
             // verificarea coliziunilor
             if (m_scene->checkObj(newX, newY)) {
-                // daca loveste tanc
-                if (dynamic_cast<Vehicle*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
-                    m_scene->removeObj(newX, newY);
-                    it = bullets.erase(it);
-                    continue;
-                }
-
-                // daca loveste alt glont
-                if (dynamic_cast<Bullet*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
-                    m_scene->removeObj(newX, newY);
-                    it = bullets.erase(it);
-                    continue;
-                }
-
-                // daca loveste perete
-                if (dynamic_cast<Wall*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
-                    m_scene->removeObj(newX, newY);
-                    it = bullets.erase(it);
-                    continue;
-                }
-
-                // daca loveste o bomba
-                if (dynamic_cast<Bomb*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
-                    m_scene->removeObj(newX, newY);
-                    it = bullets.erase(it);
-                    continue;
-                }
 
                 // daca nu loveste nimic mutam glontul
                 m_scene->moveObject(&(*it), newX, newY);
@@ -97,7 +70,37 @@ void Game::startGame()
 
             }
             else {
-                it = bullets.erase(it);
+                // daca loveste tanc
+                if (dynamic_cast<Vehicle*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
+                    m_scene->removeObj(newX, newY); //stergem tancu
+                    m_scene->removeObj(it->getXStart(), it->getYStart()); //stergem glontu
+                    it = bullets.erase(it);
+                    continue;
+                }
+
+                // daca loveste alt glont
+                if (dynamic_cast<Bullet*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
+                    m_scene->removeObj(newX, newY); //stergem glontu inamicului/al nostru
+                    m_scene->removeObj(it->getXStart(), it->getYStart()); //stergem glontu tras de noi
+                    it = bullets.erase(it);
+                    continue;
+                }
+
+                // daca loveste perete
+                if (dynamic_cast<Wall*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
+                    m_scene->removeObj(newX, newY); //stergem peretele
+                    m_scene->removeObj(it->getXStart(), it->getYStart()); //stergem glontu
+                    it = bullets.erase(it);
+                    continue;
+                }
+
+                // daca loveste o bomba
+                if (dynamic_cast<Bomb*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
+                    m_scene->removeObj(newX, newY); //stergem bomba
+                    m_scene->removeObj(it->getXStart(), it->getYStart()); //stergem glontu
+                    it = bullets.erase(it);
+                    continue;
+                }
             }
         }
     }

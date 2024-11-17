@@ -40,9 +40,14 @@
 
     bool GameScene::checkObj(int x, int y)
     {
-        //functia verifica daca e libera casuta
-        if (typeid(*m_map.getMap()[x][y]) == typeid(Road))
-            return true;
+        if (x < 0 || x >= m_map.GetHeight() || y < 0 || y >= m_map.GetWidth()) {
+            return false; // poz este in afara hartii
+        }
+
+        if (typeid(*m_map.getMap()[x][y]) == typeid(Road)) {
+            return true; // este liber
+        }
+
         return false;
     }
 

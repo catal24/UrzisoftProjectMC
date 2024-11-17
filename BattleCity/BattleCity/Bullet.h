@@ -8,7 +8,7 @@ class Bullet:public GameObject
 
 public:
     Bullet() = default;
-    Bullet(int id = 0, int xStart = 0, int yStart = 0, bool isBreakable = false, bool isVisible = true, int level=0, int speed=0, Axis axis = Axis::left);
+    Bullet(int id = 0, int xStart = -1, int yStart = -1, bool isBreakable = false, bool isVisible = true, int level=0, int speed=0, Axis axis = Axis::left);
         
     
 
