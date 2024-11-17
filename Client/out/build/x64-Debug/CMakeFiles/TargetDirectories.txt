@@ -1,8 +1,0 @@
-C:/Users/alinc/Documents/MC/out/build/x64-Debug/CMakeFiles/TestamQT.dir
-C:/Users/alinc/Documents/MC/out/build/x64-Debug/CMakeFiles/edit_cache.dir
-C:/Users/alinc/Documents/MC/out/build/x64-Debug/CMakeFiles/rebuild_cache.dir
-C:/Users/alinc/Documents/MC/out/build/x64-Debug/CMakeFiles/list_install_components.dir
-C:/Users/alinc/Documents/MC/out/build/x64-Debug/CMakeFiles/install.dir
-C:/Users/alinc/Documents/MC/out/build/x64-Debug/CMakeFiles/install/local.dir
-C:/Users/alinc/Documents/MC/out/build/x64-Debug/CMakeFiles/TestamQT_autogen_timestamp_deps.dir
-C:/Users/alinc/Documents/MC/out/build/x64-Debug/CMakeFiles/TestamQT_autogen.dir

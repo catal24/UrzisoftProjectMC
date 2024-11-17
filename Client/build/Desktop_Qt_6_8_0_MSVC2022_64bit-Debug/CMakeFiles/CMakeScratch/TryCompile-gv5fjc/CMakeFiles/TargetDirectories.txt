@@ -1,3 +1,0 @@
-C:/Users/alinc/Documents/MC/build/Desktop_Qt_6_8_0_MSVC2022_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-gv5fjc/CMakeFiles/cmTC_61cde.dir
-C:/Users/alinc/Documents/MC/build/Desktop_Qt_6_8_0_MSVC2022_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-gv5fjc/CMakeFiles/edit_cache.dir
-C:/Users/alinc/Documents/MC/build/Desktop_Qt_6_8_0_MSVC2022_64bit-Debug/CMakeFiles/CMakeScratch/TryCompile-gv5fjc/CMakeFiles/rebuild_cache.dir

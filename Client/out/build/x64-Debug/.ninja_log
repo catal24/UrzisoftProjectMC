@@ -1,9 +1,0 @@
-# ninja log v5
-19	4434	7533611771650602	TestamQT_autogen/timestamp	9e4c98883ec82cc3
-19	4434	7533611771650602	TestamQT_autogen/mocs_compilation.cpp	9e4c98883ec82cc3
-19	4434	7533611771650602	C:/Users/alinc/Documents/MC/out/build/x64-Debug/TestamQT_autogen/timestamp	9e4c98883ec82cc3
-19	4434	7533611771650602	C:/Users/alinc/Documents/MC/out/build/x64-Debug/TestamQT_autogen/mocs_compilation.cpp	9e4c98883ec82cc3
-4439	7395	7533611802451188	CMakeFiles/TestamQT.dir/TestamQT_autogen/mocs_compilation.cpp.obj	f1a3ec1fdda62536
-4467	7404	7533611802576818	CMakeFiles/TestamQT.dir/mainwindow.cpp.obj	f0988baf805790b7
-4451	7420	7533611802752665	CMakeFiles/TestamQT.dir/main.cpp.obj	9c17b2185921eed
-7421	10668	7533611808864413	TestamQT.exe	ae03b27e59b37d94
