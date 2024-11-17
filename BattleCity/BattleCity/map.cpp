@@ -1,4 +1,4 @@
-#include "Map.h"
+﻿#include "Map.h"
 #include "Road.h"
 #include "Bomb.h"
 #include <ctime>
@@ -96,5 +96,47 @@ void Map::generateRandomBombsOnWalls(int numBombs)
 		}
 	}
 
+}
+
+
+
+int Map::GetWidth()
+{
+	return m_width;
+}
+
+int Map::GetHeight()
+{
+	return m_height;
+}
+
+int Map::GetNumberOfRoads()
+{
+	return m_numberOfRoads;
+}
+
+int Map::GetNumberOfWalls()
+{
+	return m_numberOfWalls;
+}
+
+void Map::SetWidth(int width)
+{
+	m_width = width;
+}
+
+void Map::SetHeight(int height)
+{
+	m_height = height;
+}
+
+void Map::SetNumberOfRoads(int numberOfRoads)
+{
+	m_numberOfRoads = numberOfRoads;
+}
+
+void Map::SetNumberOfWalls(int numberOfWalls)
+{
+	m_numberOfWalls = numberOfWalls;
 }
 

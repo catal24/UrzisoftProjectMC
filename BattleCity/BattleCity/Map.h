@@ -20,6 +20,16 @@ public:
 
 	void generateRandomBombsOnWalls(int numBombs);
 
+
+	int GetWidth();
+	int GetHeight();
+	int GetNumberOfRoads();
+	int GetNumberOfWalls();
+	void SetWidth(int width);
+	void SetHeight(int height);
+	void SetNumberOfRoads(int numberOfRoads);
+	void SetNumberOfWalls(int numberOfWalls);
+
 private:
 	int m_width;
 	int m_height;

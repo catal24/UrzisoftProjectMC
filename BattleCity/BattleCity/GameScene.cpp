@@ -1,4 +1,4 @@
-    #include "GameScene.h"
+﻿    #include "GameScene.h"
 
     void moveCursor(int x, int y) {
         // Make the cursor invisible
@@ -95,3 +95,4 @@
         q.pop();
     }
 
+  
