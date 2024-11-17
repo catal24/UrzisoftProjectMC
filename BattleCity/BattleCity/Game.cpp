@@ -88,7 +88,10 @@ void Game::startGame()
 
                 // daca loveste perete
                 if (dynamic_cast<Wall*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
-                    m_scene->removeObj(newX, newY); //stergem peretele
+                    if (dynamic_cast<Wall*>(m_scene->getObjectAt(newX, newY))->isBreakable())
+                    {
+                        m_scene->removeObj(newX, newY); //stergem peretele
+                    }
                     m_scene->removeObj(it->getXStart(), it->getYStart()); //stergem glontu
                     it = bullets.erase(it);
                     continue;

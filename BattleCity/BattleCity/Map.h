@@ -19,6 +19,8 @@ public:
 	std::vector<std::vector<GameObject*>>& getMap();
 
 	void generateRandomBombsOnWalls(int numBombs);
+	void generateRandomIndestructibleWalls(int count);
+	void setIndestructibleBorders();
 
 	GameObject* getObjectAt(int x, int y);
 

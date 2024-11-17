@@ -12,10 +12,7 @@ Wall::Wall(int id, int xStart, int yStart, bool isVisible, bool isBreakable, boo
 
 {}
 
-bool Wall::IsBreakable() const
-{
-	return m_isBreakable;
-}
+
 
 
 bool Wall::HasBomb() const
@@ -52,7 +49,12 @@ void Wall::setVisible(bool isVisible) { m_isVisible = isVisible; }
 
 void Wall::draw()
 {
-	this->setTextColor(3);
+	if (!m_isBreakable)
+	{
+		this->setTextColor(5);
+	}
+	else
+		this->setTextColor(3);
 	std::cout << (char)254u;
 	this->setTextColor(7);
 }

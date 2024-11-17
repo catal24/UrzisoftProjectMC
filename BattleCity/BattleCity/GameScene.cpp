@@ -73,24 +73,30 @@
     void GameScene::drawTest(Game g)
     {
         clearConsole();
+        m_map.setIndestructibleBorders();
+        int indestructibleWallCount = 0;
         switch (g.GetDifficulty())
         {
         case Game::Difficulty::EASY:
             m_map.generateRandomBombsOnWalls(7);
+            indestructibleWallCount = 5;
             break;
         case Game::Difficulty::MEDIUM:
             m_map.generateRandomBombsOnWalls(10);
+            indestructibleWallCount = 10;
             break;
         case Game::Difficulty::HARD:
             m_map.generateRandomBombsOnWalls(15);
+            indestructibleWallCount = 15;
             break;
         case Game::Difficulty::EXTREME:
             m_map.generateRandomBombsOnWalls(20);
+            indestructibleWallCount = 20;
             break;
         default:
             break;
         }
-    
+        m_map.generateRandomIndestructibleWalls(indestructibleWallCount);
         m_map.drawMap();
     }
 
