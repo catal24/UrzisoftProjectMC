@@ -95,4 +95,12 @@
         q.pop();
     }
 
+    GameObject* GameScene::getObjectAt(int x, int y)
+    {
+        if (x >= 0 && x < m_map.GetHeight() && y >= 0 && y < m_map.GetWidth()) {
+            return m_map[x][y];
+        }
+        return nullptr;
+    }
+
   

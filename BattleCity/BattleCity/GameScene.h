@@ -27,6 +27,8 @@ public:
 
 	void drawQueue(std::queue<GameObject*>& q);
 
+	GameObject* getObjectAt(int x, int y);
+
 protected:
 	Map m_map;
 	

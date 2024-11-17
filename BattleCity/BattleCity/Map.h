@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <iostream>
 #include <vector>
 #include<windows.h>
@@ -20,6 +20,10 @@ public:
 
 	void generateRandomBombsOnWalls(int numBombs);
 
+	GameObject* getObjectAt(int x, int y);
+
+	std::vector<GameObject*>& operator[](int index); // pentru accesare scrisa
+	const std::vector<GameObject*>& operator[](int index) const; // pentru citire
 
 	int GetWidth();
 	int GetHeight();

@@ -98,6 +98,24 @@ void Map::generateRandomBombsOnWalls(int numBombs)
 
 }
 
+GameObject* Map::getObjectAt(int x, int y)
+{
+	if (x >= 0 && x < m_height && y >= 0 && y < m_width) {
+		return m_map[x][y]; // returnam obiectul de pe pozitia (x, y)
+	}
+	return nullptr;
+}
+
+std::vector<GameObject*>& Map::operator[](int index)
+{
+	return m_map[index];
+}
+
+const std::vector<GameObject*>& Map::operator[](int index) const
+{
+	return m_map[index];
+}
+
 
 
 int Map::GetWidth()

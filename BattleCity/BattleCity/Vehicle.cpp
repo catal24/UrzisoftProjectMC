@@ -21,10 +21,10 @@ Bullet Vehicle::shootBullet()
 
 //	std::cout << "Shooting in direction: " << static_cast<int>(m_axis) << std::endl;
 	switch (m_axis) {
-	case Axis::up: bulletX; break;
-	case Axis::down: bulletX; break;
-	case Axis::left: bulletY; break;
-	case Axis::right: bulletY; break;
+	case Axis::up: bulletX--; break;
+	case Axis::down: bulletX++; break;
+	case Axis::left: bulletY--; break;
+	case Axis::right: bulletY++; break;
 	}
 	return Bullet(0, bulletX, bulletY, false, true, 1, 1, m_axis);
 	
