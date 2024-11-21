@@ -109,44 +109,11 @@ void Game::startGame()
                 }
 
                 // daca loveste o bomba
-                if (dynamic_cast<Bomb*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
+                if (Bomb*bomb =dynamic_cast<Bomb*>(m_scene->getObjectAt(newX, newY))) {
                     //coordonate bomba
-                    int bombX = newX;
-                    int bombY = newY;
+                    HandleBombCollision(bomb, newX, newY);
 
                     m_scene->removeObj(newX, newY); //stergem bomba
-
-                    //vector de perechi pentru directii
-
-                    std::vector<std::pair<int, int>> directions = {
-                        {-1,0},// sus
-                        {-1,1},//dreapta sus
-                        {0,1},//dreapta
-                        {1,1},//dreapta jos
-                        {1,0},//jos
-                        {1,-1},//stanga jos
-                        {0,-1},//stanga
-                        {-1,-1}//stanga sus
-                    };
-                    for (const auto& dir : directions)
-                    {
-                        int checkX = bombX + dir.first;
-                        int checkY = bombY + dir.second;
-                        //verificam daca este perete destructibil langa bomba
-                        if (Wall* wall = dynamic_cast<Wall*>(m_scene->getObjectAt(checkX, checkY)))
-                        {
-                            if (wall->isBreakable())
-                                m_scene->removeObj(checkX, checkY);
-                        }
-                        //verificam daca este vehicul si il distrugem
-                        if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->getObjectAt(checkX, checkY))) {
-                            m_scene->removeObj(checkX, checkY);
-                        }
-                        //distrugem si bombele
-                        if (Bomb* bomb = dynamic_cast<Bomb*>(m_scene->getObjectAt(checkX, checkY))) {
-                            m_scene->removeObj(checkX, checkY);
-                        }
-                    }
                     if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt(it->getXStart(), it->getYStart())))
                         m_scene->removeObj(it->getXStart(), it->getYStart());
                     it = bullets.erase(it);
@@ -166,4 +133,38 @@ Game::Difficulty Game::GetDifficulty()
 void Game::SetDifficulty(Difficulty difficulty)
 {
     m_difficulty = difficulty;
+}
+
+void Game::HandleBombCollision(Bomb* bomb, int bombX, int bombY)
+{       
+        //vector de perechi pentru directii
+    std::vector<std::pair<int, int>> directions = {
+        {-1,0},// sus
+        {-1,1},//dreapta sus
+        {0,1},//dreapta
+        {1,1},//dreapta jos
+        {1,0},//jos
+        {1,-1},//stanga jos
+        {0,-1},//stanga
+        {-1,-1}//stanga sus
+    };
+    for (const auto& dir : directions)
+    {
+        int checkX = bombX + dir.first;
+        int checkY = bombY + dir.second;
+        //verificam daca este perete destructibil langa bomba
+        if (Wall* wall = dynamic_cast<Wall*>(m_scene->getObjectAt(checkX, checkY)))
+        {
+            if (wall->isBreakable())
+                m_scene->removeObj(checkX, checkY);
+        }
+        //verificam daca este vehicul si il distrugem
+        if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->getObjectAt(checkX, checkY))) {
+            m_scene->removeObj(checkX, checkY);
+        }
+        //distrugem si bombele
+        if (Bomb* bomb = dynamic_cast<Bomb*>(m_scene->getObjectAt(checkX, checkY))) {
+            m_scene->removeObj(checkX, checkY);
+        }
+    }
 }

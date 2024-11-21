@@ -28,7 +28,7 @@ public:
 
 	Difficulty GetDifficulty();
 	void SetDifficulty(Difficulty difficulty);
-
+	void HandleBombCollision(Bomb* bomb, int bombX, int bombY);
 private:
 	Vehicle m_v;
 	Difficulty m_difficulty = EASY;
