@@ -2,6 +2,7 @@
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
+#include <QMessageBox>
 
 Login::Login(QWidget* parent) : QWidget(parent)
 {
@@ -23,5 +24,12 @@ Login::~Login(){}
 
 void Login::handleLogin()
 {
+	QString username = usernameField->text();
+	//aici vom verifica in baza de date daca exista un cont cu acest username
+	
+	emit loginSuccess();
+	QMessageBox::information(this, "Login", "Login successful!");
 
+	//daca nu exista Player cu acest username vom crea unul
+	QMessageBox::information(this, "Login", "A new account with your username was created");
 }
