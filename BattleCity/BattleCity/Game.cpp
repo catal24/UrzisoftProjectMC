@@ -47,21 +47,44 @@ void Game::startGame()
             else if (key == ' ') {
                 unsigned long currentTime = GetTickCount();
                 if (currentTime - lastShotTime >= shootDelay) {
+
+                    // coord vehiculului curent
+                    int currentX = m_v.getXStart();
+                    int currentY = m_v.getYStart();
+
+                    // coord tintei in functie de directia vehiculului
+                    int targetX = currentX;
+                    int targetY = currentY;
+
+                    switch (m_v.GetAxis()) {
+                    case Axis::up:    targetX--; break;   // verif sus jos stanga dreapta
+                    case Axis::down:  targetX++; break;   
+                    case Axis::left:  targetY--; break;   
+                    case Axis::right: targetY++; break;   
+                    }
+
+                    // verificam daca la pozitia tinta se afla un `Wall` indestructibil
+                    GameObject* targetObj = m_scene->getObjectAt(targetX, targetY);
+                    if (Wall* wall = dynamic_cast<Wall*>(targetObj)) {
+                        if (!wall->isBreakable()) {
+                            continue;  // sarim peste actiunea de tragere
+                        }
+                    }
+
                     auto newBullet = m_v.shootBullet(m_v.GetX(), m_v.GetY());
-                    //std::cout << "Bullet created at: (" << newBullet->getXStart() << ", " << newBullet->getYStart() << ")" << std::endl;
                     bullets.push_back(std::move(newBullet));
-                    lastShotTime = currentTime; // Actualizăm timpul ultimei trageri
+                    lastShotTime = currentTime; // actualizam timpul ultimei trageri
                 }
             }
         }
 
-        // Mișcarea gloanțelor
+        // miscarea gloantelor
         for (auto it = bullets.begin(); it != bullets.end();) {
             int newX = (*it)->getXStart();
             int newY = (*it)->getYStart();
-            //std::cout << "Bullet at (" << newX << ", " << newY << ") moving in direction: " << static_cast<int>((*it)->getAxis()) << std::endl;
 
-            // Determinarea direcției glonțului
+
+            // det directiei glontului
             switch ((*it)->getAxis()) {
             case Axis::up:    newX--; break;
             case Axis::down:  newX++; break;
@@ -123,6 +146,7 @@ void Game::startGame()
                     continue;
                 }
             }
+
         }
     }
 }
