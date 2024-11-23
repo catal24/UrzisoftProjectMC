@@ -71,6 +71,12 @@
                 // Mesaj de debugging pentru a verifica setarea corectă
                 //std::cout << "Vehicle moved to new position: (" << vehicle->GetX() << ", " << vehicle->GetY() << ")" << std::endl;
             }
+
+            if (Bullet* bullet = dynamic_cast<Bullet*>(obj)) {
+                bullet->setXStart(x);
+                bullet->setYStart(y);
+            }
+
         }
         else
         {

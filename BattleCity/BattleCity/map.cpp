@@ -13,7 +13,7 @@ Map::Map(std::vector<std::vector<int>> mat)
 	m_width = mat.size();
 	m_height = mat[0].size();
 	m_map.resize(mat.size());
-	
+
 	for (int i = 0; i < m_height; i++)
 	{
 		m_map[i].resize(m_width);
@@ -21,12 +21,12 @@ Map::Map(std::vector<std::vector<int>> mat)
 		{
 			if (mat[i][j] == 0)
 			{
-				m_map[i][j] = new Road{i,j,0,false,true};
+				m_map[i][j] = new Road{ i,j,0,false,true };
 				m_numberOfRoads++;
 			}
 			else
 			{
-				m_map[i][j] = new Wall{i,j,0,true,true,false};
+				m_map[i][j] = new Wall{ i,j,0,true,true,false };
 				m_numberOfWalls++;
 			}
 		}
@@ -37,7 +37,7 @@ Map::Map(std::vector<std::vector<int>> mat)
 	iar celulele corespunzatoare cu 1 voar fi initializate cu ob din clasa Wall
 
 	*/
-	
+
 
 
 }
@@ -60,7 +60,7 @@ void Map::drawMap()
 
 std::vector<std::vector<GameObject*>>& Map::getMap()
 {
-	return m_map; 
+	return m_map;
 }
 
 void Map::generateRandomBombsOnWalls(int numBombs)
@@ -128,9 +128,8 @@ void Map::setIndestructibleBorders()
 			{
 				Wall* wall = dynamic_cast<Wall*>(m_map[i][j]);
 				if (wall && wall->isBreakable())
-				{
 					wall->setBreakable(false);
-				}
+
 			}
 }
 
@@ -155,43 +154,13 @@ const std::vector<GameObject*>& Map::operator[](int index) const
 
 
 
-int Map::GetWidth()
-{
-	return m_width;
-}
+int Map::GetWidth() { return m_width; }
+int Map::GetHeight() { return m_height; }
+int Map::GetNumberOfRoads() { return m_numberOfRoads; }
+int Map::GetNumberOfWalls() { return m_numberOfWalls; }
 
-int Map::GetHeight()
-{
-	return m_height;
-}
-
-int Map::GetNumberOfRoads()
-{
-	return m_numberOfRoads;
-}
-
-int Map::GetNumberOfWalls()
-{
-	return m_numberOfWalls;
-}
-
-void Map::SetWidth(int width)
-{
-	m_width = width;
-}
-
-void Map::SetHeight(int height)
-{
-	m_height = height;
-}
-
-void Map::SetNumberOfRoads(int numberOfRoads)
-{
-	m_numberOfRoads = numberOfRoads;
-}
-
-void Map::SetNumberOfWalls(int numberOfWalls)
-{
-	m_numberOfWalls = numberOfWalls;
-}
+void Map::SetWidth(int width) { m_width = width; }
+void Map::SetHeight(int height) { m_height = height; }
+void Map::SetNumberOfRoads(int numberOfRoads) { m_numberOfRoads = numberOfRoads; }
+void Map::SetNumberOfWalls(int numberOfWalls) { m_numberOfWalls = numberOfWalls; }
 
