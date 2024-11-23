@@ -4,7 +4,7 @@
 class Bomb : public GameObject
 {
 public:
-    Bomb(int xStart = 0, int yStart = 0, int id = 0, bool isBreakable = false, bool isVisible = false, int radius = 1);
+    Bomb(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int radius = 1);
 
     int getRadius() const;
     void setRadius(int radius);

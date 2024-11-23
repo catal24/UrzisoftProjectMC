@@ -3,7 +3,13 @@
 class Road:public GameObject
 {
 public:
-	Road(int xStart = 0, int yStart = 0, int id = 0, bool isBreakable = false, bool isVisible = true);
+	Road(int xStart, int yStart, int id, bool isBreakable, bool isVisible);
 	void draw() override;
+
+private:
+	int m_xStart, m_yStart;
+	int m_id;
+	bool m_isBreakable;
+	bool m_isVisible;
 };
 

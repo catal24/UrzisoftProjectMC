@@ -9,24 +9,28 @@ Vehicle::Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisibl
 	m_speed{ speed },
 	m_isDead{ isDead },
 	m_axis{ axis }
-	{}
-
-
-
-
-Bullet Vehicle::shootBullet()
 {
-	int bulletX = m_x;
-	int bulletY = m_y;
+}
+
+
+
+
+std::shared_ptr<Bullet> Vehicle::shootBullet(int x, int y)
+{
+	int bulletX = x;
+	int bulletY = y;
 
 //	std::cout << "Shooting in direction: " << static_cast<int>(m_axis) << std::endl;
 	switch (m_axis) {
-	case Axis::up: bulletX; break;
-	case Axis::down: bulletX; break;
-	case Axis::left: bulletY; break;
-	case Axis::right: bulletY; break;
+	case Axis::up: bulletX--; break;
+	case Axis::down: bulletX++; break;
+	case Axis::left: bulletY--; break;
+	case Axis::right: bulletY++; break;
 	}
-	return Bullet(0, bulletX, bulletY, false, true, 1, 1, m_axis);
+
+	//std::cout << "Bullet position after adjustment: (" << bulletX << ", " << bulletY << ")" << std::endl;
+
+	return std::make_shared<Bullet>(bulletX, bulletY, 0, false, true, 1, 1, m_axis);
 	
 }
 
@@ -56,6 +60,16 @@ void Vehicle::SetLives(int amount)
 void Vehicle::SetIsDead()
 {
 	m_isDead = true;
+}
+
+void Vehicle::SetX(int x)
+{
+	m_x = x;
+}
+
+void Vehicle::SetY(int y)
+{
+	m_y = y;
 }
 
 void Vehicle::moveTank(char dir)
@@ -91,6 +105,16 @@ int Vehicle::GetSpeed() const
 	return m_speed;
 }
 
+int Vehicle::GetX()
+{
+	return m_x;
+}
+
+int Vehicle::GetY()
+{
+	return m_y;
+}
+
 int Vehicle::GetLives() const
 {
 	return m_lives;
@@ -118,6 +142,11 @@ void Vehicle::die()
 
 void Vehicle::respawn()
 {
+}
+
+std::vector<std::pair<int, int>> Vehicle::GetStartingPositions()
+{
+	return m_startingPositions;
 }
 
 void Vehicle::draw()

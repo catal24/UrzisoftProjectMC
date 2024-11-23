@@ -4,8 +4,8 @@
 Game::Game(std::vector<std::vector<int>> m_initMap, Difficulty difficulty)
     :m_scene{ new GameScene{m_initMap} }, m_playerCount{ 1 }, m_difficulty{ difficulty }
 {
-    m_v = { m_scene->GetStartingPositions()[m_playerCount-1].first, 
-        m_scene->GetStartingPositions()[m_playerCount-1].second,0,false,true};
+    m_v = { m_v.GetStartingPositions()[m_playerCount-1].first, 
+        m_v.GetStartingPositions()[m_playerCount-1].second,0,false,true};
     m_scene->addObj(&m_v);
 }
 //spawn the vehicle at a dafault location
@@ -47,7 +47,9 @@ void Game::startGame()
             else if (key == ' ') {
                 unsigned long currentTime = GetTickCount();
                 if (currentTime - lastShotTime >= shootDelay) {
-                    bullets.push_back(m_v.shootBullet());
+                    auto newBullet = m_v.shootBullet(m_v.GetX(), m_v.GetY());
+                    //std::cout << "Bullet created at: (" << newBullet->getXStart() << ", " << newBullet->getYStart() << ")" << std::endl;
+                    bullets.push_back(std::move(newBullet));
                     lastShotTime = currentTime; // Actualizăm timpul ultimei trageri
                 }
             }
@@ -55,11 +57,12 @@ void Game::startGame()
 
         // Mișcarea gloanțelor
         for (auto it = bullets.begin(); it != bullets.end();) {
-            int newX = it->getXStart();
-            int newY = it->getYStart();
+            int newX = (*it)->getXStart();
+            int newY = (*it)->getYStart();
+            //std::cout << "Bullet at (" << newX << ", " << newY << ") moving in direction: " << static_cast<int>((*it)->getAxis()) << std::endl;
 
             // Determinarea direcției glonțului
-            switch (it->getAxis()) {
+            switch ((*it)->getAxis()) {
             case Axis::up:    newX--; break;
             case Axis::down:  newX++; break;
             case Axis::left:  newY--; break;
@@ -71,9 +74,9 @@ void Game::startGame()
             if (m_scene->checkObj(newX, newY)) {
 
                 // daca nu loveste nimic mutam glontul
-                m_scene->moveObject(&(*it), newX, newY);
-                it->setXStart(newX); // actualizare pozitie glont
-                it->setYStart(newY);
+                m_scene->moveObject((*it).get(), newX, newY);
+                (*it)->setXStart(newX); // actualizare pozitie glont
+                (*it)->setYStart(newY);
                 ++it;
 
             }
@@ -81,8 +84,8 @@ void Game::startGame()
                 // daca loveste tanc
                 if (dynamic_cast<Vehicle*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
                     m_scene->removeObj(newX, newY); //stergem tancu
-                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt(it->getXStart(), it->getYStart())))
-                        m_scene->removeObj(it->getXStart(), it->getYStart());
+                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt((*it)->getXStart(), (*it)->getYStart())))
+                        m_scene->removeObj((*it)->getXStart(), (*it)->getYStart());
                     it = bullets.erase(it);
                     continue;
                 }
@@ -90,8 +93,8 @@ void Game::startGame()
                 // daca loveste alt glont
                 if (dynamic_cast<Bullet*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
                     m_scene->removeObj(newX, newY); //stergem glontu inamicului/al nostru
-                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt(it->getXStart(), it->getYStart())))
-                        m_scene->removeObj(it->getXStart(), it->getYStart());
+                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt((*it)->getXStart(), (*it)->getYStart())))
+                        m_scene->removeObj((*it)->getXStart(), (*it)->getYStart());
                     it = bullets.erase(it);
                     continue;
                 }
@@ -102,8 +105,8 @@ void Game::startGame()
                     {
                         m_scene->removeObj(newX, newY); //stergem peretele
                     }
-                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt(it->getXStart(), it->getYStart())))
-                        m_scene->removeObj(it->getXStart(), it->getYStart());
+                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt((*it)->getXStart(), (*it)->getYStart())))
+                        m_scene->removeObj((*it)->getXStart(), (*it)->getYStart());
                     it = bullets.erase(it);
                     continue;
                 }
@@ -114,8 +117,8 @@ void Game::startGame()
                     HandleBombCollision(bomb, newX, newY);
 
                     m_scene->removeObj(newX, newY); //stergem bomba
-                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt(it->getXStart(), it->getYStart())))
-                        m_scene->removeObj(it->getXStart(), it->getYStart());
+                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt((*it)->getXStart(), (*it)->getYStart())))
+                        m_scene->removeObj((*it)->getXStart(), (*it)->getYStart());
                     it = bullets.erase(it);
                     continue;
                 }

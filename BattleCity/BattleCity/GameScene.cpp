@@ -34,7 +34,7 @@
         moveCursor(y, x);
    
         m_map.getMap()[x][y] = nullptr;
-        m_map.getMap()[x][y] = new Road;
+        m_map.getMap()[x][y] = new Road{x,y,0,false,true};
         m_map.getMap()[x][y]->draw();
     }
 
@@ -63,6 +63,14 @@
             obj->setXStart(x);
             obj->setYStart(y);
        
+            if (Vehicle* vehicle = dynamic_cast<Vehicle*>(obj)) {
+                // Setăm coordonatele specifice vehiculului
+                vehicle->SetX(x);
+                vehicle->SetY(y);
+
+                // Mesaj de debugging pentru a verifica setarea corectă
+                //std::cout << "Vehicle moved to new position: (" << vehicle->GetX() << ", " << vehicle->GetY() << ")" << std::endl;
+            }
         }
         else
         {

@@ -6,7 +6,7 @@ class Wall : public GameObject
 {
 public:
 	
-	Wall(int id = 0, int xStart = 0, int yStart = 0, bool isVisible = true, bool isBreakable = true, bool hasBomb = false);
+	Wall(int xStart, int yStart, int id, bool isBreakable, bool isVisible, bool hasBomb);
 
 	bool IsBreakable()const;
 	bool HasBomb()const;

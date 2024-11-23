@@ -34,7 +34,7 @@ private:
 	Difficulty m_difficulty = EASY;
 	std::vector<std::vector<int>> m_initMap;
 	GameScene* m_scene;
-	std::vector<Bullet> bullets;
+	std::vector<std::shared_ptr<Bullet>> bullets;
 	int m_playerCount;
 };
 

@@ -2,14 +2,9 @@
 #include "Wall.h"
 
 
-Wall::Wall(int id, int xStart, int yStart, bool isVisible, bool isBreakable, bool hasBomb)
-	:m_id{ id },
-	m_xStart{ xStart },
-	m_yStart{ yStart },
-	m_isBreakable{ isBreakable },
-	m_isVisible{ isVisible },
+Wall::Wall(int xStart, int yStart, int id, bool isBreakable, bool isVisible, bool hasBomb)
+	:GameObject{ xStart, yStart, id, isBreakable, isVisible },
 	m_hasBomb{ hasBomb }
-
 {}
 
 
@@ -49,7 +44,7 @@ void Wall::setVisible(bool isVisible) { m_isVisible = isVisible; }
 
 void Wall::draw()
 {
-	if (!m_isBreakable)
+	if (!isBreakable())
 	{
 		this->setTextColor(5);
 	}

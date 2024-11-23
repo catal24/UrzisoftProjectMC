@@ -5,8 +5,8 @@ class GameObject
 {
 
 public:
-
-    GameObject(int xStart = 0, int yStart = 0, int id = 0, bool isBreakable = false, bool isVisible = true);
+    GameObject() = default;
+    GameObject(int xStart, int yStart, int id, bool isBreakable, bool isVisible);
 
     int getXStart() const;
     void setXStart(int xStart);

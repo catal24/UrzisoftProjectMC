@@ -21,12 +21,12 @@ Map::Map(std::vector<std::vector<int>> mat)
 		{
 			if (mat[i][j] == 0)
 			{
-				m_map[i][j] = new Road;
+				m_map[i][j] = new Road{i,j,0,false,true};
 				m_numberOfRoads++;
 			}
 			else
 			{
-				m_map[i][j] = new Wall;
+				m_map[i][j] = new Wall{i,j,0,true,true,false};
 				m_numberOfWalls++;
 			}
 		}
@@ -93,7 +93,7 @@ void Map::generateRandomBombsOnWalls(int numBombs)
 				if (hasAdjacentRoad)
 				{
 					delete m_map[i][j];
-					m_map[i][j] = new Bomb(i, j, 0, false, true, 1);
+					m_map[i][j] = new Bomb{ i, j, 0, true, true, 1 };
 					count++;
 				}
 			}
@@ -125,7 +125,13 @@ void Map::setIndestructibleBorders()
 	for (int i = 0; i < m_height; i++)
 		for (int j = 0; j < m_width; j++)
 			if (i == 0 || i == m_height - 1 || j == 0 || j == m_width - 1)
-				m_map[i][j] = new Wall(0, i, j, true, false,false);
+			{
+				Wall* wall = dynamic_cast<Wall*>(m_map[i][j]);
+				if (wall && wall->isBreakable())
+				{
+					wall->setBreakable(false);
+				}
+			}
 }
 
 
