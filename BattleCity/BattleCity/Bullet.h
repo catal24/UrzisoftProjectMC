@@ -19,6 +19,7 @@ public:
 
     void setSpeed(int speed);
 
+
     int getXStart() const;
     void setXStart(int xStart);
 
@@ -40,7 +41,7 @@ private:
     int m_id;
     Axis m_axis;
 	int m_level;
-	int m_speed;
+    int m_speed;
     int m_xStart;
     int m_yStart;
     bool m_isBreakable;

@@ -83,8 +83,7 @@ void Game::startGame()
             int newX = (*it)->getXStart();
             int newY = (*it)->getYStart();
 
-
-            // det directiei glontului
+            // Determinăm direcția glonțului
             switch ((*it)->getAxis()) {
             case Axis::up:    newX--; break;
             case Axis::down:  newX++; break;
@@ -92,61 +91,18 @@ void Game::startGame()
             case Axis::right: newY++; break;
             }
 
-
-            // verificarea coliziunilor
+            // Verificăm coliziunea
             if (m_scene->checkObj(newX, newY)) {
-
-                // daca nu loveste nimic mutam glontul
+                // Dacă nu lovește nimic, mutăm glonțul
                 m_scene->moveObject((*it).get(), newX, newY);
-                (*it)->setXStart(newX); // actualizare pozitie glont
+                (*it)->setXStart(newX); // Actualizăm poziția glonțului
                 (*it)->setYStart(newY);
-                ++it;
-
+                ++it; // Avansăm iteratorul
             }
             else {
-                // daca loveste tanc
-                if (dynamic_cast<Vehicle*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
-                    m_scene->removeObj(newX, newY); //stergem tancu
-                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt((*it)->getXStart(), (*it)->getYStart())))
-                        m_scene->removeObj((*it)->getXStart(), (*it)->getYStart());
-                    it = bullets.erase(it);
-                    continue;
-                }
-
-                // daca loveste alt glont
-                if (dynamic_cast<Bullet*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
-                    m_scene->removeObj(newX, newY); //stergem glontu inamicului/al nostru
-                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt((*it)->getXStart(), (*it)->getYStart())))
-                        m_scene->removeObj((*it)->getXStart(), (*it)->getYStart());
-                    it = bullets.erase(it);
-                    continue;
-                }
-
-                // daca loveste perete
-                if (dynamic_cast<Wall*>(m_scene->getObjectAt(newX, newY)) != nullptr) {
-                    if (dynamic_cast<Wall*>(m_scene->getObjectAt(newX, newY))->isBreakable())
-                    {
-                        m_scene->removeObj(newX, newY); //stergem peretele
-                    }
-                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt((*it)->getXStart(), (*it)->getYStart())))
-                        m_scene->removeObj((*it)->getXStart(), (*it)->getYStart());
-                    it = bullets.erase(it);
-                    continue;
-                }
-
-                // daca loveste o bomba
-                if (Bomb*bomb =dynamic_cast<Bomb*>(m_scene->getObjectAt(newX, newY))) {
-                    //coordonate bomba
-                    HandleBombCollision(bomb, newX, newY);
-
-                    m_scene->removeObj(newX, newY); //stergem bomba
-                    if (!dynamic_cast<Vehicle*>(m_scene->getObjectAt((*it)->getXStart(), (*it)->getYStart())))
-                        m_scene->removeObj((*it)->getXStart(), (*it)->getYStart());
-                    it = bullets.erase(it);
-                    continue;
-                }
+                // Dacă există coliziune, gestionăm și actualizăm iteratorul
+                HandleBulletCollision(it, newX, newY);
             }
-
         }
     }
 }
@@ -195,3 +151,48 @@ void Game::HandleBombCollision(Bomb* bomb, int bombX, int bombY)
         }
     }
 }
+
+void Game::HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator& it, int newX, int newY) {
+    Bullet* bullet = it->get();
+
+    // Dacă lovește un tanc
+    if (dynamic_cast<Vehicle*>(m_scene->getObjectAt(newX, newY))) {
+        m_scene->removeObj(newX, newY);
+        m_scene->removeObj(bullet->getXStart(), bullet->getYStart());
+        it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
+        return;
+    }
+
+    // Dacă lovește un alt glonț
+    if (dynamic_cast<Bullet*>(m_scene->getObjectAt(newX, newY))) {
+        m_scene->removeObj(newX, newY);
+        m_scene->removeObj(bullet->getXStart(), bullet->getYStart());
+        it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
+        return;
+    }
+
+    // Dacă lovește un perete
+    if (Wall* wall = dynamic_cast<Wall*>(m_scene->getObjectAt(newX, newY))) {
+        if (wall->isBreakable()) {
+            m_scene->removeObj(newX, newY);
+        }
+        m_scene->removeObj(bullet->getXStart(), bullet->getYStart());
+        it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
+        return;
+    }
+
+    // Dacă lovește o bombă
+    if (Bomb* bomb = dynamic_cast<Bomb*>(m_scene->getObjectAt(newX, newY))) {
+        HandleBombCollision(bomb, newX, newY);
+        m_scene->removeObj(newX, newY);
+        m_scene->removeObj(bullet->getXStart(), bullet->getYStart());
+        it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
+        return;
+    }
+
+    // Dacă nu se întâmplă nimic, doar avansăm iteratorul
+    ++it;
+}
+
+
+

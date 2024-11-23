@@ -25,6 +25,8 @@ Axis Bullet::getAxis() const   {return m_axis;}
 
 void Bullet::setSpeed(int speed)    {m_speed = speed;}
 
+
+
 void Bullet::draw()		{std::cout << "*";}
 
 int Bullet::getXStart() const    { return m_xStart; }

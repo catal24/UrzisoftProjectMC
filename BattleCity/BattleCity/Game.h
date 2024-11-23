@@ -29,6 +29,7 @@ public:
 	Difficulty GetDifficulty();
 	void SetDifficulty(Difficulty difficulty);
 	void HandleBombCollision(Bomb* bomb, int bombX, int bombY);
+	void HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator& it, int newX, int newY);
 private:
 	Vehicle m_v;
 	Difficulty m_difficulty = EASY;
