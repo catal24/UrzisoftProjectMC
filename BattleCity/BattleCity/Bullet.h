@@ -36,6 +36,9 @@ public:
     bool isVisible() const;
     void setVisible(bool isVisible);
 
+    bool isFirstMove();
+    void setFirstMove(bool value);
+
     void draw()override;
 private:
     int m_id;
@@ -46,5 +49,6 @@ private:
     int m_yStart;
     bool m_isBreakable;
     bool m_isVisible;
+    bool m_firstMove = true;
 };
 

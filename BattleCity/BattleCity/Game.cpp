@@ -80,15 +80,22 @@ void Game::startGame()
 
 		// miscarea gloantelor
 		for (auto it = bullets.begin(); it != bullets.end();) {
+			auto bullet = *it;
 			int newX = (*it)->getXStart();
 			int newY = (*it)->getYStart();
 
-			// Determinăm direcția glonțului
-			switch ((*it)->getAxis()) {
-			case Axis::up:    newX--; break;
-			case Axis::down:  newX++; break;
-			case Axis::left:  newY--; break;
-			case Axis::right: newY++; break;
+			if (!(*it)->isFirstMove())
+			{
+				// Determinăm direcția glonțului
+				switch ((*it)->getAxis()) {
+				case Axis::up:    newX--; break;
+				case Axis::down:  newX++; break;
+				case Axis::left:  newY--; break;
+				case Axis::right: newY++; break;
+				}
+			}
+			else {
+				(*it)->setFirstMove(false);
 			}
 
 			// Verificăm coliziunea
