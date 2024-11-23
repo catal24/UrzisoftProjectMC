@@ -1,7 +1,8 @@
 #pragma once
+#include <QPushButton>
 
 #include <QtWidgets/QMainWindow>
-#include "ui_ClientMC.h"
+
 
 class ClientMC : public QMainWindow
 {
@@ -12,5 +13,5 @@ public:
     ~ClientMC();
 
 private:
-    Ui::ClientMCClass ui;
+    QPushButton* infoButton;
 };

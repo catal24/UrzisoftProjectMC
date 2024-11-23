@@ -6,10 +6,12 @@
 int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
-    Login login;
+
     QMainWindow* window = new QMainWindow;
     ClientMC mainWindow(window);
-	mainWindow.setWindowTitle("Menu");
+	
+
+    Login login;
 	login.setWindowTitle("Login");
 
     QObject::connect(&login, &Login::loginSuccess, [&]() {
