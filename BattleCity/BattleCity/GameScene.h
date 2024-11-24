@@ -31,6 +31,8 @@ public:
 
 	GameObject* getObjectAt(int x, int y);
 
+	void respawnObj(Vehicle* obj, int x, int y);
+
 protected:
 	Map m_map;
 	std::vector<std::pair<int, int>> m_startingPositions = { {1,1},{18,18},{1,18},{18,1} };

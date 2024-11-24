@@ -134,4 +134,11 @@
         return nullptr;
     }
 
+    void GameScene::respawnObj(Vehicle* obj, int x, int y)
+    {
+        moveObject(obj, x, y);
+        std::cout << obj->GetLives();
+        obj->SetLives(obj->GetLives());
+    }
+
   

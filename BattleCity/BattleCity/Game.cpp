@@ -159,6 +159,7 @@ void Game::HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator&
 	if (dynamic_cast<Vehicle*>(m_scene->getObjectAt(newX, newY))) {
 		m_scene->removeObj(newX, newY);
 		m_scene->removeObj(bullet->getXStart(), bullet->getYStart());
+		
 		it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
 		return;
 	}
