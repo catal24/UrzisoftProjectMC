@@ -143,7 +143,8 @@ void Game::HandleBombCollision(Bomb* bomb, int bombX, int bombY)
 		}
 		//verificam daca este vehicul si il distrugem
 		if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->getObjectAt(checkX, checkY))) {
-			m_scene->removeObj(checkX, checkY);
+			m_scene->respawnObj(vehicle, 1, 1);
+			//m_scene->removeObj(checkX, checkY);
 		}
 		//distrugem si bombele
 		if (Bomb* bomb = dynamic_cast<Bomb*>(m_scene->getObjectAt(checkX, checkY))) {
@@ -156,13 +157,15 @@ void Game::HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator&
 	Bullet* bullet = it->get();
 
 	// Dacă lovește un tanc
-	if (dynamic_cast<Vehicle*>(m_scene->getObjectAt(newX, newY))) {
-		m_scene->removeObj(newX, newY);
-		m_scene->removeObj(bullet->getXStart(), bullet->getYStart());
-		
-		it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
+	if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->getObjectAt(newX, newY))) {
+		// Respawn the vehicle
+		m_scene->respawnObj(vehicle, 1, 1); 
+		m_scene->removeObj(newX, newY);                  
+		m_scene->removeObj(bullet->getXStart(), bullet->getYStart()); 
+		it = bullets.erase(it);                          
 		return;
 	}
+
 
 	// Dacă lovește un alt glonț
 	if (dynamic_cast<Bullet*>(m_scene->getObjectAt(newX, newY))) {
