@@ -15,8 +15,8 @@ int main(int argc, char *argv[])
 	login.setWindowTitle("Login");
 
     QObject::connect(&login, &Login::loginSuccess, [&]() {
-        login.close();          // Închide fereastra de login
-        mainWindow.show();      // Deschide fereastra principală
+        login.close();          // Inchide fereastra de login
+        mainWindow.show();      // Deschide fereastra principala
         });
 
     login.show();
