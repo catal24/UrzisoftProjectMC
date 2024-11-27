@@ -14,4 +14,5 @@ public:
 
 private:
     QPushButton* infoButton;
+	QPushButton* leaderboardButton;
 };

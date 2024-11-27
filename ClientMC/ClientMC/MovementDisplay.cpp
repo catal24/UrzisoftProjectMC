@@ -6,7 +6,6 @@
 MovementInfoDisplay::MovementInfoDisplay(QWidget* parent)
     : QWidget(parent)
 {
-    this->setWindowTitle("Movement Info");
     this->setFixedSize(800, 600);
 
     QVBoxLayout* layout = new QVBoxLayout(this);
