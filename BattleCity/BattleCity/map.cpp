@@ -112,8 +112,8 @@ void Map::GenerateRandomIndestructibleWalls(int count)
 
 		//verificam daca este destructibil deja
 		Wall* wall = dynamic_cast<Wall*>(m_map[x][y]);
-		if (wall && wall->isBreakable()) {
-			wall->setBreakable(false); // il facem indestructibil
+		if (wall && wall->IsBreakable()) {
+			wall->SetBreakable(false); // il facem indestructibil
 			++modified;
 		}
 	}
@@ -127,8 +127,8 @@ void Map::SetIndestructibleBorders()
 			if (i == 0 || i == m_height - 1 || j == 0 || j == m_width - 1)
 			{
 				Wall* wall = dynamic_cast<Wall*>(m_map[i][j]);
-				if (wall && wall->isBreakable())
-					wall->setBreakable(false);
+				if (wall && wall->IsBreakable())
+					wall->SetBreakable(false);
 
 			}
 }

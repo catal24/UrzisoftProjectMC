@@ -8,26 +8,25 @@ public:
 	
 	Wall(int xStart, int yStart, int id, bool isBreakable, bool isVisible, bool hasBomb);
 
-	bool IsBreakable()const;
 	bool HasBomb()const;
 
 	void SetDestructible(bool isBreakable);
 	void SetBomb(bool hasBomb);
 
-	int getXStart() const;
-	void setXStart(int xStart);
+	int GetXStart() const;
+	void SetXStart(int xStart);
 
-	int getYStart() const;
-	void setYStart(int yStart);
+	int GetYStart() const;
+	void SetYStart(int yStart);
 
-	int getId() const;
-	void setId(int id);
+	int GetId() const;
+	void SetId(int id);
 
-	bool isBreakable() const;
-	void setBreakable(bool isBreakable);
+	bool IsBreakable() const;
+	void SetBreakable(bool isBreakable);
 
-	bool isVisible() const;
-	void setVisible(bool isVisible);
+	bool IsVisible() const;
+	void SetVisible(bool isVisible);
 
 	void Draw()override;
 

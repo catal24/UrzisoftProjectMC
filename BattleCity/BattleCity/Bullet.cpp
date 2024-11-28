@@ -17,33 +17,33 @@ Bullet::Bullet(const Bullet& other)
 	m_axis{ other.m_axis }
 {}
 
-int Bullet::getLevel() const { return m_level; }
+int Bullet::GetLevel() const { return m_level; }
 
-int Bullet::getSpeed() const { return m_speed; }
+int Bullet::GetSpeed() const { return m_speed; }
 
-Axis Bullet::getAxis() const { return m_axis; }
+Axis Bullet::GetAxis() const { return m_axis; }
 
-void Bullet::setSpeed(int speed) { m_speed = speed; }
+void Bullet::SetSpeed(int speed) { m_speed = speed; }
 
 
 
 void Bullet::Draw() { std::cout << "*"; }
 
-int Bullet::getXStart() const { return m_xStart; }
-void Bullet::setXStart(int xStart) { m_xStart = xStart; }
+int Bullet::GetXStart() const { return m_xStart; }
+void Bullet::SetXStart(int xStart) { m_xStart = xStart; }
 
-int Bullet::getYStart() const { return m_yStart; }
-void Bullet::setYStart(int yStart) { m_yStart = yStart; }
+int Bullet::GetYStart() const { return m_yStart; }
+void Bullet::SetYStart(int yStart) { m_yStart = yStart; }
 
-int Bullet::getId() const { return m_id; }
-void Bullet::setId(int id) { m_id = id; }
+int Bullet::GetId() const { return m_id; }
+void Bullet::SetId(int id) { m_id = id; }
 
-bool Bullet::isBreakable() const { return m_isBreakable; }
-void Bullet::setBreakable(bool isBreakable) { m_isBreakable = isBreakable; }
+bool Bullet::IsBreakable() const { return m_isBreakable; }
+void Bullet::SetBreakable(bool isBreakable) { m_isBreakable = isBreakable; }
 
-bool Bullet::isVisible() const { return m_isVisible; }
-void Bullet::setVisible(bool isVisible) { m_isVisible = isVisible; }
+bool Bullet::IsVisible() const { return m_isVisible; }
+void Bullet::SetVisible(bool isVisible) { m_isVisible = isVisible; }
 
-bool Bullet::isFirstMove() { return m_firstMove; }
-void Bullet::setFirstMove(bool value) { m_firstMove = value; }
+bool Bullet::IsFirstMove() { return m_firstMove; }
+void Bullet::SetFirstMove(bool value) { m_firstMove = value; }
 

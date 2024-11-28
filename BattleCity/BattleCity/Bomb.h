@@ -6,10 +6,10 @@ class Bomb : public GameObject
 public:
     Bomb(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int radius = 1);
 
-    int getRadius() const;
-    void setRadius(int radius);
+    int GetRadius() const;
+    void SetRadius(int radius);
 
-    void explosion();
+    void Explosion();
     
     void Draw()override;
 

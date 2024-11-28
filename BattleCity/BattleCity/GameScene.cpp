@@ -73,8 +73,8 @@
             }
 
             if (Bullet* bullet = dynamic_cast<Bullet*>(obj)) {
-                bullet->setXStart(x);
-                bullet->setYStart(y);
+                bullet->SetXStart(x);
+                bullet->SetYStart(y);
             }
 
         }

@@ -12,32 +12,32 @@ public:
     Bullet(const Bullet& other);
     
 
-    int getLevel() const;
-    int getSpeed() const;
+    int GetLevel() const;
+    int GetSpeed() const;
 
-    Axis getAxis() const;
+    Axis GetAxis() const;
 
-    void setSpeed(int speed);
-
-
-    int getXStart() const;
-    void setXStart(int xStart);
+    void SetSpeed(int speed);
 
 
-    int getYStart() const;
-    void setYStart(int yStart);
+    int GetXStart() const;
+    void SetXStart(int xStart);
 
-    int getId() const;
-    void setId(int id);
 
-    bool isBreakable() const;
-    void setBreakable(bool isBreakable);
+    int GetYStart() const;
+    void SetYStart(int yStart);
 
-    bool isVisible() const;
-    void setVisible(bool isVisible);
+    int GetId() const;
+    void SetId(int id);
 
-    bool isFirstMove();
-    void setFirstMove(bool value);
+    bool IsBreakable() const;
+    void SetBreakable(bool isBreakable);
+
+    bool IsVisible() const;
+    void SetVisible(bool isVisible);
+
+    bool IsFirstMove();
+    void SetFirstMove(bool value);
 
     void Draw()override;
 private:

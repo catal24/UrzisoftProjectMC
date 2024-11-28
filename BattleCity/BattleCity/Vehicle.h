@@ -16,24 +16,24 @@ public:
 	
 	
 
-	std::shared_ptr<Bullet> shootBullet(int x, int y);
+	std::shared_ptr<Bullet> ShootBullet(int x, int y);
 
-	void setAxis(char ax);
+	void SetAxis(char ax);
 
 	void SetSpeed(int amount);
 	void SetLives(int amount);
 	void SetIsDead(bool flag);
 	void SetX(int x);
 	void SetY(int y);
-	void moveTank(char dir);
+	void MoveTank(char dir);
 	int GetSpeed()const;
 	int GetX();
 	int GetY();
 	int GetLives()const;
 	bool GetIsDead()const;
 	Axis GetAxis()const;
-	void die();
-	void respawn();
+	void Die();
+	void Respawn();
 	std::vector<std::pair<int, int>> GetStartingPositions();
 	void Draw()override;
 

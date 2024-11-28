@@ -15,7 +15,7 @@ Vehicle::Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisibl
 
 
 
-std::shared_ptr<Bullet> Vehicle::shootBullet(int x, int y)
+std::shared_ptr<Bullet> Vehicle::ShootBullet(int x, int y)
 {
 	int bulletX = x;
 	int bulletY = y;
@@ -34,7 +34,7 @@ std::shared_ptr<Bullet> Vehicle::shootBullet(int x, int y)
 
 }
 
-void Vehicle::setAxis(char ax)
+void Vehicle::SetAxis(char ax)
 {
 	if (ax == 'w')
 		m_axis = Axis::up;
@@ -53,7 +53,7 @@ void Vehicle::SetIsDead(bool flag) { m_isDead = flag; }
 void Vehicle::SetX(int x) { m_x = x; }
 void Vehicle::SetY(int y) { m_y = y; }
 
-void Vehicle::moveTank(char dir)
+void Vehicle::MoveTank(char dir)
 {
 	if (dir == 'w') {
 		m_x--;
@@ -88,16 +88,16 @@ int Vehicle::GetLives() const { return m_lives; }
 bool Vehicle::GetIsDead() const { return m_isDead; }
 Axis Vehicle::GetAxis() const { return m_axis; }
 
-void Vehicle::die()
+void Vehicle::Die()
 {
 	m_lives -= 1;
 	if (m_lives > 0)
-		respawn();
+		Respawn();
 	else
 		m_isDead = true;
 }
 
-void Vehicle::respawn()
+void Vehicle::Respawn()
 {
 }
 

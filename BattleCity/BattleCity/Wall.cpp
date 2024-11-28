@@ -27,24 +27,24 @@ void Wall::SetBomb(bool hasBomb)
 	m_hasBomb = hasBomb;
 }
 
-int Wall::getXStart() const { return m_xStart; }
-void Wall::setXStart(int xStart) { m_xStart = xStart; }
+int Wall::GetXStart() const { return m_xStart; }
+void Wall::SetXStart(int xStart) { m_xStart = xStart; }
 
-int Wall::getYStart() const { return m_yStart; }
-void Wall::setYStart(int yStart) { m_yStart = yStart; }
+int Wall::GetYStart() const { return m_yStart; }
+void Wall::SetYStart(int yStart) { m_yStart = yStart; }
 
-int Wall::getId() const { return m_id; }
-void Wall::setId(int id) { m_id = id; }
+int Wall::GetId() const { return m_id; }
+void Wall::SetId(int id) { m_id = id; }
 
-bool Wall::isBreakable() const { return m_isBreakable; }
-void Wall::setBreakable(bool isBreakable) { m_isBreakable = isBreakable; }
+bool Wall::IsBreakable() const { return m_isBreakable; }
+void Wall::SetBreakable(bool isBreakable) { m_isBreakable = isBreakable; }
 
-bool Wall::isVisible() const { return m_isVisible; }
-void Wall::setVisible(bool isVisible) { m_isVisible = isVisible; }
+bool Wall::IsVisible() const { return m_isVisible; }
+void Wall::SetVisible(bool isVisible) { m_isVisible = isVisible; }
 
 void Wall::Draw()
 {
-	if (!isBreakable())
+	if (!IsBreakable())
 	{
 		this->SetTextColor(5);
 	}

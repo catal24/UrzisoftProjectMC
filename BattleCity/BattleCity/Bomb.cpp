@@ -4,8 +4,8 @@ Bomb::Bomb(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int
 	: GameObject{xStart, yStart, id, isBreakable, isVisible},
 	m_radius{ radius } {}
 
-int Bomb::getRadius() const { return m_radius; }
-void Bomb::setRadius(int radius) { m_radius = radius; }
+int Bomb::GetRadius() const { return m_radius; }
+void Bomb::SetRadius(int radius) { m_radius = radius; }
 
 void Bomb::Draw()
 {
