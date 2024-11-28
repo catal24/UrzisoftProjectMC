@@ -35,7 +35,7 @@ public:
 	void die();
 	void respawn();
 	std::vector<std::pair<int, int>> GetStartingPositions();
-	void draw()override;
+	void Draw()override;
 
 
 private:

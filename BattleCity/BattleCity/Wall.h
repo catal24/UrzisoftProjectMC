@@ -29,7 +29,7 @@ public:
 	bool isVisible() const;
 	void setVisible(bool isVisible);
 
-	void draw()override;
+	void Draw()override;
 
 private:
 	int m_id;

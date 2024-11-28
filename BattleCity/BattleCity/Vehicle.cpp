@@ -103,7 +103,7 @@ void Vehicle::respawn()
 
 std::vector<std::pair<int, int>> Vehicle::GetStartingPositions() { return m_startingPositions; }
 
-void Vehicle::draw()
+void Vehicle::Draw()
 {
 	std::cout << (char)254u;
 }

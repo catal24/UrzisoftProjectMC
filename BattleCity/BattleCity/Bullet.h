@@ -39,7 +39,7 @@ public:
     bool isFirstMove();
     void setFirstMove(bool value);
 
-    void draw()override;
+    void Draw()override;
 private:
     int m_id;
     Axis m_axis;

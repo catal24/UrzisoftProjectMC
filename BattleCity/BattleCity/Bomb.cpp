@@ -7,10 +7,10 @@ Bomb::Bomb(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int
 int Bomb::getRadius() const { return m_radius; }
 void Bomb::setRadius(int radius) { m_radius = radius; }
 
-void Bomb::draw()
+void Bomb::Draw()
 {
-	this->setTextColor(4);
+	this->SetTextColor(4);
 	std::cout << (char)254u;
-	this->setTextColor(7);
+	this->SetTextColor(7);
 }
 

@@ -4,7 +4,7 @@ class Road:public GameObject
 {
 public:
 	Road(int xStart, int yStart, int id, bool isBreakable, bool isVisible);
-	void draw() override;
+	void Draw() override;
 
 private:
 	int m_xStart, m_yStart;

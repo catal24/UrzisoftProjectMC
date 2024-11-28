@@ -11,7 +11,7 @@ public:
 
     void explosion();
     
-    void draw()override;
+    void Draw()override;
 
 private:
     int m_id;

@@ -49,8 +49,8 @@ void Map::drawMap()
 	{
 		for (int j = 0; j < m_width; j++)
 		{
-			if (m_map[i][j]->isVisible())
-				m_map[i][j]->draw();
+			if (m_map[i][j]->IsVisible())
+				m_map[i][j]->Draw();
 			else
 				std::cout << ".";
 		}

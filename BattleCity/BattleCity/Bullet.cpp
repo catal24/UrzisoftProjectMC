@@ -27,7 +27,7 @@ void Bullet::setSpeed(int speed) { m_speed = speed; }
 
 
 
-void Bullet::draw() { std::cout << "*"; }
+void Bullet::Draw() { std::cout << "*"; }
 
 int Bullet::getXStart() const { return m_xStart; }
 void Bullet::setXStart(int xStart) { m_xStart = xStart; }

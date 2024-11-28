@@ -25,7 +25,7 @@
 
     void GameScene::AddObj(GameObject* obj)
     {
-        m_map.getMap()[obj->getXStart()][obj->getYStart()] = obj;
+        m_map.getMap()[obj->GetXStart()][obj->GetYStart()] = obj;
     
     }
 
@@ -35,7 +35,7 @@
    
         m_map.getMap()[x][y] = nullptr;
         m_map.getMap()[x][y] = new Road{x,y,0,false,true};
-        m_map.getMap()[x][y]->draw();
+        m_map.getMap()[x][y]->Draw();
     }
 
     bool GameScene::CheckObj(int x, int y)
@@ -55,13 +55,13 @@
     {
         if (CheckObj(x, y))
         {
-            RemoveObj(obj->getXStart(), obj->getYStart());
+            RemoveObj(obj->GetXStart(), obj->GetYStart());
 
             m_map.getMap()[x][y] = obj;
             MoveCursor(y, x);
-            m_map.getMap()[x][y]->draw();
-            obj->setXStart(x);
-            obj->setYStart(y);
+            m_map.getMap()[x][y]->Draw();
+            obj->SetXStart(x);
+            obj->SetYStart(y);
        
             if (Vehicle* vehicle = dynamic_cast<Vehicle*>(obj)) {
                 // Setăm coordonatele specifice vehiculului
@@ -116,7 +116,7 @@
 
     void GameScene::DrawQueue(std::queue<GameObject*>& q)
     {
-        q.front()->draw();
+        q.front()->Draw();
         q.pop();
     }
 

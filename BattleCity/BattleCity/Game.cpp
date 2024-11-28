@@ -25,22 +25,22 @@ void Game::startGame()
 		if (_kbhit() && !m_v.GetIsDead()) {
 			char key = _getch();
 			if (key == 'w' || key == 'W') {
-				m_scene->MoveObject(&m_v, m_v.getXStart() - 1, m_v.getYStart());
+				m_scene->MoveObject(&m_v, m_v.GetXStart() - 1, m_v.GetYStart());
 				m_v.setAxis(key);
 
 			}
 			else if (key == 's' || key == 'S') {
-				m_scene->MoveObject(&m_v, m_v.getXStart() + 1, m_v.getYStart());
+				m_scene->MoveObject(&m_v, m_v.GetXStart() + 1, m_v.GetYStart());
 				m_v.setAxis(key);
 
 			}
 			else if (key == 'a' || key == 'A') {
-				m_scene->MoveObject(&m_v, m_v.getXStart(), m_v.getYStart() - 1);
+				m_scene->MoveObject(&m_v, m_v.GetXStart(), m_v.GetYStart() - 1);
 				m_v.setAxis(key);
 
 			}
 			else if (key == 'd' || key == 'D') {
-				m_scene->MoveObject(&m_v, m_v.getXStart(), m_v.getYStart() + 1);
+				m_scene->MoveObject(&m_v, m_v.GetXStart(), m_v.GetYStart() + 1);
 				m_v.setAxis(key);
 
 			}
@@ -49,8 +49,8 @@ void Game::startGame()
 				if (currentTime - lastShotTime >= shootDelay) {
 
 					// coord vehiculului curent
-					int currentX = m_v.getXStart();
-					int currentY = m_v.getYStart();
+					int currentX = m_v.GetXStart();
+					int currentY = m_v.GetYStart();
 
 					// coord tintei in functie de directia vehiculului
 					int targetX = currentX;

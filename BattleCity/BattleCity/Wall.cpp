@@ -42,14 +42,14 @@ void Wall::setBreakable(bool isBreakable) { m_isBreakable = isBreakable; }
 bool Wall::isVisible() const { return m_isVisible; }
 void Wall::setVisible(bool isVisible) { m_isVisible = isVisible; }
 
-void Wall::draw()
+void Wall::Draw()
 {
 	if (!isBreakable())
 	{
-		this->setTextColor(5);
+		this->SetTextColor(5);
 	}
 	else
-		this->setTextColor(3);
+		this->SetTextColor(3);
 	std::cout << (char)254u;
-	this->setTextColor(7);
+	this->SetTextColor(7);
 }
