@@ -14,15 +14,15 @@ public:
 
 	Map(std::vector<std::vector<int>> mat);
 
-	void drawMap();
+	void DrawMap();
 
-	std::vector<std::vector<GameObject*>>& getMap();
+	std::vector<std::vector<GameObject*>>& GetMap();
 
-	void generateRandomBombsOnWalls(int numBombs);
-	void generateRandomIndestructibleWalls(int count);
-	void setIndestructibleBorders();
+	void GenerateRandomBombsOnWalls(int numBombs);
+	void GenerateRandomIndestructibleWalls(int count);
+	void SetIndestructibleBorders();
 
-	GameObject* getObjectAt(int x, int y);
+	GameObject* GetObjectAt(int x, int y);
 
 	std::vector<GameObject*>& operator[](int index); // pentru accesare scrisa
 	const std::vector<GameObject*>& operator[](int index) const; // pentru citire

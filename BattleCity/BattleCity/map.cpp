@@ -42,7 +42,7 @@ Map::Map(std::vector<std::vector<int>> mat)
 
 }
 
-void Map::drawMap()
+void Map::DrawMap()
 {
 
 	for (int i = 0; i < m_height; i++)
@@ -58,12 +58,12 @@ void Map::drawMap()
 	}
 }
 
-std::vector<std::vector<GameObject*>>& Map::getMap()
+std::vector<std::vector<GameObject*>>& Map::GetMap()
 {
 	return m_map;
 }
 
-void Map::generateRandomBombsOnWalls(int numBombs)
+void Map::GenerateRandomBombsOnWalls(int numBombs)
 {
 	srand(time(nullptr));
 
@@ -102,7 +102,7 @@ void Map::generateRandomBombsOnWalls(int numBombs)
 }
 
 
-void Map::generateRandomIndestructibleWalls(int count)
+void Map::GenerateRandomIndestructibleWalls(int count)
 {
 	int modified = 0;
 
@@ -120,7 +120,7 @@ void Map::generateRandomIndestructibleWalls(int count)
 
 }
 
-void Map::setIndestructibleBorders()
+void Map::SetIndestructibleBorders()
 {
 	for (int i = 0; i < m_height; i++)
 		for (int j = 0; j < m_width; j++)
@@ -134,7 +134,7 @@ void Map::setIndestructibleBorders()
 }
 
 
-GameObject* Map::getObjectAt(int x, int y)
+GameObject* Map::GetObjectAt(int x, int y)
 {
 	if (x >= 0 && x < m_height && y >= 0 && y < m_width) {
 		return m_map[x][y]; // returnam obiectul de pe pozitia (x, y)

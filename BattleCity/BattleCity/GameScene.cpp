@@ -25,7 +25,7 @@
 
     void GameScene::AddObj(GameObject* obj)
     {
-        m_map.getMap()[obj->GetXStart()][obj->GetYStart()] = obj;
+        m_map.GetMap()[obj->GetXStart()][obj->GetYStart()] = obj;
     
     }
 
@@ -33,9 +33,9 @@
     {   
         MoveCursor(y, x);
    
-        m_map.getMap()[x][y] = nullptr;
-        m_map.getMap()[x][y] = new Road{x,y,0,false,true};
-        m_map.getMap()[x][y]->Draw();
+        m_map.GetMap()[x][y] = nullptr;
+        m_map.GetMap()[x][y] = new Road{x,y,0,false,true};
+        m_map.GetMap()[x][y]->Draw();
     }
 
     bool GameScene::CheckObj(int x, int y)
@@ -44,7 +44,7 @@
             return false; // poz este in afara hartii
         }
 
-        if (typeid(*m_map.getMap()[x][y]) == typeid(Road)) {
+        if (typeid(*m_map.GetMap()[x][y]) == typeid(Road)) {
             return true; // este liber
         }
 
@@ -57,9 +57,9 @@
         {
             RemoveObj(obj->GetXStart(), obj->GetYStart());
 
-            m_map.getMap()[x][y] = obj;
+            m_map.GetMap()[x][y] = obj;
             MoveCursor(y, x);
-            m_map.getMap()[x][y]->Draw();
+            m_map.GetMap()[x][y]->Draw();
             obj->SetXStart(x);
             obj->SetYStart(y);
        
@@ -87,31 +87,31 @@
     void GameScene::DrawTest(Game g)
     {
         ClearConsole();
-        m_map.setIndestructibleBorders();
+        m_map.SetIndestructibleBorders();
         int indestructibleWallCount = 0;
         switch (g.GetDifficulty())
         {
         case Game::Difficulty::EASY:
-            m_map.generateRandomBombsOnWalls(7);
+            m_map.GenerateRandomBombsOnWalls(7);
             indestructibleWallCount = 5;
             break;
         case Game::Difficulty::MEDIUM:
-            m_map.generateRandomBombsOnWalls(10);
+            m_map.GenerateRandomBombsOnWalls(10);
             indestructibleWallCount = 10;
             break;
         case Game::Difficulty::HARD:
-            m_map.generateRandomBombsOnWalls(15);
+            m_map.GenerateRandomBombsOnWalls(15);
             indestructibleWallCount = 15;
             break;
         case Game::Difficulty::EXTREME:
-            m_map.generateRandomBombsOnWalls(20);
+            m_map.GenerateRandomBombsOnWalls(20);
             indestructibleWallCount = 20;
             break;
         default:
             break;
         }
-        m_map.generateRandomIndestructibleWalls(indestructibleWallCount);
-        m_map.drawMap();
+        m_map.GenerateRandomIndestructibleWalls(indestructibleWallCount);
+        m_map.DrawMap();
     }
 
     void GameScene::DrawQueue(std::queue<GameObject*>& q)
