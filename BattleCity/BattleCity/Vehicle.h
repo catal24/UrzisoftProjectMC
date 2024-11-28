@@ -22,7 +22,7 @@ public:
 
 	void SetSpeed(int amount);
 	void SetLives(int amount);
-	void SetIsDead();
+	void SetIsDead(bool flag);
 	void SetX(int x);
 	void SetY(int y);
 	void moveTank(char dir);

@@ -136,10 +136,18 @@
 
     void GameScene::respawnObj(Vehicle* obj, int x, int y)
     {
-        moveObject(obj, x, y);
-        int lives=obj->GetLives();
-        lives--;
-        obj->SetLives(lives);
+        if (obj->GetLives())
+        {
+            moveObject(obj, x, y);
+            int lives = obj->GetLives();
+            lives--;
+            obj->SetLives(lives);
+        }
+        else
+        {
+            removeObj(obj->GetX(),obj->GetY());
+            obj->SetIsDead(true);
+        }
     }
 
   

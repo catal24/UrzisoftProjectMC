@@ -49,7 +49,7 @@ void Vehicle::setAxis(char ax)
 
 void Vehicle::SetSpeed(int amount) { m_speed = amount; }
 void Vehicle::SetLives(int amount) { m_lives = amount; }
-void Vehicle::SetIsDead() { m_isDead = true; }
+void Vehicle::SetIsDead(bool flag) { m_isDead = flag; }
 void Vehicle::SetX(int x) { m_x = x; }
 void Vehicle::SetY(int y) { m_y = y; }
 

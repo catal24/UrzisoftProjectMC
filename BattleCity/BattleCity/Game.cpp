@@ -5,7 +5,7 @@ Game::Game(std::vector<std::vector<int>> m_initMap, Difficulty difficulty)
 	:m_scene{ new GameScene{m_initMap} }, m_playerCount{ 1 }, m_difficulty{ difficulty }
 {
 	m_v = { m_v.GetStartingPositions()[m_playerCount - 1].first,
-		m_v.GetStartingPositions()[m_playerCount - 1].second,0,false,true };
+		m_v.GetStartingPositions()[m_playerCount - 1].second,0,false,true,3,5,false,Axis::down };
 	m_scene->addObj(&m_v);
 }
 //spawn the vehicle at a dafault location
@@ -22,7 +22,7 @@ void Game::startGame()
 		Sleep(50);  // Sleep pentru a controla viteza jocului
 
 		// Controlul jucătorului
-		if (_kbhit()) {
+		if (_kbhit() && !m_v.GetIsDead()) {
 			char key = _getch();
 			if (key == 'w' || key == 'W') {
 				m_scene->moveObject(&m_v, m_v.getXStart() - 1, m_v.getYStart());
