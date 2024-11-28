@@ -16,22 +16,22 @@ public:
 	GameScene(std::vector<std::vector<int>> m);
 	GameScene() = default;
 
-	void addObj(GameObject* obj);
+	void AddObj(GameObject* obj);
 
-	void removeObj(int x, int y);
+	void RemoveObj(int x, int y);
 
-	bool checkObj(int x,int y);
+	bool CheckObj(int x,int y);
 
-	void moveObject(GameObject* obj, int x, int y);
+	void MoveObject(GameObject* obj, int x, int y);
 
-	void drawTest(Game g);
+	void DrawTest(Game g);
 
-	void drawQueue(std::queue<GameObject*>& q);
+	void DrawQueue(std::queue<GameObject*>& q);
 	std::vector<std::pair<int,int>> GetStartingPositions();
 
-	GameObject* getObjectAt(int x, int y);
+	GameObject* GetObjectAt(int x, int y);
 
-	void respawnObj(Vehicle* obj, int x, int y);
+	void RespawnObj(Vehicle* obj, int x, int y);
 
 protected:
 	Map m_map;

@@ -1,6 +1,6 @@
 ﻿    #include "GameScene.h"
 
-    void moveCursor(int x, int y) {
+    void MoveCursor(int x, int y) {
         // Make the cursor invisible
         HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
         CONSOLE_CURSOR_INFO cursorInfo;
@@ -13,7 +13,7 @@
 
     }
 
-    void clearConsole() {
+    void ClearConsole() {
         system("cls");
     }
 
@@ -23,22 +23,22 @@
     
     }
 
-    void GameScene::addObj(GameObject* obj)
+    void GameScene::AddObj(GameObject* obj)
     {
         m_map.getMap()[obj->getXStart()][obj->getYStart()] = obj;
     
     }
 
-    void GameScene::removeObj(int x,int y)
+    void GameScene::RemoveObj(int x,int y)
     {   
-        moveCursor(y, x);
+        MoveCursor(y, x);
    
         m_map.getMap()[x][y] = nullptr;
         m_map.getMap()[x][y] = new Road{x,y,0,false,true};
         m_map.getMap()[x][y]->draw();
     }
 
-    bool GameScene::checkObj(int x, int y)
+    bool GameScene::CheckObj(int x, int y)
     {
         if (x < 0 || x >= m_map.GetHeight() || y < 0 || y >= m_map.GetWidth()) {
             return false; // poz este in afara hartii
@@ -51,14 +51,14 @@
         return false;
     }
 
-    void GameScene::moveObject(GameObject* obj, int x, int y)
+    void GameScene::MoveObject(GameObject* obj, int x, int y)
     {
-        if (checkObj(x, y))
+        if (CheckObj(x, y))
         {
-            removeObj(obj->getXStart(), obj->getYStart());
+            RemoveObj(obj->getXStart(), obj->getYStart());
 
             m_map.getMap()[x][y] = obj;
-            moveCursor(y, x);
+            MoveCursor(y, x);
             m_map.getMap()[x][y]->draw();
             obj->setXStart(x);
             obj->setYStart(y);
@@ -84,9 +84,9 @@
         }
     }
 
-    void GameScene::drawTest(Game g)
+    void GameScene::DrawTest(Game g)
     {
-        clearConsole();
+        ClearConsole();
         m_map.setIndestructibleBorders();
         int indestructibleWallCount = 0;
         switch (g.GetDifficulty())
@@ -114,7 +114,7 @@
         m_map.drawMap();
     }
 
-    void GameScene::drawQueue(std::queue<GameObject*>& q)
+    void GameScene::DrawQueue(std::queue<GameObject*>& q)
     {
         q.front()->draw();
         q.pop();
@@ -126,7 +126,7 @@
 	
     }
 
-    GameObject* GameScene::getObjectAt(int x, int y)
+    GameObject* GameScene::GetObjectAt(int x, int y)
     {
         if (x >= 0 && x < m_map.GetHeight() && y >= 0 && y < m_map.GetWidth()) {
             return m_map[x][y];
@@ -134,18 +134,18 @@
         return nullptr;
     }
 
-    void GameScene::respawnObj(Vehicle* obj, int x, int y)
+    void GameScene::RespawnObj(Vehicle* obj, int x, int y)
     {
         if (obj->GetLives())
         {
-            moveObject(obj, x, y);
+            MoveObject(obj, x, y);
             int lives = obj->GetLives();
             lives--;
             obj->SetLives(lives);
         }
         else
         {
-            removeObj(obj->GetX(),obj->GetY());
+            RemoveObj(obj->GetX(),obj->GetY());
             obj->SetIsDead(true);
         }
     }

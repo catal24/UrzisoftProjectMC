@@ -6,14 +6,14 @@ Game::Game(std::vector<std::vector<int>> m_initMap, Difficulty difficulty)
 {
 	m_v = { m_v.GetStartingPositions()[m_playerCount - 1].first,
 		m_v.GetStartingPositions()[m_playerCount - 1].second,0,false,true,3,5,false,Axis::down };
-	m_scene->addObj(&m_v);
+	m_scene->AddObj(&m_v);
 }
 //spawn the vehicle at a dafault location
 void Game::startGame()
 {
 	bool isStart = true;
 	std::queue<GameObject*> q;
-	m_scene->drawTest(*this);
+	m_scene->DrawTest(*this);
 
 	unsigned long lastShotTime = 0;  // Timpul ultimei trageri
 	const unsigned long shootDelay = 500; // Delay de 500ms între trageri
@@ -25,22 +25,22 @@ void Game::startGame()
 		if (_kbhit() && !m_v.GetIsDead()) {
 			char key = _getch();
 			if (key == 'w' || key == 'W') {
-				m_scene->moveObject(&m_v, m_v.getXStart() - 1, m_v.getYStart());
+				m_scene->MoveObject(&m_v, m_v.getXStart() - 1, m_v.getYStart());
 				m_v.setAxis(key);
 
 			}
 			else if (key == 's' || key == 'S') {
-				m_scene->moveObject(&m_v, m_v.getXStart() + 1, m_v.getYStart());
+				m_scene->MoveObject(&m_v, m_v.getXStart() + 1, m_v.getYStart());
 				m_v.setAxis(key);
 
 			}
 			else if (key == 'a' || key == 'A') {
-				m_scene->moveObject(&m_v, m_v.getXStart(), m_v.getYStart() - 1);
+				m_scene->MoveObject(&m_v, m_v.getXStart(), m_v.getYStart() - 1);
 				m_v.setAxis(key);
 
 			}
 			else if (key == 'd' || key == 'D') {
-				m_scene->moveObject(&m_v, m_v.getXStart(), m_v.getYStart() + 1);
+				m_scene->MoveObject(&m_v, m_v.getXStart(), m_v.getYStart() + 1);
 				m_v.setAxis(key);
 
 			}
@@ -64,7 +64,7 @@ void Game::startGame()
 					}
 
 					// verificam daca la pozitia tinta se afla un `Wall` indestructibil
-					GameObject* targetObj = m_scene->getObjectAt(targetX, targetY);
+					GameObject* targetObj = m_scene->GetObjectAt(targetX, targetY);
 					if (Wall* wall = dynamic_cast<Wall*>(targetObj)) {
 						if (!wall->isBreakable()) {
 							continue;  // sarim peste actiunea de tragere
@@ -99,9 +99,9 @@ void Game::startGame()
 			}
 
 			// Verificăm coliziunea
-			if (m_scene->checkObj(newX, newY)) {
+			if (m_scene->CheckObj(newX, newY)) {
 				// Dacă nu lovește nimic, mutăm glonțul
-				m_scene->moveObject((*it).get(), newX, newY);
+				m_scene->MoveObject((*it).get(), newX, newY);
 				(*it)->setXStart(newX); // Actualizăm poziția glonțului
 				(*it)->setYStart(newY);
 				++it; // Avansăm iteratorul
@@ -136,19 +136,19 @@ void Game::HandleBombCollision(Bomb* bomb, int bombX, int bombY)
 		int checkX = bombX + dir.first;
 		int checkY = bombY + dir.second;
 		//verificam daca este perete destructibil langa bomba
-		if (Wall* wall = dynamic_cast<Wall*>(m_scene->getObjectAt(checkX, checkY)))
+		if (Wall* wall = dynamic_cast<Wall*>(m_scene->GetObjectAt(checkX, checkY)))
 		{
 			if (wall->isBreakable())
-				m_scene->removeObj(checkX, checkY);
+				m_scene->RemoveObj(checkX, checkY);
 		}
 		//verificam daca este vehicul si il distrugem
-		if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->getObjectAt(checkX, checkY))) {
-			m_scene->respawnObj(vehicle, 1, 1);
+		if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->GetObjectAt(checkX, checkY))) {
+			m_scene->RespawnObj(vehicle, 1, 1);
 			//m_scene->removeObj(checkX, checkY);
 		}
 		//distrugem si bombele
-		if (Bomb* bomb = dynamic_cast<Bomb*>(m_scene->getObjectAt(checkX, checkY))) {
-			m_scene->removeObj(checkX, checkY);
+		if (Bomb* bomb = dynamic_cast<Bomb*>(m_scene->GetObjectAt(checkX, checkY))) {
+			m_scene->RemoveObj(checkX, checkY);
 		}
 	}
 }
@@ -157,39 +157,39 @@ void Game::HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator&
 	Bullet* bullet = it->get();
 
 	// Dacă lovește un tanc
-	if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->getObjectAt(newX, newY))) {
+	if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->GetObjectAt(newX, newY))) {
 		// Respawn the vehicle
-		m_scene->respawnObj(vehicle, 1, 1); 
-		m_scene->removeObj(newX, newY);                  
-		m_scene->removeObj(bullet->getXStart(), bullet->getYStart()); 
+		m_scene->RespawnObj(vehicle, 1, 1); 
+		m_scene->RemoveObj(newX, newY);                  
+		m_scene->RemoveObj(bullet->getXStart(), bullet->getYStart()); 
 		it = bullets.erase(it);                          
 		return;
 	}
 
 
 	// Dacă lovește un alt glonț
-	if (dynamic_cast<Bullet*>(m_scene->getObjectAt(newX, newY))) {
-		m_scene->removeObj(newX, newY);
-		m_scene->removeObj(bullet->getXStart(), bullet->getYStart());
+	if (dynamic_cast<Bullet*>(m_scene->GetObjectAt(newX, newY))) {
+		m_scene->RemoveObj(newX, newY);
+		m_scene->RemoveObj(bullet->getXStart(), bullet->getYStart());
 		it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
 		return;
 	}
 
 	// Dacă lovește un perete
-	if (Wall* wall = dynamic_cast<Wall*>(m_scene->getObjectAt(newX, newY))) {
+	if (Wall* wall = dynamic_cast<Wall*>(m_scene->GetObjectAt(newX, newY))) {
 		if (wall->isBreakable()) {
-			m_scene->removeObj(newX, newY);
+			m_scene->RemoveObj(newX, newY);
 		}
-		m_scene->removeObj(bullet->getXStart(), bullet->getYStart());
+		m_scene->RemoveObj(bullet->getXStart(), bullet->getYStart());
 		it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
 		return;
 	}
 
 	// Dacă lovește o bombă
-	if (Bomb* bomb = dynamic_cast<Bomb*>(m_scene->getObjectAt(newX, newY))) {
+	if (Bomb* bomb = dynamic_cast<Bomb*>(m_scene->GetObjectAt(newX, newY))) {
 		HandleBombCollision(bomb, newX, newY);
-		m_scene->removeObj(newX, newY);
-		m_scene->removeObj(bullet->getXStart(), bullet->getYStart());
+		m_scene->RemoveObj(newX, newY);
+		m_scene->RemoveObj(bullet->getXStart(), bullet->getYStart());
 		it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
 		return;
 	}
