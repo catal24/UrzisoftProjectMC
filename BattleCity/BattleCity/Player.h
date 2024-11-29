@@ -4,7 +4,7 @@
 class Player
 {public:
 	Player(std::string name, int id, int credits=0, int rank=0);
-	~Player() {}
+	~Player() = default;
 
 	void SetName(std::string name);
 	void SetId(int id);

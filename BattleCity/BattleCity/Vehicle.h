@@ -45,7 +45,7 @@ private:
 	int m_lives;
 	int m_speed;
 	bool m_isDead;
-	std::vector<std::pair<int, int>> m_startingPositions = { {1,1},{18,18},{1,18},{18,1} };
+	std::vector<std::pair<int, int>> m_startingPositions = { {1,1},{18,18},{1,18},{18,1} };// in constructor default
 
 };
 

@@ -2,7 +2,7 @@
 #ifndef AXIS_H
 #define AXIS_H
 
-enum Axis {
+enum class Axis {
     left,
     right,
     up,

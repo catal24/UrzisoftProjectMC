@@ -1,7 +1,7 @@
 ﻿#include "Game.h"
 
 
-Game::Game(std::vector<std::vector<int>> m_initMap, Difficulty difficulty)
+Game::Game(const std::vector<std::vector<int>>& m_initMap, Difficulty difficulty)
 	:m_scene{ new GameScene{m_initMap} }, m_playerCount{ 1 }, m_difficulty{ difficulty }
 {
 	m_v = { m_v.GetStartingPositions()[m_playerCount - 1].first,
@@ -10,7 +10,7 @@ Game::Game(std::vector<std::vector<int>> m_initMap, Difficulty difficulty)
 }
 //spawn the vehicle at a dafault location
 void Game::startGame()
-{
+{//spargere functie
 	bool isStart = true;
 	std::queue<GameObject*> q;
 	m_scene->DrawTest(*this);

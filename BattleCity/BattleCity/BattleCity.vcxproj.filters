@@ -89,7 +89,7 @@
   </ItemGroup>
   <ItemGroup>
     <Text Include="Map1.txt">
-      <Filter>Header Files</Filter>
+      <Filter>Resource Files</Filter>
     </Text>
   </ItemGroup>
 </Project>

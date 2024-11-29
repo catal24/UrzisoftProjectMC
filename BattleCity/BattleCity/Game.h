@@ -23,7 +23,7 @@ public:
 	};
 
 	Game() = default;
-	Game(std::vector<std::vector<int>> m_initMap, Difficulty = EASY);
+	Game(const std::vector<std::vector<int>>& initMap, Difficulty = EASY);
 	void startGame();
 
 	Difficulty GetDifficulty();
