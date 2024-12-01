@@ -1,6 +1,8 @@
 #pragma once
 #include <QWidget>
-#include <QGridLayout>
+#include <QTableWidget>
+#include <QHeaderView>
+#include <QBoxLayout>
 
 class LeaderboardDisplay : public QWidget
 {
@@ -10,6 +12,6 @@ public:
 	explicit LeaderboardDisplay(QWidget* parent = nullptr);
 	~LeaderboardDisplay();
 private:
-	QGridLayout* gridLayout;
+	QTableWidget* m_table;
 };
 

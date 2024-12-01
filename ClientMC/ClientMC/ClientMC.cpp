@@ -9,24 +9,24 @@ ClientMC::ClientMC(QWidget *parent)
 	this->setWindowTitle("Menu");
 	this->setFixedSize(800, 600);
 
-    infoButton = new QPushButton("INFO",this);
-	infoButton->setGeometry(25, 25, 50, 50);
-	leaderboardButton = new QPushButton("", this);
-	leaderboardButton->setGeometry(725, 25, 50, 50);
+    m_infoButton = new QPushButton("INFO",this);
+	m_infoButton->setGeometry(25, 25, 50, 50);
+	m_leaderboardButton = new QPushButton("", this);
+	m_leaderboardButton->setGeometry(725, 25, 50, 50);
 
-	connect(infoButton, &QPushButton::clicked, this, [&]() {
+	connect(m_infoButton, &QPushButton::clicked, this, [&]() {
 		MovementInfoDisplay* infoWindow = new MovementInfoDisplay(this);  // Creează instanța ferestrei
 		infoWindow->setAttribute(Qt::WA_DeleteOnClose);
 		infoWindow->show();  // Deschide fereastra
-		infoButton->hide();
-		leaderboardButton->hide();
+		m_infoButton->hide();
+		m_leaderboardButton->hide();
 		});
-	connect(leaderboardButton, &QPushButton::clicked, this, [&]() {
+	connect(m_leaderboardButton, &QPushButton::clicked, this, [&]() {
 		LeaderboardDisplay* leaderboardWindow = new LeaderboardDisplay(this); 
 		leaderboardWindow->setAttribute(Qt::WA_DeleteOnClose);
 		leaderboardWindow->show();
-		infoButton->hide();
-		leaderboardButton->hide();
+		m_infoButton->hide();
+		m_leaderboardButton->hide();
 		});
 	
 }
