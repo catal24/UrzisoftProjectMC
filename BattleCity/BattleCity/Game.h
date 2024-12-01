@@ -30,11 +30,13 @@ public:
 	void SetDifficulty(Difficulty difficulty);
 	void HandleBombCollision(Bomb* bomb, int bombX, int bombY);
 	void HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator& it, int newX, int newY);
+	void BulletMoving();
 private:
 	Vehicle m_v;
 	Difficulty m_difficulty = EASY;
 	std::vector<std::vector<int>> m_initMap;
 	GameScene* m_scene;
+
 	std::vector<std::shared_ptr<Bullet>> bullets;
 	int m_playerCount;
 };

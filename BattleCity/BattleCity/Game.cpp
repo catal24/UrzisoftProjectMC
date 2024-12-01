@@ -78,38 +78,42 @@ void Game::startGame()
 			}
 		}
 
-		// miscarea gloantelor
-		for (auto it = bullets.begin(); it != bullets.end();) {
-			auto bullet = *it;
-			int newX = (*it)->GetXStart();
-			int newY = (*it)->GetYStart();
+		BulletMoving();
+		
+	}
+}
 
-			if (!(*it)->IsFirstMove())
-			{
-				// Determinăm direcția glonțului
-				switch ((*it)->GetAxis()) {
-				case Axis::up:    newX--; break;
-				case Axis::down:  newX++; break;
-				case Axis::left:  newY--; break;
-				case Axis::right: newY++; break;
-				}
-			}
-			else {
-				(*it)->SetFirstMove(false);
-			}
+void Game::BulletMoving() {
+	// Iterate through bullets
+	for (auto it = bullets.begin(); it != bullets.end();) {
+		auto bullet = it->get();
+		int newX = bullet->GetXStart();
+		int newY = bullet->GetYStart();
 
-			// Verificăm coliziunea
-			if (m_scene->CheckObj(newX, newY)) {
-				// Dacă nu lovește nimic, mutăm glonțul
-				m_scene->MoveObject((*it).get(), newX, newY);
-				(*it)->SetXStart(newX); // Actualizăm poziția glonțului
-				(*it)->SetYStart(newY);
-				++it; // Avansăm iteratorul
+		// Determine new position based on direction
+		if (!bullet->IsFirstMove()) {
+			switch (bullet->GetAxis()) {
+			case Axis::up:    newX--; break;
+			case Axis::down:  newX++; break;
+			case Axis::left:  newY--; break;
+			case Axis::right: newY++; break;
 			}
-			else {
-				// Dacă există coliziune, gestionăm și actualizăm iteratorul
-				HandleBulletCollision(it, newX, newY);
-			}
+		}
+		else {
+			bullet->SetFirstMove(false);
+		}
+
+		// Check collision at the new position
+		if (m_scene->CheckObj(newX, newY)) {
+			// Move the bullet if no collision occurs
+			m_scene->MoveObject(bullet, newX, newY);
+			bullet->SetXStart(newX);
+			bullet->SetYStart(newY);
+			++it;  // Advance the iterator
+		}
+		else {
+			// Handle collision and update iterator
+			HandleBulletCollision(it, newX, newY);
 		}
 	}
 }
