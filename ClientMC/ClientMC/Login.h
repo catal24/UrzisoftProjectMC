@@ -19,8 +19,8 @@ private slots:
 	void handleLogin();
 
 private:
-    QLineEdit* usernameField;
-    QPushButton* loginButton;
+    QLineEdit* m_usernameField;
+    QPushButton* m_loginButton;
 };
 
 

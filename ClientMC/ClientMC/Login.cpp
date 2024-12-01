@@ -6,25 +6,25 @@
 
 Login::Login(QWidget* parent) : QWidget(parent)
 {
-	usernameField = new QLineEdit(this);
-	usernameField->setPlaceholderText("Username");
+	m_usernameField = new QLineEdit(this);
+	m_usernameField->setPlaceholderText("Username");
 
-	loginButton = new QPushButton("Login", this);
+	m_loginButton = new QPushButton("Login", this);
 
 	QVBoxLayout* layout = new QVBoxLayout(this);
-	layout->addWidget(usernameField);
-	layout->addWidget(loginButton);
+	layout->addWidget(m_usernameField);
+	layout->addWidget(m_loginButton);
 	this->setMinimumSize(300, 100);
 	setLayout(layout);
 
-	connect(loginButton, &QPushButton::clicked, this, &Login::handleLogin);
+	connect(m_loginButton, &QPushButton::clicked, this, &Login::handleLogin);
 }
 
 Login::~Login(){}
 
 void Login::handleLogin()
 {
-	QString username = usernameField->text();
+	QString username = m_usernameField->text();
 	//aici vom verifica in baza de date daca exista un cont cu acest username
 	if(username.isEmpty())
 	{

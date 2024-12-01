@@ -13,6 +13,6 @@ public:
     ~ClientMC();
 
 private:
-    QPushButton* infoButton;
-	QPushButton* leaderboardButton;
+    QPushButton* m_infoButton;
+	QPushButton* m_leaderboardButton;
 };
