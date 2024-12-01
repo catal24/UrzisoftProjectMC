@@ -15,8 +15,7 @@ void Game::startGame()
 	std::queue<GameObject*> q;
 	m_scene->DrawTest(*this);
 
-	unsigned long lastShotTime = 0;  // Timpul ultimei trageri
-	const unsigned long shootDelay = 500; // Delay de 500ms între trageri
+
 
 	while (isStart) {
 		Sleep(50);  // Sleep pentru a controla viteza jocului
@@ -45,36 +44,7 @@ void Game::startGame()
 
 			}
 			else if (key == ' ') {
-				unsigned long currentTime = GetTickCount();
-				if (currentTime - lastShotTime >= shootDelay) {
-
-					// coord vehiculului curent
-					int currentX = m_v.GetXStart();
-					int currentY = m_v.GetYStart();
-
-					// coord tintei in functie de directia vehiculului
-					int targetX = currentX;
-					int targetY = currentY;
-
-					switch (m_v.GetAxis()) {
-					case Axis::up:    targetX--; break;   // verif sus jos stanga dreapta
-					case Axis::down:  targetX++; break;
-					case Axis::left:  targetY--; break;
-					case Axis::right: targetY++; break;
-					}
-
-					// verificam daca la pozitia tinta se afla un `Wall` indestructibil
-					GameObject* targetObj = m_scene->GetObjectAt(targetX, targetY);
-					if (Wall* wall = dynamic_cast<Wall*>(targetObj)) {
-						if (!wall->IsBreakable()) {
-							continue;  // sarim peste actiunea de tragere
-						}
-					}
-
-					auto newBullet = m_v.ShootBullet(m_v.GetX(), m_v.GetY());
-					bullets.push_back(std::move(newBullet));
-					lastShotTime = currentTime; // actualizam timpul ultimei trageri
-				}
+				Shoot();
 			}
 		}
 
@@ -82,6 +52,48 @@ void Game::startGame()
 		
 	}
 }
+
+void Game::Shoot() {
+	static unsigned long lastShotTime = 0;  // Timpul ultimei trageri
+	const unsigned long shootDelay = 500;  // Delay de 500ms între trageri
+	unsigned long currentTime = GetTickCount();
+
+	// Verificăm dacă putem trage
+	if (currentTime - lastShotTime < shootDelay) {
+		return;  // Ieșim dacă nu a trecut suficient timp
+	}
+
+	// Coordonatele vehiculului curent
+	int currentX = m_v.GetXStart();
+	int currentY = m_v.GetYStart();
+
+	// Coordonatele țintei în funcție de direcția vehiculului
+	int targetX = currentX;
+	int targetY = currentY;
+
+	switch (m_v.GetAxis()) {
+	case Axis::up:    targetX--; break;
+	case Axis::down:  targetX++; break;
+	case Axis::left:  targetY--; break;
+	case Axis::right: targetY++; break;
+	}
+
+	// Verificăm dacă la poziția țintă se află un perete indestructibil
+	GameObject* targetObj = m_scene->GetObjectAt(targetX, targetY);
+	if (Wall* wall = dynamic_cast<Wall*>(targetObj)) {
+		if (!wall->IsBreakable()) {
+			return;  // Ieșim dacă nu putem trage în perete
+		}
+	}
+
+	// Creăm un glonț nou și îl adăugăm în lista de gloanțe
+	auto newBullet = m_v.ShootBullet(currentX, currentY);
+	bullets.push_back(std::move(newBullet));
+
+	// Actualizăm timpul ultimei trageri
+	lastShotTime = currentTime;
+}
+
 
 void Game::BulletMoving() {
 	// Iterate through bullets
