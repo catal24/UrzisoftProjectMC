@@ -32,12 +32,13 @@ public:
 	void HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator& it, int newX, int newY);
 	void BulletMoving();
 	void Shoot();
+	void InputControll();
 private:
 	Vehicle m_v;
 	Difficulty m_difficulty = EASY;
 	std::vector<std::vector<int>> m_initMap;
 	GameScene* m_scene;
-
+	bool isStart;
 	std::vector<std::shared_ptr<Bullet>> bullets;
 	int m_playerCount;
 };

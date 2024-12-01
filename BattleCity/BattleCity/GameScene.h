@@ -13,6 +13,7 @@ class Game;
 class GameScene
 {
 public:
+	void ClearConsole();
 	GameScene(std::vector<std::vector<int>> m);
 	GameScene() = default;
 

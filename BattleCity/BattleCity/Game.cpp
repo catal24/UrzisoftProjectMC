@@ -11,7 +11,7 @@ Game::Game(const std::vector<std::vector<int>>& m_initMap, Difficulty difficulty
 //spawn the vehicle at a dafault location
 void Game::startGame()
 {//spargere functie
-	bool isStart = true;
+	isStart = true;
 	std::queue<GameObject*> q;
 	m_scene->DrawTest(*this);
 
@@ -20,36 +20,42 @@ void Game::startGame()
 	while (isStart) {
 		Sleep(50);  // Sleep pentru a controla viteza jocului
 
-		// Controlul jucătorului
-		if (_kbhit() && !m_v.GetIsDead()) {
-			char key = _getch();
-			if (key == 'w' || key == 'W') {
-				m_scene->MoveObject(&m_v, m_v.GetXStart() - 1, m_v.GetYStart());
-				m_v.SetAxis(key);
-
-			}
-			else if (key == 's' || key == 'S') {
-				m_scene->MoveObject(&m_v, m_v.GetXStart() + 1, m_v.GetYStart());
-				m_v.SetAxis(key);
-
-			}
-			else if (key == 'a' || key == 'A') {
-				m_scene->MoveObject(&m_v, m_v.GetXStart(), m_v.GetYStart() - 1);
-				m_v.SetAxis(key);
-
-			}
-			else if (key == 'd' || key == 'D') {
-				m_scene->MoveObject(&m_v, m_v.GetXStart(), m_v.GetYStart() + 1);
-				m_v.SetAxis(key);
-
-			}
-			else if (key == ' ') {
-				Shoot();
-			}
-		}
+		InputControll();
 
 		BulletMoving();
 		
+	}
+	std::cout << "GameOver";
+}
+
+void Game::InputControll()
+{
+	// Controlul jucătorului
+	if (_kbhit() && !m_v.GetIsDead()) {
+		char key = _getch();
+		if (key == 'w' || key == 'W') {
+			m_scene->MoveObject(&m_v, m_v.GetXStart() - 1, m_v.GetYStart());
+			m_v.SetAxis(key);
+
+		}
+		else if (key == 's' || key == 'S') {
+			m_scene->MoveObject(&m_v, m_v.GetXStart() + 1, m_v.GetYStart());
+			m_v.SetAxis(key);
+
+		}
+		else if (key == 'a' || key == 'A') {
+			m_scene->MoveObject(&m_v, m_v.GetXStart(), m_v.GetYStart() - 1);
+			m_v.SetAxis(key);
+
+		}
+		else if (key == 'd' || key == 'D') {
+			m_scene->MoveObject(&m_v, m_v.GetXStart(), m_v.GetYStart() + 1);
+			m_v.SetAxis(key);
+
+		}
+		else if (key == ' ') {
+			Shoot();
+		}
 	}
 }
 
@@ -160,6 +166,11 @@ void Game::HandleBombCollision(Bomb* bomb, int bombX, int bombY)
 		//verificam daca este vehicul si il distrugem
 		if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->GetObjectAt(checkX, checkY))) {
 			m_scene->RespawnObj(vehicle, 1, 1);
+			if (vehicle->GetLives() == 0)
+			{
+				isStart = false;
+				system("cls");
+			}
 			//m_scene->removeObj(checkX, checkY);
 		}
 		//distrugem si bombele
@@ -178,7 +189,10 @@ void Game::HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator&
 		m_scene->RespawnObj(vehicle, 1, 1); 
 		m_scene->RemoveObj(newX, newY);                  
 		m_scene->RemoveObj(bullet->GetXStart(), bullet->GetYStart()); 
-		it = bullets.erase(it);                          
+		
+		it = bullets.erase(it);
+		if (vehicle->GetLives() == 0)
+			isStart = false;
 		return;
 	}
 

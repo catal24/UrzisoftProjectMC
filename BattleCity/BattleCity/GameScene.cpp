@@ -13,7 +13,7 @@
 
     }
 
-    void ClearConsole() {
+    void GameScene::ClearConsole() {
         system("cls");
     }
 
