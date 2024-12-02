@@ -44,10 +44,7 @@ MovementInfoDisplay::MovementInfoDisplay(QWidget* parent)
     this->setLayout(layout);
 
     // Conecteaza butonul la metoda de inchidere a ferestrei
-    connect(backButton, &QPushButton::clicked, this, [&]() {
-        this->hide();
-
-        });
+    connect(backButton, &QPushButton::clicked, this, &MovementInfoDisplay::backButtonClicked);
 }
 
 MovementInfoDisplay::~MovementInfoDisplay()

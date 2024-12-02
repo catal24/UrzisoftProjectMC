@@ -3,6 +3,7 @@
 #include <QTableWidget>
 #include <QHeaderView>
 #include <QBoxLayout>
+#include <QPushButton>
 
 class LeaderboardDisplay : public QWidget
 {
@@ -11,6 +12,8 @@ class LeaderboardDisplay : public QWidget
 public:
 	explicit LeaderboardDisplay(QWidget* parent = nullptr);
 	~LeaderboardDisplay();
+signals:
+	void backButtonClicked();
 private:
 	QTableWidget* m_table;
 };

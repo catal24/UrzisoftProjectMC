@@ -25,6 +25,17 @@ LeaderboardDisplay::LeaderboardDisplay(QWidget* parent)
 
 	auto layout = new QVBoxLayout(this);
 	layout->addWidget(m_table);
+	layout->setContentsMargins(20, Qt::AlignVCenter, 20, 20);
+	QPushButton* backButton = new QPushButton("Back", this);
+	QVBoxLayout* layoutButton = new QVBoxLayout(this);
+	layoutButton->addWidget(backButton,0,Qt::AlignRight);
+	connect(backButton, &QPushButton::clicked, this, &LeaderboardDisplay::backButtonClicked);
+	connect(backButton, &QPushButton::clicked, this, [&]() {
+		this->hide();
+
+		});
+	layout->addLayout(layoutButton);
+
 	setLayout(layout);
 }
 

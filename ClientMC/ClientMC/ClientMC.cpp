@@ -20,14 +20,28 @@ ClientMC::ClientMC(QWidget *parent)
 		infoWindow->show();  // Deschide fereastra
 		m_infoButton->hide();
 		m_leaderboardButton->hide();
+
+		connect(infoWindow, &MovementInfoDisplay::backButtonClicked, this, [=]() {
+			infoWindow->close();         
+			this->show();            
+			m_infoButton->show();         
+			m_leaderboardButton->show();
 		});
+	});
 	connect(m_leaderboardButton, &QPushButton::clicked, this, [&]() {
 		LeaderboardDisplay* leaderboardWindow = new LeaderboardDisplay(this); 
 		leaderboardWindow->setAttribute(Qt::WA_DeleteOnClose);
 		leaderboardWindow->show();
 		m_infoButton->hide();
 		m_leaderboardButton->hide();
+
+		connect(leaderboardWindow, &LeaderboardDisplay::backButtonClicked, this, [=]() {
+			leaderboardWindow->close();
+			this->show();
+			m_infoButton->show();
+			m_leaderboardButton->show();
 		});
+	});
 	
 }
 

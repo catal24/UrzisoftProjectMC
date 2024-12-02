@@ -8,4 +8,6 @@ class MovementInfoDisplay : public QWidget
 public:
     explicit MovementInfoDisplay(QWidget* parent = nullptr);
     ~MovementInfoDisplay();
+signals:
+    void backButtonClicked();
 };
