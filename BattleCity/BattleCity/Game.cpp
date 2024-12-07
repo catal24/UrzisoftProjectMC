@@ -1,8 +1,8 @@
 ﻿#include "Game.h"
 
 
-Game::Game(const std::vector<std::vector<int>>& m_initMap, Difficulty difficulty)
-	:m_scene{ new GameScene{m_initMap} }, m_playerCount{ 1 }, m_difficulty{ difficulty }
+Game::Game( Difficulty difficulty)
+	:m_scene{ new GameScene{randomMap()}}, m_playerCount{1}, m_difficulty{difficulty}
 {
 	m_v = { m_v.GetStartingPositions()[m_playerCount - 1].first,
 		m_v.GetStartingPositions()[m_playerCount - 1].second,0,false,true,3,5,false,Axis::down };
@@ -59,6 +59,8 @@ void Game::InputControll()
 	}
 }
 
+
+
 std::vector<std::vector<int>> Game::randomMap()
 {
 	std::random_device rd;
@@ -68,7 +70,30 @@ std::vector<std::vector<int>> Game::randomMap()
 	std::uniform_int_distribution<> dist(1, 5);
 
 	int random_number = dist(gen);
-	std::ifstream inputFile("Map1.txt");
+
+	 std::string fileName;
+    switch (random_number) {
+        case 1:
+            fileName = "Map1.txt";
+            break;
+        case 2:
+            fileName = "Map2.txt";
+            break;
+        case 3:
+            fileName = "Map3.txt";
+            break;
+        case 4:
+            fileName = "Map4.txt";
+            break;
+        case 5:
+            fileName = "Map5.txt";
+            break;
+
+    }
+
+	std::ifstream inputFile(fileName);
+
+
 
 	std::vector<std::vector<int>> map;
 	map.resize(20);
@@ -76,8 +101,6 @@ std::vector<std::vector<int>> Game::randomMap()
 		std::cerr << "Nu s-a putut deschide fișierul!" << std::endl;
 		
 	}
-
-	
 	for (int i = 0; i < 20; ++i) {
 		map[i].resize(20);
 		for (int j = 0; j < 20; ++j) {
