@@ -32,7 +32,7 @@ int main()
     {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1}
     };
 
-    Game g(a,Game::Difficulty::EXTREME);
+    Game g(a, Game::Difficulty::EXTREME);
     g.startGame();
 	return 0;
 }

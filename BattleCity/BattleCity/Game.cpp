@@ -8,7 +8,7 @@ Game::Game(const std::vector<std::vector<int>>& m_initMap, Difficulty difficulty
 		m_v.GetStartingPositions()[m_playerCount - 1].second,0,false,true,3,5,false,Axis::down };
 	m_scene->AddObj(&m_v);
 }
-//spawn the vehicle at a dafault location
+//spawn the vehicle at a default location
 void Game::startGame()
 {//spargere functie
 	isStart = true;
@@ -57,6 +57,37 @@ void Game::InputControll()
 			Shoot();
 		}
 	}
+}
+
+std::vector<std::vector<int>> Game::randomMap()
+{
+	std::random_device rd;
+
+	std::mt19937 gen(rd());
+
+	std::uniform_int_distribution<> dist(1, 5);
+
+	int random_number = dist(gen);
+	std::ifstream inputFile("Map1.txt");
+
+	std::vector<std::vector<int>> map;
+	map.resize(20);
+	if (!inputFile) {
+		std::cerr << "Nu s-a putut deschide fișierul!" << std::endl;
+		
+	}
+
+	
+	for (int i = 0; i < 20; ++i) {
+		map[i].resize(20);
+		for (int j = 0; j < 20; ++j) {
+			inputFile >> map[i][j];
+			
+		}
+	}
+
+	inputFile.close();
+	return map;
 }
 
 void Game::Shoot() {

@@ -9,6 +9,8 @@
 #include <windows.h>
 #include <utility>
 #include "Axis.h"
+#include <random>
+#include <fstream>
 
 class GameScene;
 
@@ -33,6 +35,7 @@ public:
 	void BulletMoving();
 	void Shoot();
 	void InputControll();
+	std::vector<std::vector<int>> randomMap();
 private:
 	Vehicle m_v;
 	Difficulty m_difficulty = EASY;
