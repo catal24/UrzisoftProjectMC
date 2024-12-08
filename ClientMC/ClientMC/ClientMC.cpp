@@ -11,20 +11,47 @@ ClientMC::ClientMC(QWidget *parent)
 
     m_infoButton = new QPushButton("INFO",this);
 	m_infoButton->setGeometry(25, 25, 50, 50);
+	m_infoButton->setStyleSheet(
+		"QPushButton {"
+		"   border: 2px solid #000000;"
+		"   border-radius: 25px;"
+		"}");
 	m_leaderboardButton = new QPushButton("", this);
-	m_leaderboardButton->setGeometry(725, 25, 50, 50);
-
+	m_leaderboardButton->setGeometry(25, 80, 50, 50);
+	m_leaderboardButton->setStyleSheet(
+		"QPushButton {"
+		"   border: 2px solid #000000;"
+		"   border-radius: 25px;"
+		"}");
+	m_upgrade = new QPushButton(this);
+	m_upgrade->setGeometry(725, 25, 50, 50);
+	m_upgrade->setStyleSheet(
+		"QPushButton {"
+		"   border: 2px solid #000000;"
+		"   border-radius: 25px;"
+		"}");
+	m_mapSelector = new QPushButton(this);
+	m_mapSelector->setGeometry(725,80,50,50);
+	m_mapSelector->setStyleSheet(
+		"QPushButton {"
+		"   border: 2px solid #000000;"
+		"   border-radius: 25px;"
+		"}");
 	connect(m_infoButton, &QPushButton::clicked, this, [&]() {
 		MovementInfoDisplay* infoWindow = new MovementInfoDisplay(this);  // Creează instanța ferestrei
 		infoWindow->setAttribute(Qt::WA_DeleteOnClose);
 		infoWindow->show();  // Deschide fereastra
 		m_infoButton->hide();
+		m_upgrade->hide();
+		m_mapSelector->hide();
 		m_leaderboardButton->hide();
 
 		connect(infoWindow, &MovementInfoDisplay::backButtonClicked, this, [=]() {
 			infoWindow->close();         
 			this->show();            
-			m_infoButton->show();         
+			m_infoButton->show();
+			m_upgrade->show();
+			m_mapSelector->show();
 			m_leaderboardButton->show();
 		});
 	});
@@ -33,12 +60,16 @@ ClientMC::ClientMC(QWidget *parent)
 		leaderboardWindow->setAttribute(Qt::WA_DeleteOnClose);
 		leaderboardWindow->show();
 		m_infoButton->hide();
+		m_upgrade->hide();
+		m_mapSelector->hide();
 		m_leaderboardButton->hide();
 
 		connect(leaderboardWindow, &LeaderboardDisplay::backButtonClicked, this, [=]() {
 			leaderboardWindow->close();
 			this->show();
 			m_infoButton->show();
+			m_upgrade->show();
+			m_mapSelector->show();
 			m_leaderboardButton->show();
 		});
 	});

@@ -15,4 +15,6 @@ public:
 private:
     QPushButton* m_infoButton;
 	QPushButton* m_leaderboardButton;
+    QPushButton* m_mapSelector;
+    QPushButton* m_upgrade;
 };
