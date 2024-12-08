@@ -67,7 +67,7 @@ std::vector<std::vector<int>> Game::randomMap()
 
 	std::mt19937 gen(rd());
 
-	std::uniform_int_distribution<> dist(1, 5);
+	std::uniform_int_distribution<> dist(1, 10);
 
 	int random_number = dist(gen);
 
@@ -75,19 +75,43 @@ std::vector<std::vector<int>> Game::randomMap()
     switch (random_number) {
         case 1:
             fileName = "Map1.txt";
+			std::cout << "map1";
             break;
         case 2:
             fileName = "Map2.txt";
+			std::cout << "map2";
             break;
         case 3:
             fileName = "Map3.txt";
+			std::cout << "map3";
             break;
         case 4:
             fileName = "Map4.txt";
+			std::cout << "map4";
             break;
         case 5:
             fileName = "Map5.txt";
+			std::cout << "map5";
             break;
+		case 6:
+			fileName = "Map6.txt";
+			std::cout << "map6";
+			break;
+		case 7:
+			fileName = "Map7.txt";
+			std::cout << "map7";
+			break;
+		case 8:
+			fileName = "Map8.txt";
+			std::cout << "map8";
+			break;
+		case 9:
+			fileName = "Map9.txt";
+			std::cout << "map9";
+			break;
+		case 10:
+			fileName = "Map10.txt";
+			break;
 
     }
 
