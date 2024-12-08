@@ -12,15 +12,7 @@ public:
 
 	void SetDestructible(bool isBreakable);
 	void SetBomb(bool hasBomb);
-	//curatare getter si setteri
-	int GetXStart() const;
-	void SetXStart(int xStart);
-
-	int GetYStart() const;
-	void SetYStart(int yStart);
-
-	int GetId() const;
-	void SetId(int id);
+	
 
 	bool IsBreakable() const;
 	void SetBreakable(bool isBreakable);

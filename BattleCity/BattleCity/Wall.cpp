@@ -27,14 +27,6 @@ void Wall::SetBomb(bool hasBomb)
 	m_hasBomb = hasBomb;
 }
 
-int Wall::GetXStart() const { return m_xStart; }
-void Wall::SetXStart(int xStart) { m_xStart = xStart; }
-
-int Wall::GetYStart() const { return m_yStart; }
-void Wall::SetYStart(int yStart) { m_yStart = yStart; }
-
-int Wall::GetId() const { return m_id; }
-void Wall::SetId(int id) { m_id = id; }
 
 bool Wall::IsBreakable() const { return m_isBreakable; }
 void Wall::SetBreakable(bool isBreakable) { m_isBreakable = isBreakable; }
