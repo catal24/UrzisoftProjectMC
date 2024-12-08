@@ -1,6 +1,8 @@
 #pragma once
 #include <QWidget>
 #include <QTimer>
+#include <QPainter>
+#include <QKeyEvent>
 #include "Game.h"
 class GameWidget : public QWidget
 {

@@ -1,11 +1,14 @@
 #include "QtWidgetsApplication.h"
 #include <QtWidgets/QApplication>
-#include "qmainwindow.h"
+#include "GameWidget.h"
 
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-    QtWidgetsApplication w;
-    w.show();
-    return a.exec();
+    QApplication app(argc, argv);
+
+    GameWidget gameWidget;
+    gameWidget.resize(800, 600);
+    gameWidget.show();
+    
+    return app.exec();
 }
