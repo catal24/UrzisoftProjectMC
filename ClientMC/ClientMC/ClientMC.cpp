@@ -5,6 +5,12 @@
 ClientMC::ClientMC(QWidget *parent)
     : QMainWindow(parent)
 {
+	this->setStyleSheet("QMainWindow {"
+		"   background-image: url(resources/wallpaper.jpg);"// path to wallpaper
+		"   background-repeat: no-repeat;"
+		"   background-position: center;"
+		"   background-size: cover;"// resize wallpaper 
+		"}");
 
 	this->setWindowTitle("Menu");
 	this->setFixedSize(800, 600);
@@ -18,7 +24,7 @@ ClientMC::ClientMC(QWidget *parent)
 	m_mapSelector = new QPushButton(this);
 	setupButton(m_mapSelector, 725, 25, 50, 50);
 	connect(m_infoButton, &QPushButton::clicked, this, [&]() {
-		MovementInfoDisplay* infoWindow = new MovementInfoDisplay(this);  // Creează instanța ferestrei
+		MovementInfoDisplay* infoWindow = new MovementInfoDisplay(this);  
 		infoWindow->setAttribute(Qt::WA_DeleteOnClose);
 		infoWindow->show();
 		toggleBButtons(false);
