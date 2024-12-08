@@ -11,7 +11,9 @@ class ClientMC : public QMainWindow
 public:
     ClientMC(QWidget *parent = nullptr);
     ~ClientMC();
-
+private:
+    void setupButton(QPushButton* button, int x, int y, int width, int height);
+    void toggleBButtons(bool visible);
 private:
     QPushButton* m_infoButton;
 	QPushButton* m_leaderboardButton;
