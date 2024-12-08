@@ -114,9 +114,6 @@
     <ClInclude Include="..\..\BattleCity\BattleCity\Wall.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="GameWidget.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\BattleCity\BattleCity\BattleCity.vcxproj" />
@@ -129,5 +126,10 @@
     <Text Include="..\..\BattleCity\BattleCity\Map3.txt" />
     <Text Include="..\..\BattleCity\BattleCity\Map4.txt" />
     <Text Include="..\..\BattleCity\BattleCity\Map5.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="GameWidget.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
   </ItemGroup>
 </Project>

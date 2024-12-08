@@ -128,7 +128,7 @@
     <ClInclude Include="..\..\BattleCity\BattleCity\Road.h" />
     <ClInclude Include="..\..\BattleCity\BattleCity\Vehicle.h" />
     <ClInclude Include="..\..\BattleCity\BattleCity\Wall.h" />
-    <ClInclude Include="GameWidget.h" />
+    <QtMoc Include="GameWidget.h" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\BattleCity\BattleCity\BattleCity.vcxproj" />
