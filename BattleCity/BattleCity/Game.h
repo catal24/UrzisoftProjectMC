@@ -34,9 +34,12 @@ public:
 	void BulletMoving();
 	void Shoot();
 	void InputControll();
+	Map& GetMap();
+	GameScene* GetScene();
 	std::vector<std::vector<int>> randomMap();
 private:
 	Vehicle m_v;
+	Map m_map;
 	Difficulty m_difficulty = EASY;
 	std::vector<std::vector<int>> m_initMap;
 	GameScene* m_scene;

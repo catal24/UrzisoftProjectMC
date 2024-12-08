@@ -32,6 +32,8 @@ public:
 
 	GameObject* GetObjectAt(int x, int y);
 
+	Map& GetMap();
+
 	void RespawnObj(Vehicle* obj, int x, int y);
 
 protected:

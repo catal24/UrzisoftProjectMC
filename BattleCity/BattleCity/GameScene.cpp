@@ -134,6 +134,11 @@
         return nullptr;
     }
 
+    Map& GameScene::GetMap()
+    {
+        return m_map;
+    }
+
     void GameScene::RespawnObj(Vehicle* obj, int x, int y)
     {
         if (obj->GetLives())

@@ -59,6 +59,16 @@ void Game::InputControll()
 	}
 }
 
+Map& Game::GetMap()
+{
+	return m_map;
+}
+
+GameScene* Game::GetScene()
+{
+	return m_scene;
+}
+
 
 
 std::vector<std::vector<int>> Game::randomMap()

@@ -1,4 +1,6 @@
 ﻿#include "GameWidget.h"
+#include "Map.h"
+#include "GameScene.h"
 
 GameWidget::GameWidget(QWidget* parent)
 	:QWidget{parent}, m_game{Game::EASY}
@@ -21,13 +23,19 @@ void GameWidget::paintEvent(QPaintEvent* event)
     QPainter painter(this);
     painter.fillRect(rect(), Qt::white);  // Fundal alb
 
-    // Exemplu de desenare: desenează o hartă simplă
-    auto map = m_game.randomMap();  // Obține harta din Game
-    for (int i = 0; i < map.size(); ++i) {
-        for (int j = 0; j < map[i].size(); ++j) {
-            if (map[i][j] == 1) {
-                painter.setBrush(Qt::gray);
-                painter.drawRect(j * m_titleSize, i * m_titleSize, m_titleSize, m_titleSize);
+    int tileSize = 20;  // Dimensiunea celulei
+    auto& map = m_game.GetScene()->GetMap();  // Obține referința către hartă
+
+    for (int i = 0; i < map.GetHeight(); ++i) {
+        for (int j = 0; j < map.GetWidth(); ++j) {
+            GameObject* obj = map.GetObjectAt(i, j);
+            if (dynamic_cast<Wall*>(obj)) {
+                painter.setBrush(Qt::gray);  // Pereți
+                painter.drawRect(j * tileSize, i * tileSize, tileSize, tileSize);
+            }
+            else if (dynamic_cast<Road*>(obj)) {
+                painter.setBrush(Qt::white);  // Drum
+                painter.drawRect(j * tileSize, i * tileSize, tileSize, tileSize);
             }
         }
     }
