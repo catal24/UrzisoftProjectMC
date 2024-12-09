@@ -17,6 +17,16 @@ ClientMC::ClientMC(QWidget *parent)
 
     m_infoButton = new QPushButton(this);
 	setupButton(m_infoButton, 25, 25, 50, 50);
+	m_infoButton->setStyleSheet(
+		"QPushButton {"
+		"    border: none;"
+		"    background: transparent;"
+		"    background-image: url(resources/infoButton.png);"
+		"    background-repeat: no-repeat;"
+		"    background-position: center;"
+		
+		"}"
+	);
 	m_leaderboardButton = new QPushButton(this);
 	setupButton(m_leaderboardButton, 25, 80, 50, 50);
 	m_upgrade = new QPushButton(this);
