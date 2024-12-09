@@ -29,6 +29,17 @@ ClientMC::ClientMC(QWidget *parent)
 	);
 	m_leaderboardButton = new QPushButton(this);
 	setupButton(m_leaderboardButton, 25, 80, 50, 50);
+	m_leaderboardButton->setStyleSheet(
+		"QPushButton {"
+		"    border: none;"
+		"    background: transparent;"
+		"    background-image: url(resources/rankButton.png);"
+		"    background-repeat: no-repeat;"
+		"    background-position: center;"
+
+		"}"
+	);
+
 	m_upgrade = new QPushButton(this);
 	setupButton(m_upgrade, 725, 80, 50, 50);
 	m_mapSelector = new QPushButton(this);
