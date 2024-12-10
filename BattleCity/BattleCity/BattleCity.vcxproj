@@ -156,6 +156,7 @@
     <ClInclude Include="Wall.h" />
   </ItemGroup>
   <ItemGroup>
+    <Text Include="encoded_map.txt" />
     <Text Include="Map1.txt" />
     <Text Include="Map2.txt" />
     <Text Include="Map3.txt" />

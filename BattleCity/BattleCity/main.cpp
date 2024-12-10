@@ -10,5 +10,6 @@ int main()
 {
     Game g( Game::Difficulty::EXTREME);
     g.startGame();
+   
 	return 0;
 }

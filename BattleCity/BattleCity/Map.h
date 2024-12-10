@@ -16,7 +16,7 @@ public:
 
 	void DrawMap();
 
-	void EncodeMap();
+	std::vector<std::vector<int>> EncodeMap();
 
 	std::vector<std::vector<GameObject*>>& GetMap();
 

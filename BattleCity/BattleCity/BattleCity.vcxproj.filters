@@ -103,5 +103,8 @@
     <Text Include="Map5.txt">
       <Filter>Resource Files</Filter>
     </Text>
+    <Text Include="encoded_map.txt">
+      <Filter>Resource Files</Filter>
+    </Text>
   </ItemGroup>
 </Project>

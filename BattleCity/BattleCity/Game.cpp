@@ -14,15 +14,16 @@ void Game::startGame()
 	isStart = true;
 	std::queue<GameObject*> q;
 	m_scene->DrawTest(*this);
-
-
-
+	
 	while (isStart) {
 		Sleep(50);  // Sleep pentru a controla viteza jocului
 
 		InputControll();
 
 		BulletMoving();
+
+		m_scene->GetMap().EncodeMap();
+
 		
 	}
 	std::cout << "GameOver";

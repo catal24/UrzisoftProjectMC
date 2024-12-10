@@ -76,6 +76,8 @@
                 bullet->SetXStart(x);
                 bullet->SetYStart(y);
             }
+           GetMap().EncodeMap();
+
 
         }
         else

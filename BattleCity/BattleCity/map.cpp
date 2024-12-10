@@ -2,11 +2,16 @@
 #include "Road.h"
 #include "Bomb.h"
 #include <ctime>
+#include <fstream> // For file operations
+#include <iostream>
+#include <vector>
 
 void setTextColor(int color) {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, color);
 }
+
+std::ofstream outFile("encoded_map.txt");
 
 Map::Map(std::vector<std::vector<int>> mat)
 {
@@ -55,22 +60,23 @@ void Map::DrawMap()
 	}
 }
 
-void Map::EncodeMap()
-{
 
+
+std::vector<std::vector<int>> Map::EncodeMap()
+{
 	std::vector<std::vector<int>> encodedMap;
 	encodedMap.resize(m_map.size());
-	for (int i = 0; i < m_height; i++)
-	{
+
+	for (int i = 0; i < m_height; i++) {
 		encodedMap[i].resize(m_map[i].size());
-		for (int j = 0; j < m_width; j++)
-		{
-			
+		for (int j = 0; j < m_width; j++) {
 			if (dynamic_cast<Road*>(m_map[i][j])) {
 				encodedMap[i][j] = 0;
-			}else if (dynamic_cast<Wall*>(m_map[i][j])) {
+			}
+			else if (dynamic_cast<Wall*>(m_map[i][j])) {
 				encodedMap[i][j] = 1;
-			}else if (dynamic_cast<Vehicle*>(m_map[i][j])) {
+			}
+			else if (dynamic_cast<Vehicle*>(m_map[i][j])) {
 				encodedMap[i][j] = 2;
 			}
 			else if (dynamic_cast<Bullet*>(m_map[i][j])) {
@@ -79,15 +85,18 @@ void Map::EncodeMap()
 		}
 	}
 
-	for (int i = 0; i < encodedMap.size(); i++)
-	{
-		for (int j = 0; j < encodedMap[i].size(); j++)
-		{
-			std::cout<<encodedMap[i][j]<<" ";
+	for (const auto& row : encodedMap) {
+		for (const auto& cell : row) {
+			outFile << cell << " ";
 		}
-		std::cout << std::endl;
+		outFile << '\n'; 
 	}
+	outFile << '\n';
+
+
+	return encodedMap;
 }
+
 
 std::vector<std::vector<GameObject*>>& Map::GetMap()
 {
