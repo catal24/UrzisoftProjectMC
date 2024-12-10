@@ -31,12 +31,7 @@ Map::Map(std::vector<std::vector<int>> mat)
 			}
 		}
 	}
-	/*
-	aici se va citi din fisier o matrice si pe baza matricei
-	celulele cu 0 vor fi initializate ca obiecte din clasa Road
-	iar celulele corespunzatoare cu 1 voar fi initializate cu ob din clasa Wall
 
-	*/
 
 
 
@@ -49,10 +44,46 @@ void Map::DrawMap()
 	{
 		for (int j = 0; j < m_width; j++)
 		{
+			
+
 			if (m_map[i][j]->IsVisible())
 				m_map[i][j]->Draw();
 			else
 				std::cout << ".";
+		}
+		std::cout << std::endl;
+	}
+}
+
+void Map::EncodeMap()
+{
+
+	std::vector<std::vector<int>> encodedMap;
+	encodedMap.resize(m_map.size());
+	for (int i = 0; i < m_height; i++)
+	{
+		encodedMap[i].resize(m_map[i].size());
+		for (int j = 0; j < m_width; j++)
+		{
+			
+			if (dynamic_cast<Road*>(m_map[i][j])) {
+				encodedMap[i][j] = 0;
+			}else if (dynamic_cast<Wall*>(m_map[i][j])) {
+				encodedMap[i][j] = 1;
+			}else if (dynamic_cast<Vehicle*>(m_map[i][j])) {
+				encodedMap[i][j] = 2;
+			}
+			else if (dynamic_cast<Bullet*>(m_map[i][j])) {
+				encodedMap[i][j] = 3;
+			}
+		}
+	}
+
+	for (int i = 0; i < encodedMap.size(); i++)
+	{
+		for (int j = 0; j < encodedMap[i].size(); j++)
+		{
+			std::cout<<encodedMap[i][j]<<" ";
 		}
 		std::cout << std::endl;
 	}

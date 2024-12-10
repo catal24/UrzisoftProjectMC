@@ -16,6 +16,8 @@ public:
 
 	void DrawMap();
 
+	void EncodeMap();
+
 	std::vector<std::vector<GameObject*>>& GetMap();
 
 	void GenerateRandomBombsOnWalls(int numBombs);
