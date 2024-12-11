@@ -1,0 +1,14 @@
+<RCC>
+    <qresource prefix="/resources">
+        <file>resources/Nautolan - Spinning Bullet.png</file>
+        <file>resources/Nautolan Ship - Bomber - Base.png</file>
+        <file>resources/Nautolan Ship - Bomber - Engine Effect.png</file>
+        <file>resources/Nautolan Ship - Bomber - Shield.png</file>
+        <file>resources/Nautolan Ship - Bomber.png</file>
+        <file>resources/Asteroid - Flame.png</file>
+        <file>resources/Asteroid 01 - Base.png</file>
+        <file>resources/Asteroid 01 - Explode.png</file>
+        <file>resources/Earth-Like planet.png</file>
+        <file>resources/Starry background  - Layer 02 - Stars.png</file>
+    </qresource>
+</RCC>
