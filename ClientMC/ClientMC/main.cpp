@@ -7,6 +7,8 @@ int main(int argc, char *argv[])
 {
     QApplication app(argc, argv);
 
+    app.setQuitOnLastWindowClosed(true); // Închide aplicația când ultima fereastră este închisă
+
     QMainWindow* window = new QMainWindow;
     ClientMC mainWindow(window);
 	

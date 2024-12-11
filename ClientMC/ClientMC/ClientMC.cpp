@@ -2,6 +2,8 @@
 #include <QPushButton>
 #include "MovementInfoDisplay.h"
 #include "LeaderboardDisplay.h"
+#include <QCoreApplication>
+#include <QCloseEvent>
 ClientMC::ClientMC(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -71,6 +73,12 @@ ClientMC::ClientMC(QWidget *parent)
 
 ClientMC::~ClientMC()
 {}
+
+void ClientMC::closeEvent(QCloseEvent * event)
+{
+	QCoreApplication::quit();
+	event->accept();
+}
 
 void ClientMC::setupButton(QPushButton * button, int x, int y, int width, int height)
 {
