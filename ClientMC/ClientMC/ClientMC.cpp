@@ -10,7 +10,7 @@ ClientMC::ClientMC(QWidget *parent)
     : QMainWindow(parent)
 {
 	this->setStyleSheet("QMainWindow {"
-		"   background-image: url(resources/wallpaper.jpg);"// path to wallpaper
+		"   background-image: url(resources/images/wallpaper.jpg);"// path to wallpaper
 		"   background-repeat: no-repeat;"
 		"   background-position: center;"
 		"   background-size: cover;"// resize wallpaper 
@@ -25,7 +25,7 @@ ClientMC::ClientMC(QWidget *parent)
 		"QPushButton {"
 		"    border: none;"
 		"    background: transparent;"
-		"    background-image: url(resources/infoButton.png);"
+		"    background-image: url(resources/images/infoButton.png);"
 		"    background-repeat: no-repeat;"
 		"    background-position: center;"
 		
@@ -37,7 +37,7 @@ ClientMC::ClientMC(QWidget *parent)
 		"QPushButton {"
 		"    border: none;"
 		"    background: transparent;"
-		"    background-image: url(resources/rankButton.png);"
+		"    background-image: url(resources/images/rankButton.png);"
 		"    background-repeat: no-repeat;"
 		"    background-position: center;"
 
