@@ -44,11 +44,8 @@ ClientMC::ClientMC(QWidget *parent)
 		"}"
 	);
 
-	// creez un widget central
-	QWidget* centralWidget = new QWidget(this);
-	setCentralWidget(centralWidget);
-
 	m_findGame = new QPushButton("Find Game",this);
+	setupButton(m_findGame, 350, 275, 100, 50);
 	m_findGame->setStyleSheet(
 		"QPushButton {"
 		"    background-color: #3498db;"
@@ -65,14 +62,9 @@ ClientMC::ClientMC(QWidget *parent)
 		"    background-color: #1c5985;"
 		"}"
 	);
-	// Creează un layout pentru a centra butonul
-	QVBoxLayout* layout = new QVBoxLayout;
-	layout->addWidget(m_findGame, 0, Qt::AlignCenter);
 
-	// Setează layout-ul pe widget-ul central
-	centralWidget->setLayout(layout);
 
-	// Conectează butonul la funcția sa
+
 	connect(m_findGame, &QPushButton::clicked, this, [&]() {
 		qDebug() << "Find Game button clicked!";
 		});
@@ -117,21 +109,25 @@ void ClientMC::closeEvent(QCloseEvent * event)
 	event->accept();
 }
 
-void ClientMC::setupButton(QPushButton * button, int x, int y, int width, int height)
+
+
+void ClientMC::toggleBButtons(bool visible)
+{
+	m_findGame->setVisible(visible);
+	m_infoButton->setVisible(visible);
+	m_leaderboardButton->setVisible(visible);
+	m_upgrade->setVisible(visible);
+	m_mapSelector->setVisible(visible);
+}
+
+
+void ClientMC::setupButton(QPushButton* button, int x, int y, int width, int height)
 {
 	button->setGeometry(x, y, width, height);
 	button->setStyleSheet(
 		"QPushButton {"
 		"   border: 2px solid #000000;"
-		"   border-radius: 25px;"  
+		"   border-radius: 25px;"
 		"}"
 	);
-}
-
-void ClientMC::toggleBButtons(bool visible)
-{
-	m_infoButton->setVisible(visible);
-	m_leaderboardButton->setVisible(visible);
-	m_upgrade->setVisible(visible);
-	m_mapSelector->setVisible(visible);
 }
