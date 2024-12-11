@@ -19,6 +19,7 @@ private:
     void setupButton(QPushButton* button, int x, int y, int width, int height);
     void toggleBButtons(bool visible);
 private:
+    QPushButton* m_findGame;
     QPushButton* m_infoButton;
 	QPushButton* m_leaderboardButton;
     QPushButton* m_mapSelector;

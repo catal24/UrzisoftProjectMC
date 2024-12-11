@@ -4,6 +4,8 @@
 #include "LeaderboardDisplay.h"
 #include <QCoreApplication>
 #include <QCloseEvent>
+#include <QVBoxLayout>
+
 ClientMC::ClientMC(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -42,10 +44,44 @@ ClientMC::ClientMC(QWidget *parent)
 		"}"
 	);
 
+	// creez un widget central
+	QWidget* centralWidget = new QWidget(this);
+	setCentralWidget(centralWidget);
+
+	m_findGame = new QPushButton("Find Game",this);
+	m_findGame->setStyleSheet(
+		"QPushButton {"
+		"    background-color: #3498db;"
+		"    color: white;"
+		"    border: 2px solid #2980b9;"
+		"    border-radius: 10px;"
+		"    font-size: 16px;"
+		"    padding: 10px;"
+		"}"
+		"QPushButton:hover {"
+		"    background-color: #2980b9;"
+		"}"
+		"QPushButton:pressed {"
+		"    background-color: #1c5985;"
+		"}"
+	);
+	// Creează un layout pentru a centra butonul
+	QVBoxLayout* layout = new QVBoxLayout;
+	layout->addWidget(m_findGame, 0, Qt::AlignCenter);
+
+	// Setează layout-ul pe widget-ul central
+	centralWidget->setLayout(layout);
+
+	// Conectează butonul la funcția sa
+	connect(m_findGame, &QPushButton::clicked, this, [&]() {
+		qDebug() << "Find Game button clicked!";
+		});
+
 	m_upgrade = new QPushButton(this);
 	setupButton(m_upgrade, 725, 80, 50, 50);
 	m_mapSelector = new QPushButton(this);
 	setupButton(m_mapSelector, 725, 25, 50, 50);
+
 	connect(m_infoButton, &QPushButton::clicked, this, [&]() {
 		MovementInfoDisplay* infoWindow = new MovementInfoDisplay(this);  
 		infoWindow->setAttribute(Qt::WA_DeleteOnClose);
@@ -57,6 +93,7 @@ ClientMC::ClientMC(QWidget *parent)
 			toggleBButtons(true);
 		});
 	});
+
 	connect(m_leaderboardButton, &QPushButton::clicked, this, [&]() {
 		LeaderboardDisplay* leaderboardWindow = new LeaderboardDisplay(this); 
 		leaderboardWindow->setAttribute(Qt::WA_DeleteOnClose);
