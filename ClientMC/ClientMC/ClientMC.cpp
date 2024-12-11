@@ -64,15 +64,38 @@ ClientMC::ClientMC(QWidget *parent)
 	);
 
 
+	m_mapSelector = new QPushButton(this);
+	setupButton(m_mapSelector, 725, 25, 50, 50);
+	m_mapSelector->setStyleSheet(
+		"QPushButton {"
+		"    border: none;"
+		"    background: transparent;"
+		"    background-image: url(resources/images/mapSelector.png);"
+		"    background-repeat: no-repeat;"
+		"    background-position: center;"
+
+		"}"
+	);
+
+	m_upgrade = new QPushButton(this);
+	setupButton(m_upgrade, 725, 80, 50, 50);
+	m_upgrade->setStyleSheet(
+		"QPushButton {"
+		"    border: none;"
+		"    background: transparent;"
+		"    background-image: url(resources/images/upgrade.png);"
+		"    background-repeat: no-repeat;"
+		"    background-position: center;"
+
+		"}"
+	);
 
 	connect(m_findGame, &QPushButton::clicked, this, [&]() {
 		qDebug() << "Find Game button clicked!";
 		});
 
-	m_upgrade = new QPushButton(this);
-	setupButton(m_upgrade, 725, 80, 50, 50);
-	m_mapSelector = new QPushButton(this);
-	setupButton(m_mapSelector, 725, 25, 50, 50);
+	
+
 
 	connect(m_infoButton, &QPushButton::clicked, this, [&]() {
 		MovementInfoDisplay* infoWindow = new MovementInfoDisplay(this);  
