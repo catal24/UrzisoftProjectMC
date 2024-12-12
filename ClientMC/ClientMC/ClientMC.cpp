@@ -2,7 +2,7 @@
 #include <QPushButton>
 #include "MovementInfoDisplay.h"
 #include "LeaderboardDisplay.h"
-#include <QCoreApplication>
+//#include <QCoreApplication>
 #include <QCloseEvent>
 #include <QVBoxLayout>
 
@@ -20,32 +20,14 @@ ClientMC::ClientMC(QWidget *parent)
 	this->setFixedSize(800, 600);
 
     m_infoButton = new QPushButton(this);
-	setupButton(m_infoButton, 25, 25, 50, 50);
-	m_infoButton->setStyleSheet(
-		"QPushButton {"
-		"    border: none;"
-		"    background: transparent;"
-		"    background-image: url(resources/images/infoButton.png);"
-		"    background-repeat: no-repeat;"
-		"    background-position: center;"
-		
-		"}"
-	);
-	m_leaderboardButton = new QPushButton(this);
-	setupButton(m_leaderboardButton, 25, 80, 50, 50);
-	m_leaderboardButton->setStyleSheet(
-		"QPushButton {"
-		"    border: none;"
-		"    background: transparent;"
-		"    background-image: url(resources/images/rankButton.png);"
-		"    background-repeat: no-repeat;"
-		"    background-position: center;"
+	setupButtonWithImage(m_infoButton, 25, 25, 50, 50, "resources/images/infoButton.png");
 
-		"}"
-	);
+	m_leaderboardButton = new QPushButton(this);
+	setupButtonWithImage(m_leaderboardButton, 25, 80, 50, 50,"resources/images/rankButton.png");
+
 
 	m_findGame = new QPushButton("Find Game",this);
-	setupButton(m_findGame, 350, 275, 100, 50);
+	m_findGame->setGeometry( 350, 275, 100, 50);
 	m_findGame->setStyleSheet(
 		"QPushButton {"
 		"    background-color: #3498db;"
@@ -65,30 +47,10 @@ ClientMC::ClientMC(QWidget *parent)
 
 
 	m_mapSelector = new QPushButton(this);
-	setupButton(m_mapSelector, 725, 25, 50, 50);
-	m_mapSelector->setStyleSheet(
-		"QPushButton {"
-		"    border: none;"
-		"    background: transparent;"
-		"    background-image: url(resources/images/mapSelector.png);"
-		"    background-repeat: no-repeat;"
-		"    background-position: center;"
-
-		"}"
-	);
+	setupButtonWithImage(m_mapSelector, 725, 25, 50, 50,"resources/images/mapSelector.png");
 
 	m_upgrade = new QPushButton(this);
-	setupButton(m_upgrade, 725, 80, 50, 50);
-	m_upgrade->setStyleSheet(
-		"QPushButton {"
-		"    border: none;"
-		"    background: transparent;"
-		"    background-image: url(resources/images/upgrade.png);"
-		"    background-repeat: no-repeat;"
-		"    background-position: center;"
-
-		"}"
-	);
+	setupButtonWithImage(m_upgrade, 725, 80, 50, 50, "resources/images/upgrade.png");
 
 	connect(m_findGame, &QPushButton::clicked, this, [&]() {
 		qDebug() << "Find Game button clicked!";
@@ -144,13 +106,16 @@ void ClientMC::toggleBButtons(bool visible)
 }
 
 
-void ClientMC::setupButton(QPushButton* button, int x, int y, int width, int height)
+void ClientMC::setupButtonWithImage(QPushButton* button, int x, int y, int width, int height,const std::string& imagePath)
 {
 	button->setGeometry(x, y, width, height);
 	button->setStyleSheet(
 		"QPushButton {"
-		"   border: 2px solid #000000;"
 		"   border-radius: 25px;"
+		"   background: transparent;"
+		"    background-image: url(" +QString::fromStdString(imagePath) +"); "
+		"    background-repeat: no-repeat;"
+		"    background-position: center;"
 		"}"
 	);
 }
