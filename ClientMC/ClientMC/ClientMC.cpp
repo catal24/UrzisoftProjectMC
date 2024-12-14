@@ -2,10 +2,23 @@
 #include <QPushButton>
 #include "MovementInfoDisplay.h"
 #include "LeaderboardDisplay.h"
-//#include <QCoreApplication>
 #include <QCloseEvent>
 #include <QVBoxLayout>
+#include <QFontDatabase>
 
+void setupButtonWithImage(QPushButton* button, int x, int y, int width, int height, const std::string& imagePath)
+{
+	button->setGeometry(x, y, width, height);
+	button->setStyleSheet(
+		"QPushButton {"
+		"   border-radius: 25px;"
+		"   background: transparent;"
+		"    background-image: url(" + QString::fromStdString(imagePath) + "); "
+		"    background-repeat: no-repeat;"
+		"    background-position: center;"
+		"}"
+	);
+}
 ClientMC::ClientMC(QWidget *parent)
     : QMainWindow(parent)
 {
@@ -18,7 +31,7 @@ ClientMC::ClientMC(QWidget *parent)
 
 	this->setWindowTitle("Menu");
 	this->setFixedSize(800, 600);
-
+	QFontDatabase::addApplicationFont("resources/fonts/Deadknight.otf");
     m_infoButton = new QPushButton(this);
 	setupButtonWithImage(m_infoButton, 25, 25, 50, 50, "resources/images/infoButton.png");
 
@@ -27,7 +40,7 @@ ClientMC::ClientMC(QWidget *parent)
 
 
 	m_findGame = new QPushButton("Find Game",this);
-	m_findGame->setGeometry( 350, 275, 100, 50);
+	m_findGame->setGeometry( 325, 300, 150, 50);
 	m_findGame->setStyleSheet(
 		"QPushButton {"
 		"    background-color: #3498db;"
@@ -35,6 +48,7 @@ ClientMC::ClientMC(QWidget *parent)
 		"    border: 2px solid #2980b9;"
 		"    border-radius: 10px;"
 		"    font-size: 16px;"
+		"    font-family: 'Deadknight';"
 		"    padding: 10px;"
 		"}"
 		"QPushButton:hover {"
@@ -106,16 +120,3 @@ void ClientMC::toggleBButtons(bool visible)
 }
 
 
-void ClientMC::setupButtonWithImage(QPushButton* button, int x, int y, int width, int height,const std::string& imagePath)
-{
-	button->setGeometry(x, y, width, height);
-	button->setStyleSheet(
-		"QPushButton {"
-		"   border-radius: 25px;"
-		"   background: transparent;"
-		"    background-image: url(" +QString::fromStdString(imagePath) +"); "
-		"    background-repeat: no-repeat;"
-		"    background-position: center;"
-		"}"
-	);
-}
