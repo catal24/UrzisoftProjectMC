@@ -138,6 +138,7 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Map.cpp" />
     <ClCompile Include="Player.cpp" />
+    <ClCompile Include="PlayerDatabase.cpp" />
     <ClCompile Include="Road.cpp" />
     <ClCompile Include="Vehicle.cpp" />
     <ClCompile Include="Wall.cpp" />
@@ -151,6 +152,7 @@
     <ClInclude Include="GameScene.h" />
     <ClInclude Include="Map.h" />
     <ClInclude Include="Player.h" />
+    <ClInclude Include="PlayerDatabase.h" />
     <ClInclude Include="Road.h" />
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="Wall.h" />
