@@ -18,11 +18,6 @@ LeaderboardDisplay::LeaderboardDisplay(QWidget* parent)
         "QTableWidget::item { selection-background-color: #40E0D0; selection-color: #FFFFFF; }" // Selecție turcoaz
         "QTableWidget { border: 2px solid #483D8B; border-radius: 10px; }"); // Bordură mov închis
 
-
-
-
-
-
     QFont font("Arial", 12, QFont::Bold);
     m_table->setFont(font);
 
