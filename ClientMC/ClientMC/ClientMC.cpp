@@ -70,9 +70,6 @@ ClientMC::ClientMC(QWidget *parent)
 		qDebug() << "Find Game button clicked!";
 		});
 
-	
-
-
 	connect(m_infoButton, &QPushButton::clicked, this, [&]() {
 		MovementInfoDisplay* infoWindow = new MovementInfoDisplay(this);  
 		infoWindow->setAttribute(Qt::WA_DeleteOnClose);
@@ -107,8 +104,6 @@ void ClientMC::closeEvent(QCloseEvent * event)
 	QCoreApplication::quit();
 	event->accept();
 }
-
-
 
 void ClientMC::toggleBButtons(bool visible)
 {
