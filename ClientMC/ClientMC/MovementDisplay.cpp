@@ -68,11 +68,9 @@ MovementInfoDisplay::MovementInfoDisplay(QWidget* parent)
     QVBoxLayout* layoutButton = new QVBoxLayout(this);
     layoutButton->addStretch();  // adaugam spatiu flexibil
     layoutButton->addWidget(backButton, 0, Qt::AlignRight);  // aliniem butonul la dreapta
+    layout->addLayout(layoutButton);  
+    this->setLayout(layout);  
 
-    layout->addLayout(layoutButton);  // adaugam layout-ul cu buton in layout-ul principal
-    this->setLayout(layout);  // setam layout-ul final al ferestrei
-
-    // Conectam butonul la metoda care va inchide fereastra
     connect(backButton, &QPushButton::clicked, this, &MovementInfoDisplay::backButtonClicked);
 }
 
