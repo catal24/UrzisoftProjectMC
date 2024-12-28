@@ -6,7 +6,7 @@
 #include <QVBoxLayout>
 #include <QFontDatabase>
 
-
+// Functie pentru a configura butoanele cu imagini
 void setupButtonWithImage(QPushButton* button, int x, int y, int width, int height, const std::string& imagePath)
 {
     button->setGeometry(x, y, width, height);  // Setam geometria butonului (pozitia si dimensiunea)
@@ -21,46 +21,46 @@ void setupButtonWithImage(QPushButton* button, int x, int y, int width, int heig
     );
 }
 
-
+// Constructorul clasei ClientMC (Main Menu)
 ClientMC::ClientMC(QWidget* parent)
     : QMainWindow(parent)
 {
-    
+    // Setam fundalul ferestrei principale cu o imagine
     this->setStyleSheet("QMainWindow {"
-        "   background-image: url(resources/images/wallpaper.jpg);"  // Calea catre wallpaper
-        "   background-repeat: no-repeat;"  // Nu repetam imaginea
-        "   background-position: center;"  // Pozitionam imaginea la centru
-        "   background-size: cover;"  // Redimensionam wallpaper-ul pentru a acoperi intreaga fereastra
-    );
+        "   background-image: url(resources/images/wallpaper.jpg);"// path to wallpaper
+        "   background-repeat: no-repeat;"
+        "   background-position: center;"
+        "   background-size: cover;"// resize wallpaper 
+        "}");
 
-    this->setWindowTitle("Menu");  // Titlul ferestrei
+    this->setWindowTitle("Menu");  //titlul ferestrei
     this->setFixedSize(800, 600);  // Setam dimensiunea fixa a ferestrei
-    QFontDatabase::addApplicationFont("resources/fonts/Deadknight.otf");  // Adaugam fontul Deadknight
+    QFontDatabase::addApplicationFont("resources/fonts/Deadknight.otf");  //adaugam fontul Deadknight
 
-    // Creem butoanele din meniul principal
+    //creem butoanele din meniul principal
     m_infoButton = new QPushButton(this);
     setupButtonWithImage(m_infoButton, 25, 25, 50, 50, "resources/images/infoButton.png");
 
     m_leaderboardButton = new QPushButton(this);
     setupButtonWithImage(m_leaderboardButton, 25, 80, 50, 50, "resources/images/rankButton.png");
 
-    m_findGame = new QPushButton("Find Game", this);  // Butonul pentru a cauta jocuri
-    m_findGame->setGeometry(325, 300, 150, 50);  // Setam pozitia si dimensiunea butonului
+    m_findGame = new QPushButton("Find Game", this);  //butonul pentru a cauta jocuri
+    m_findGame->setGeometry(325, 300, 150, 50);  //setam pozitia si dimensiunea butonului
     m_findGame->setStyleSheet(
         "QPushButton {"
-        "    background-color: #3498db;"  // Culoarea de fundal
-        "    color: white;"  // Culoarea textului
-        "    border: 2px solid #2980b9;"  // Bordura butonului
-        "    border-radius: 10px;"  // Colturile rotunjite
-        "    font-size: 16px;"  // Dimensiunea fontului
-        "    font-family: 'Deadknight';"  // Fontul utilizat
-        "    padding: 10px;"  // Adaugam spatiu in interiorul butonului
+        "    background-color: #3498db;"  //culoarea de fundal
+        "    color: white;"  //culoarea textului
+        "    border: 2px solid #2980b9;"  //bordura butonului
+        "    border-radius: 10px;"  //colturile rotunjite
+        "    font-size: 16px;"  //dimensiunea fontului
+        "    font-family: 'Deadknight';"  //fontul utilizat
+        "    padding: 10px;"  //adaugam spatiu in interiorul butonului
         "}"
         "QPushButton:hover {"
-        "    background-color: #2980b9;"  // Culoarea butonului la hover
+        "    background-color: #2980b9;"  //culoarea butonului la hover
         "}"
         "QPushButton:pressed {"
-        "    background-color: #1c5985;"  // Culoarea butonului cand este apasat
+        "    background-color: #1c5985;"  //culoarea butonului cand este apasat
         "}"
     );
 
@@ -72,33 +72,34 @@ ClientMC::ClientMC(QWidget* parent)
 
     // Conectam butonul 'Find Game' pentru a afisa un mesaj in consola
     connect(m_findGame, &QPushButton::clicked, this, [&]() {
-        qDebug() << "Find Game button clicked!";  // Afisam mesaj la click
+        qDebug() << "Find Game button clicked!";  
         });
 
-    // Conectam butonul 'Info' pentru a deschide fereastra cu instructiuni
+    
     connect(m_infoButton, &QPushButton::clicked, this, [&]() {
         MovementInfoDisplay* infoWindow = new MovementInfoDisplay(this);
         infoWindow->setAttribute(Qt::WA_DeleteOnClose);  // Setam fereastra sa fie stearsa la inchidere
         infoWindow->show();  // Afisam fereastra
         toggleBButtons(false);  // Ascundem butoanele din meniul principal
 
+        
         connect(infoWindow, &MovementInfoDisplay::backButtonClicked, this, [=]() {
             infoWindow->close();  // Inchidem fereastra info
             toggleBButtons(true);  // Afisam butoanele din nou
             });
         });
 
-    // Conectam butonul 'Leaderboard' pentru a deschide fereastra cu clasamentul
+    
     connect(m_leaderboardButton, &QPushButton::clicked, this, [&]() {
         LeaderboardDisplay* leaderboardWindow = new LeaderboardDisplay(this);
         leaderboardWindow->setAttribute(Qt::WA_DeleteOnClose);  // Setam fereastra sa fie stearsa la inchidere
-        leaderboardWindow->show();  
-        toggleBButtons(false);  
+        leaderboardWindow->show();  // Afisam fereastra
+        toggleBButtons(false);  // Ascundem butoanele din meniul principal
 
         
         connect(leaderboardWindow, &LeaderboardDisplay::backButtonClicked, this, [=]() {
-            leaderboardWindow->close();  
-            toggleBButtons(true);  
+            leaderboardWindow->close();  // Inchidem fereastra leaderboard
+            toggleBButtons(true);  // Afisam butoanele din nou
             });
         });
 }
@@ -107,11 +108,11 @@ ClientMC::~ClientMC() {}
 
 void ClientMC::closeEvent(QCloseEvent* event)
 {
-    QCoreApplication::quit();  // inchidem aplicatia la inchiderea ferestrei
-    event->accept();  // Acceptam evenimentul de inchidere
+    QCoreApplication::quit();  // Inchidem aplicatia la inchiderea ferestrei
+    event->accept();  
 }
 
-//functie pentru a ascunde butoanele
+//functie pentru a ascunde sau afisa butoanele din meniul principal
 void ClientMC::toggleBButtons(bool visible)
 {
     m_findGame->setVisible(visible);
