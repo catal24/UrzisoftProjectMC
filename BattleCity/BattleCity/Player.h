@@ -10,16 +10,16 @@ class Player
 	void SetId(int id);
 	void SetCredits(int credits);
 	void SetRank(int rank);
-	std::string GetName(std::string name)const;
-	int GetId(int id)const;
-	int GetCredits(int credits)const;
-	int GetRank(int rank)const;
+	std::string GetName()const;
+	int GetId()const;
+	int GetCredits()const;
+	int GetRank()const;
 
 	private:
 	std::string m_name;
 	int m_id;
 	int m_credits;
 	int m_rank;
-	Vehicle m_tank;
+	Vehicle m_v;
 };
 
