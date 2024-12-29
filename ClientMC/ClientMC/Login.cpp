@@ -6,36 +6,44 @@
 
 Login::Login(QWidget* parent) : QWidget(parent)
 {
-	m_usernameField = new QLineEdit(this);
-	m_usernameField->setPlaceholderText("Username");
+    m_usernameField = new QLineEdit(this);
+    m_usernameField->setPlaceholderText("Username");  // adaugam text
 
-	m_loginButton = new QPushButton("Login", this);
+    
+    m_loginButton = new QPushButton("Login", this);// cream buton de login
 
-	QVBoxLayout* layout = new QVBoxLayout(this);
-	layout->addWidget(m_usernameField);
-	layout->addWidget(m_loginButton);
-	this->setMinimumSize(300, 100);
-	setLayout(layout);
+    // cream layout pentru widgeturi
+    QVBoxLayout* layout = new QVBoxLayout(this);
+    layout->addWidget(m_usernameField);  // camp pentru username
+    layout->addWidget(m_loginButton);    // adaugam buton login
+    this->setMinimumSize(300, 100);      // dimensiunea ferestrei
+    setLayout(layout);                   // aplicam layout
 
-	connect(m_loginButton, &QPushButton::clicked, this, &Login::handleLogin);
+    // conectam semnalul de click pe buton la slotul handleLogin
+    connect(m_loginButton, &QPushButton::clicked, this, &Login::handleLogin);
 }
 
-Login::~Login(){}
 
+Login::~Login() {}
+
+//ce facem la click
 void Login::handleLogin()
 {
-	QString username = m_usernameField->text();
-	//aici vom verifica in baza de date daca exista un cont cu acest username
-	if(username.isEmpty())
-	{
-		QMessageBox::warning(this,"Invalid username", "Enter a valid username");
+    
+    QString username = m_usernameField->text();
 
-	}
-	else {
-		emit loginSuccess();
-		QMessageBox::information(this, "Login", "Login successful!");
+    // verificam daca username e gol
+    if (username.isEmpty())
+    {
+        
+        QMessageBox::warning(this, "Invalid username", "Enter a valid username");
+    }
+    else {
+        emit loginSuccess();
+        // afisam un mesaj ca logarea a fost realizata cu succes
+        QMessageBox::information(this, "Login", "Login successful!");
 
-		//daca nu exista Player cu acest username vom crea unul
-		QMessageBox::information(this, "Login", "A new account with your username was created");
-	}
-	}
+        // daca nu exista un cont pentru username-ul respectiv, vom crea unul nou
+        QMessageBox::information(this, "Login", "A new account with your username was created");
+    }
+}
