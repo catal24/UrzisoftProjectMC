@@ -5,11 +5,44 @@
 #include <fstream> // For file operations
 #include <iostream>
 #include <vector>
+#include <bitset>
 
 void setTextColor(int color) {
 	HANDLE hConsole = GetStdHandle(STD_OUTPUT_HANDLE);
 	SetConsoleTextAttribute(hConsole, color);
 }
+
+std::string Map::EncodeMap2()
+{
+	std::string encodedString;
+
+	// Loop through the map and encode each cell
+	for (int i = 0; i < m_height; i++) {
+		for (int j = 0; j < m_width; j++) {
+			int encodedValue = 0;
+
+			// Encode different objects as numbers (0, 1, 2, 3)
+			if (dynamic_cast<Road*>(m_map[i][j])) {
+				encodedValue = 0;  // Road
+			}
+			else if (dynamic_cast<Wall*>(m_map[i][j])) {
+				encodedValue = 1;  // Wall
+			}
+			else if (dynamic_cast<Vehicle*>(m_map[i][j])) {
+				encodedValue = 2;  // Vehicle
+			}
+			else if (dynamic_cast<Bullet*>(m_map[i][j])) {
+				encodedValue = 3;  // Bullet
+			}
+
+			// Convert the number to a 2-bit binary string and append it to the result
+			encodedString += std::bitset<2>(encodedValue).to_string();
+		}
+	}
+
+	return encodedString;
+}
+
 
 std::ofstream outFile("encoded_map.txt");
 

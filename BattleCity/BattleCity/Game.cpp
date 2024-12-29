@@ -8,25 +8,48 @@ Game::Game( Difficulty difficulty)
 		m_v.GetStartingPositions()[m_playerCount - 1].second,0,false,true,3,5,false,Axis::down };
 	m_scene->AddObj(&m_v);
 }
-//spawn the vehicle at a default location
+
+
 void Game::startGame()
-{//spargere functie
+{
+	// Start the game
 	isStart = true;
 	std::queue<GameObject*> q;
 	m_scene->DrawTest(*this);
-	
+
+	// Assuming there's an app already set up for Crow (as you've shown previously)
+	crow::SimpleApp app;
+
+	// Route to send the map as JSON
+	CROW_ROUTE(app, "/map")([&]() {
+		// Generate the map encoding (toSend) and send it as JSON
+		std::string toSend = m_scene->GetMap().EncodeMap2();
+		return crow::json::wvalue({ {"map", toSend} });
+		});
+
+	// Run the Crow app in a separate thread to keep it non-blocking
+	std::thread appThread([&app]() {
+		app.port(18080).multithreaded().run();
+		});
+
 	while (isStart) {
-		Sleep(50);  // Sleep pentru a controla viteza jocului
+		// Sleep to control game speed
+		Sleep(50);
 
+		// Handle input and update game state
 		InputControll();
-
 		BulletMoving();
 
-		m_scene->GetMap().EncodeMap();
+		// Optionally, update the map or game state to reflect any changes
+		std::string toSend = m_scene->GetMap().EncodeMap2();
 
-		
+		// You could handle any other game-related operations here, like sending the updated data
 	}
-	std::cout << "GameOver";
+
+	std::cout << "GameOver\n";
+
+	// Ensure the app thread joins before finishing the game loop
+	appThread.join();
 }
 
 void Game::InputControll()

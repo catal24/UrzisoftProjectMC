@@ -1,5 +1,7 @@
 ﻿#pragma once
 #include <iostream>
+#include <crow.h>
+#include <thread>
 #include <vector>
 #include<windows.h>
 #include "Vehicle.h"
@@ -11,6 +13,8 @@ class Map
 
 public:
 	Map() = default;
+
+	std::string EncodeMap2();
 
 	Map(std::vector<std::vector<int>> mat);
 
