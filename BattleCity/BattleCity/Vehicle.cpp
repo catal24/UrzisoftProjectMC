@@ -3,13 +3,12 @@
 
 #include <iostream>
 
-Vehicle::Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed, bool isDead, Axis axis,int playerid) :
+Vehicle::Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed, bool isDead, Axis axis) :
 	GameObject{ xStart, yStart, id, isBreakable, isVisible },
 	m_lives{ lives },
 	m_speed{ speed },
 	m_isDead{ isDead },
-	m_axis{ axis },
-	m_playerid{playerid}
+	m_axis{ axis }
 {
 }
 
@@ -107,24 +106,4 @@ std::vector<std::pair<int, int>> Vehicle::GetStartingPositions() { return m_star
 void Vehicle::Draw()
 {
 	std::cout << (char)254u;
-}
-
-void Vehicle::SetId(int id)
-{
-	m_id = id;
-}
-
-int Vehicle::GetId() const
-{
-	return m_id;
-}
-
-int Vehicle::GetPlayerId() const
-{
-	return m_playerid;
-}
-
-void Vehicle::SetPlayerId(int playerid)
-{
-	m_playerid = playerid;
 }
