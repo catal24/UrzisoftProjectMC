@@ -24,7 +24,7 @@ inline auto CreateStorage(const std::string& filename)
 				sql::make_column("id", &Player::SetId, &Player::GetId, sql::primary_key().autoincrement()),
 				sql::make_column("name", &Player::SetName, &Player::GetName),
 				sql::make_column("credits", &Player::SetCredits, &Player::GetCredits),
-				sql::make_column("rank", &Player::SetRank, &Player::GetRank),
+				sql::make_column("rank", &Player::SetRank, &Player::GetRank)
 				//sql::make_column("vehicle_id", &Player::SetVehicleId, &Player::GetVehicleId,
 				//	sql::foreign_key(&Player::SetVehicleId)
 				//	.references(&Vehicle::SetId)
