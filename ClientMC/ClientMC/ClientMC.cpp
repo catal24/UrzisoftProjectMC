@@ -1,4 +1,5 @@
 ﻿#include "ClientMC.h"
+#include "GameWindow.h"
 #include <QPushButton>
 #include "MovementInfoDisplay.h"
 #include "LeaderboardDisplay.h"
@@ -72,7 +73,11 @@ ClientMC::ClientMC(QWidget* parent)
 
     // Conectam butonul 'Find Game' pentru a afisa un mesaj in consola
     connect(m_findGame, &QPushButton::clicked, this, [&]() {
-        qDebug() << "Find Game button clicked!";  
+        qDebug() << "Find Game button clicked!";
+        this->hide();  
+
+        GameWindow* gameWindow = new GameWindow();  
+        gameWindow->show();  
         });
 
     
