@@ -55,26 +55,12 @@ void Vehicle::SetX(int x) { m_x = x; }
 void Vehicle::SetY(int y) { m_y = y; }
 
 int Vehicle::GetSpeed() const { return m_speed; }
-int Vehicle::GetX() { return m_x; }
-int Vehicle::GetY() { return m_y; }
-int Vehicle::GetLives() const { return m_lives; }
+uint8_t Vehicle::GetX() { return m_x; }
+uint8_t Vehicle::GetY() { return m_y; }
+uint8_t Vehicle::GetLives() const { return m_lives; }
 bool Vehicle::GetIsDead() const { return m_isDead; }
 Axis Vehicle::GetAxis() const { return m_axis; }
-
-void Vehicle::Die()
-{
-	m_lives -= 1;
-	if (m_lives > 0)
-		Respawn();
-	else
-		m_isDead = true;
-}
-
-void Vehicle::Respawn()
-{
-}
-
-std::vector<std::pair<int, int>> Vehicle::GetStartingPositions() { return m_startingPositions; }
+std::vector<std::pair<uint8_t, uint8_t>> Vehicle::GetStartingPositions() { return m_startingPositions; }
 
 void Vehicle::Draw()
 {

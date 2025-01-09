@@ -2,7 +2,7 @@
 #include "Wall.h"
 
 
-Wall::Wall(int xStart, int yStart, int id, bool isBreakable, bool isVisible, bool hasBomb)
+Wall::Wall(uint8_t xStart, uint8_t yStart, int id, bool isBreakable, bool isVisible, bool hasBomb)
 	:GameObject{ xStart, yStart, id, isBreakable, isVisible },
 	m_hasBomb{ hasBomb }
 {}
