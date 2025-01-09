@@ -54,6 +54,34 @@ void Vehicle::SetIsDead(bool flag) { m_isDead = flag; }
 void Vehicle::SetX(int x) { m_x = x; }
 void Vehicle::SetY(int y) { m_y = y; }
 
+void Vehicle::MoveTank(char dir)
+{
+	if (dir == 'w') {
+		m_x--;
+		m_axis = Axis::up;
+		std::cout << "move direction up " << static_cast<int>(m_axis) << std::endl;
+
+
+	}
+	else if (dir == 's') {
+		m_x++;
+		m_axis = Axis::down;
+		std::cout << "move direction down" << static_cast<int>(m_axis) << std::endl;
+
+
+	}
+	else if (dir == 'a') {
+		m_y--;
+		m_axis = Axis::left;
+
+	}
+	else if (dir == 'd') {
+		m_y++;
+		m_axis = Axis::right;
+
+	}
+}
+
 int Vehicle::GetSpeed() const { return m_speed; }
 uint8_t Vehicle::GetX() { return m_x; }
 uint8_t Vehicle::GetY() { return m_y; }

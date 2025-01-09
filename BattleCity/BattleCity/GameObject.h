@@ -1,7 +1,6 @@
 #pragma once
 #include<iostream>
 #include <windows.h>
-#include <cstdint>
 class GameObject
 {
 
@@ -9,12 +8,12 @@ public:
     GameObject() = default;
     GameObject(uint8_t xStart, uint8_t yStart, int id, bool isBreakable, bool isVisible);
 
-    uint8_t GetXStart() const;
-    void SetXStart(uint8_t xStart);
+    int GetXStart() const;
+    void SetXStart(int xStart);
     void SetTextColor(int color);
 
-    uint8_t GetYStart() const;
-    void SetYStart(uint8_t yStart);
+    int GetYStart() const;
+    void SetYStart(int yStart);
 
     int GetId() const;
     void SetId(int id);
@@ -28,8 +27,8 @@ public:
    virtual void Draw()=0;
 
 protected:
-	uint8_t m_x;
-    uint8_t m_y;
+	int m_x;
+	int m_y;
 	int m_id;
 	bool m_isBreakable;
 	bool m_isVisible;
