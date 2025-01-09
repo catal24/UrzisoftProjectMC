@@ -19,24 +19,26 @@ std::string Map::EncodeMap2()
 	// Loop through the map and encode each cell
 	for (int i = 0; i < m_height; i++) {
 		for (int j = 0; j < m_width; j++) {
-			int encodedValue = 0;
+			char encodedValue = 0;
 
 			// Encode different objects as numbers (0, 1, 2, 3)
 			if (dynamic_cast<Road*>(m_map[i][j])) {
-				encodedValue = 0;  // Road
+				encodedValue = '0';  // Road
 			}
 			else if (dynamic_cast<Wall*>(m_map[i][j])) {
-				encodedValue = 1;  // Wall
+				encodedValue = '1';  // Wall
 			}
 			else if (dynamic_cast<Vehicle*>(m_map[i][j])) {
-				encodedValue = 2;  // Vehicle
+				encodedValue = '2';  // Vehicle
 			}
 			else if (dynamic_cast<Bullet*>(m_map[i][j])) {
-				encodedValue = 3;  // Bullet
+				encodedValue = '3';  // Bullet
+			}
+			else if (dynamic_cast<Bomb*>(m_map[i][j])) {
+				encodedValue = '4';  // Wall
 			}
 
-			// Convert the number to a 2-bit binary string and append it to the result
-			encodedString += std::bitset<2>(encodedValue).to_string();
+			encodedString += encodedValue;
 		}
 	}
 
