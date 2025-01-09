@@ -1,6 +1,6 @@
 #include "GameObject.h"
 
-GameObject::GameObject(uint8_t xStart, uint8_t yStart, int id, bool isBreakable, bool isVisible)
+GameObject::GameObject(int xStart, int yStart, int id, bool isBreakable, bool isVisible)
     : m_x{ xStart }, 
     m_y{ yStart }, 
     m_id{ id }, 

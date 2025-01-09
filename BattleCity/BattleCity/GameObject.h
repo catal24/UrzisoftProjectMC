@@ -6,7 +6,7 @@ class GameObject
 
 public:
     GameObject() = default;
-    GameObject(uint8_t xStart, uint8_t yStart, int id, bool isBreakable, bool isVisible);
+    GameObject(int xStart, int yStart, int id, bool isBreakable, bool isVisible);
 
     int GetXStart() const;
     void SetXStart(int xStart);

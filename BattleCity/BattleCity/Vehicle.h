@@ -14,6 +14,8 @@ public:
 
 	~Vehicle() {}
 	
+	
+
 	std::shared_ptr<Bullet> ShootBullet(int x, int y);
 
 	void SetAxis(char ax);
@@ -23,13 +25,16 @@ public:
 	void SetIsDead(bool flag);
 	void SetX(int x);
 	void SetY(int y);
+	void MoveTank(char dir);
 	int GetSpeed()const;
-	uint8_t GetX();
-	uint8_t GetY();
-	uint8_t GetLives()const;
+	int GetX();
+	int GetY();
+	int GetLives()const;
 	bool GetIsDead()const;
 	Axis GetAxis()const;
-	std::vector<std::pair<uint8_t, uint8_t>> GetStartingPositions();
+	void Die();
+	void Respawn();
+	std::vector<std::pair<int, int>> GetStartingPositions();
 	void Draw()override;
 	void SetId(int id);
 	int GetId() const;
@@ -38,13 +43,13 @@ public:
 private:
 	int m_id;
 	int m_playerid;
-	uint8_t m_x;
-	uint8_t m_y;
+	int m_x;
+	int m_y;
 	Axis m_axis;
-	uint8_t m_lives;
+	int m_lives;
 	int m_speed;
 	bool m_isDead;
-	std::vector<std::pair<uint8_t, uint8_t>> m_startingPositions = { {1,1},{18,18},{1,18},{18,1} };// in constructor default
+	std::vector<std::pair<int, int>> m_startingPositions = { {1,1},{18,18},{1,18},{18,1} };// in constructor default
 
 };
 
