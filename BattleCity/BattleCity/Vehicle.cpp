@@ -3,7 +3,7 @@
 
 #include <iostream>
 
-Vehicle::Vehicle(uint8_t xStart, uint8_t yStart, int id, bool isBreakable, bool isVisible, uint8_t lives, int speed, bool isDead, Axis axis,int playerid) :
+Vehicle::Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed, bool isDead, Axis axis,int playerid) :
 	GameObject{ xStart, yStart, id, isBreakable, isVisible },
 	m_lives{ lives },
 	m_speed{ speed },

@@ -4,15 +4,22 @@
 class Bomb : public GameObject
 {
 public:
-    Bomb(uint8_t xStart, uint8_t yStart, int id, bool isBreakable, bool isVisible);
+    Bomb(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int radius = 1);
+
+    int GetRadius() const;
+    void SetRadius(int radius);
+
+    void Explosion();
+    
     void Draw()override;
 
 private:
     int m_id;
-    uint8_t m_xStart;
-    uint8_t m_yStart;
+    int m_xStart;
+    int m_yStart;
     bool m_isVisible;
     bool isBreakable;
+	int m_radius=1;
 
 };
 
