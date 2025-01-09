@@ -31,7 +31,7 @@ std::shared_ptr<Bullet> Vehicle::ShootBullet(int x, int y)
 
 	//std::cout << "Bullet position after adjustment: (" << bulletX << ", " << bulletY << ")" << std::endl;
 
-	return std::make_shared<Bullet>(bulletX, bulletY, 0, false, true, 1, 1, m_axis);
+	return std::make_shared<Bullet>(bulletX, bulletY, 0, false, true, 1, m_axis);
 
 }
 

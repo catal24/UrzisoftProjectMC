@@ -168,7 +168,7 @@ void Map::GenerateRandomBombsOnWalls(int numBombs)
 				if (hasAdjacentRoad)
 				{
 					delete m_map[i][j];
-					m_map[i][j] = new Bomb{ i, j, 0, true, true, 1 };
+					m_map[i][j] = new Bomb{ i, j, 0, true, true };
 					count++;
 				}
 			}
