@@ -10,8 +10,8 @@ GameObject::GameObject(int xStart, int yStart, int id, bool isBreakable, bool is
 
 
 
-int GameObject::GetXStart() const { return m_x; }
-void GameObject::SetXStart(int xStart) { m_x = xStart; }
+uint8_t GameObject::GetXStart() const { return m_x; }
+void GameObject::SetXStart(uint8_t xStart) { m_x = xStart; }
 
 void GameObject::SetTextColor(int color)
 {
@@ -19,8 +19,8 @@ void GameObject::SetTextColor(int color)
     SetConsoleTextAttribute(hConsole, color);
 }
 
-int GameObject::GetYStart() const { return m_y; }
-void GameObject::SetYStart(int yStart) { m_y = yStart; }
+uint8_t GameObject::GetYStart() const { return m_y; }
+void GameObject::SetYStart(uint8_t yStart) { m_y = yStart; }
 
 int GameObject::GetId() const { return m_id; }
 void GameObject::SetId(int id) { m_id = id; }
