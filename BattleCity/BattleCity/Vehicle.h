@@ -8,7 +8,7 @@ class Vehicle :public GameObject
 {
 public:
 	
-	Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives=3, int speed=5, bool isDead = false, Axis axis=Axis::left,int playerid=0);
+	Vehicle(uint8_t xStart, uint8_t yStart, int id, bool isBreakable, bool isVisible, uint8_t lives=3, int speed=5, bool isDead = false, Axis axis=Axis::left,int playerid=0);
 
 	Vehicle() = default;
 
