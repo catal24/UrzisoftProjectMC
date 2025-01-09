@@ -12,39 +12,45 @@ void setTextColor(int color) {
 	SetConsoleTextAttribute(hConsole, color);
 }
 
-std::string Map::EncodeMap2()
-{
-	std::string encodedString;
+#include <crow/json.h>
+#include <vector>
 
-	// Loop through the map and encode each cell
+crow::json::wvalue Map::EncodeMap2() {
+	crow::json::wvalue encodedJson;
+	std::vector<std::vector<int>> encodedMap;
+	encodedMap.resize(m_map.size());
+
 	for (int i = 0; i < m_height; i++) {
+		encodedMap[i].resize(m_map[i].size());
 		for (int j = 0; j < m_width; j++) {
-			char encodedValue = 0;
-
-			// Encode different objects as numbers (0, 1, 2, 3)
 			if (dynamic_cast<Road*>(m_map[i][j])) {
-				encodedValue = '0';  // Road
+				encodedMap[i][j] = 0;
 			}
 			else if (dynamic_cast<Wall*>(m_map[i][j])) {
-				encodedValue = '1';  // Wall
+				encodedMap[i][j] = 1;
 			}
 			else if (dynamic_cast<Vehicle*>(m_map[i][j])) {
-				encodedValue = '2';  // Vehicle
+				encodedMap[i][j] = 2;
 			}
 			else if (dynamic_cast<Bullet*>(m_map[i][j])) {
-				encodedValue = '3';  // Bullet
+				encodedMap[i][j] = 3;
+
 			}
 			else if (dynamic_cast<Bomb*>(m_map[i][j])) {
-				encodedValue = '4';  // Wall
+				encodedMap[i][j] = 4;
 			}
-
-			encodedString += encodedValue;
 		}
 	}
 
-	return encodedString;
-}
+	// Construim JSON-ul
+	for (size_t i = 0; i < encodedMap.size(); i++) {
+		for (size_t j = 0; j < encodedMap[i].size(); j++) {
+			encodedJson[""][i][j] = encodedMap[i][j];
+		}
+	}
 
+	return encodedJson;
+}
 
 std::ofstream outFile("encoded_map.txt");
 

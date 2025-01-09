@@ -10,37 +10,40 @@ Game::Game( Difficulty difficulty)
 }
 
 
-void Game::startGame()
-{
+void Game::startGame() {
 	isStart = true;
 	std::queue<GameObject*> q;
 	m_scene->DrawTest(*this);
 
+	// Crow server
 	crow::SimpleApp app;
 
+	// Endpoint pentru hartă
 	CROW_ROUTE(app, "/map")([&]() {
-		std::string toSend = m_scene->GetMap().EncodeMap2();
-		return crow::json::wvalue(toSend);
+		return m_scene->GetMap().EncodeMap2(); // EncodeMap2 returnează direct un `crow::json::wvalue`
 		});
 
-	std::thread appThread([&app]() {
+	// Pornim serverul într-un thread separat
+	std::thread appThread([&]() {
 		app.port(18080).multithreaded().run();
 		});
 
+	// Bucla principală a jocului
 	while (isStart) {
 		Sleep(50);
 
 		InputControll();
 		BulletMoving();
 
-		std::string toSend = m_scene->GetMap().EncodeMap2();
-
+		// Updatează harta - nu este necesar să trimitem JSON aici
+		m_scene->GetMap().EncodeMap2();
 	}
 
 	std::cout << "GameOver\n";
 
-	// Ensure the app thread joins before finishing the game loop
-	appThread.join();
+	// Oprirea serverului Crow
+	app.stop();
+	appThread.join(); // Așteaptă firul de execuție să se termine
 }
 
 void Game::InputControll()

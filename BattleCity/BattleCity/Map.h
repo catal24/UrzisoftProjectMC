@@ -14,7 +14,7 @@ class Map
 public:
 	Map() = default;
 
-	std::string EncodeMap2();
+	crow::json::wvalue EncodeMap2();
 
 	Map(std::vector<std::vector<int>> mat);
 
