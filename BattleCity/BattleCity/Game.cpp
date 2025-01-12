@@ -49,8 +49,31 @@ void Game::startGame() {
 void Game::InputControll()
 {
 	// Controlul jucătorului
-	if (_kbhit() && !m_v.GetIsDead()) {
-		char key = _getch();
+	if (!m_v.GetIsDead()) {
+		
+		// Execute a system call to curl for HTTP GET request
+		std::string command = "curl -s http://localhost:8080/p1";
+
+		// Use _popen on Windows to execute the curl command
+		FILE* fp = _popen(command.c_str(), "r");
+		if (fp == nullptr) {
+				std::cerr << "Failed to run curl command" << std::endl;
+				return;
+		}
+
+			// Read the response from curl
+		char buffer[128];
+		std::string response = "";
+		while (fgets(buffer, sizeof(buffer), fp) != nullptr) {
+				response += buffer;
+			}
+		_pclose(fp);
+
+		// Wait for 1 second before fetching again
+		std::this_thread::sleep_for(std::chrono::seconds(0));
+		
+
+		char key = response[12];
 		if (key == 'w' || key == 'W') {
 			m_scene->MoveObject(&m_v, m_v.GetXStart() - 1, m_v.GetYStart());
 			m_v.SetAxis(key);
