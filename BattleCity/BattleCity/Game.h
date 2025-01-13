@@ -34,7 +34,7 @@ public:
 	void HandleBombCollision(Bomb* bomb, int bombX, int bombY);
 	void HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator& it, int newX, int newY);
 	void BulletMoving();
-	void Shoot();
+	void Shoot(Vehicle v);
 	void InputControll();
 	Map& GetMap();
 	GameScene* GetScene();

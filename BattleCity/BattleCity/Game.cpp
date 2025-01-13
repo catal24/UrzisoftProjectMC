@@ -97,7 +97,7 @@ void Game::InputControll()
 
 		}
 		else if (key == ' ') {
-			Shoot();
+			Shoot(m_v1);
 		}
 	}
 
@@ -147,7 +147,7 @@ void Game::InputControll()
 
 		}
 		else if (key == ' ') {
-			Shoot();
+			Shoot(m_v2);
 		}
 	}
 
@@ -232,11 +232,11 @@ std::vector<std::vector<int>> Game::randomMap()
 	return map;
 }
 
-void Game::Shoot() {
+void Game::Shoot(Vehicle v) {
 	static unsigned long lastShotTime = 0;  // Timpul ultimei trageri
 	const unsigned long shootDelay = 500;  // Delay de 500ms între trageri
 	unsigned long currentTime = GetTickCount();
-
+	Vehicle m_v1 = v;
 	// Verificăm dacă putem trage
 	if (currentTime - lastShotTime < shootDelay) {
 		return;  // Ieșim dacă nu a trecut suficient timp

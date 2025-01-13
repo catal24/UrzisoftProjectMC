@@ -10,22 +10,24 @@
 GameWindow::GameWindow(QWidget* parent)
     : QWidget(parent)
 {
-    // Setează dimensiunea ferestrei la 1280x800
+    // Set window size to 800x800
     this->setFixedSize(800, 800);
 
-    // Setează titlul ferestrei și alte caracteristici
+    // Set window title and properties
     this->setWindowTitle("STARFIRE");
-    
     this->setStyleSheet("background-color: red;");
-
     this->setWindowFlags(Qt::Window | Qt::WindowCloseButtonHint);
     this->setWindowState(Qt::WindowNoState);
 
+    // Timer to update the map every 50ms
+    QTimer* mapUpdateTimer = new QTimer(this);
+    connect(mapUpdateTimer, &QTimer::timeout, this, [&]() {
+        fetchAndSetMap("http://localhost:18080/map");
+        update();
+        });
+    mapUpdateTimer->start(50); // Update every 50ms
 
-    // Fetch map la inițializare
-    fetchAndSetMap("http://localhost:18080/map");
-
-    // Timer pentru actualizare
+    // Game timer for rendering
     QTimer* gameTimer = new QTimer(this);
     connect(gameTimer, &QTimer::timeout, this, [&]() {
         update();
@@ -33,41 +35,43 @@ GameWindow::GameWindow(QWidget* parent)
     gameTimer->start(16); // ~60 FPS
 }
 
-
-
-
 void GameWindow::fetchAndSetMap(const QString& serverUrl) {
     QString mapData = fetchMap(serverUrl);
     if (mapData.contains("Eroare")) {
         qWarning() << "Nu s-a putut încărca harta.";
+        return;
     }
-    else {
-        // Parsăm JSON-ul pentru a obține matricea
-        QJsonDocument doc = QJsonDocument::fromJson(mapData.toUtf8());
-        if (doc.isArray()) {
-            QJsonArray mapArray = doc.array();
-            for (const auto& row : mapArray) {
-                QJsonArray rowArray = row.toArray();
-                QVector<int> mapRow;
-                for (const auto& cell : rowArray) {
-                    mapRow.append(cell.toInt());
-                }
-                mapMatrix.append(mapRow);
+
+    // Parse JSON to get the map matrix
+    QJsonDocument doc = QJsonDocument::fromJson(mapData.toUtf8());
+    if (doc.isArray()) {
+        QJsonArray mapArray = doc.array();
+
+        QVector<QVector<int>> newMapMatrix;
+        for (const auto& row : mapArray) {
+            QJsonArray rowArray = row.toArray();
+            QVector<int> mapRow;
+            for (const auto& cell : rowArray) {
+                mapRow.append(cell.toInt());
             }
+            newMapMatrix.append(mapRow);
         }
+
+        // Update the map matrix
+        mapMatrix = newMapMatrix;
     }
 }
 
 QString fetchMap(const QString& serverUrl) {
-    // Realizează cererea GET către server
+    // Make a GET request to the server
     auto response = cpr::Get(cpr::Url{ serverUrl.toStdString() });
 
     if (response.status_code == 200) {
-        // Răspuns valid
+        // Valid response
         return QString::fromStdString(response.text);
     }
     else {
-        // Eroare la fetch
+        // Fetch error
         qWarning() << "Eroare la fetchMap. Status code:" << response.status_code;
         return QString("Eroare la descărcarea hărții.");
     }
@@ -76,45 +80,44 @@ QString fetchMap(const QString& serverUrl) {
 void GameWindow::paintEvent(QPaintEvent* event) {
     QPainter painter(this);
 
-    // Desenează fundalul
+    // Draw background
     painter.fillRect(this->rect(), Qt::black);
 
-    // Desenează matricea hărții
+    // Draw the map
     drawMap(painter);
 }
 
 void GameWindow::drawMap(QPainter& painter) {
-    // Dimensiunea fiecărei celule în pixeli
+    // Size of each cell in pixels
     int cellSize = 40;
 
-    // Încarcă imaginile
+    // Load images
     QPixmap blockBlack("resources/images/podea.jpeg");
     QPixmap blockGreen("resources/images/Wall.jpg");
-
-    // Scalează imaginile pentru a se potrivi celulelor de 40x40 pixeli
-    blockBlack = blockBlack.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
-    
-    blockGreen = blockGreen.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
-
     QPixmap vehicul("resources/images/playerDown.jpg");
-    vehicul=vehicul.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+
+    // Scale images to fit 40x40 pixels
+    blockBlack = blockBlack.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    blockGreen = blockGreen.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    vehicul = vehicul.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+
     QPixmap currentBlock;
-    // Desenează harta
+
+    // Draw the map based on the matrix
     for (int y = 0; y < mapMatrix.size(); ++y) {
         for (int x = 0; x < mapMatrix[y].size(); ++x) {
-            // Selectează imaginea în funcție de valoarea din matrice
+            // Choose the image based on the matrix value
             if (mapMatrix[y][x] == 0)
-                 currentBlock = blockBlack;
+                currentBlock = blockBlack;
             else if (mapMatrix[y][x] == 1)
-                 currentBlock = blockGreen;
-            else if(mapMatrix[y][x]==2)
+                currentBlock = blockGreen;
+            else if (mapMatrix[y][x] == 2)
                 currentBlock = vehicul;
 
-            // Desenează imaginea în poziția corespunzătoare
+            // Draw the image at the corresponding position
             painter.drawPixmap(x * cellSize, y * cellSize, currentBlock);
         }
     }
 }
-
 
 GameWindow::~GameWindow() {}
