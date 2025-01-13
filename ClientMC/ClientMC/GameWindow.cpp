@@ -88,7 +88,7 @@ void GameWindow::drawMap(QPainter& painter) {
     int cellSize = 40;
 
     // Încarcă imaginile
-    QPixmap blockBlack("resources/images/podea2.jpeg");
+    QPixmap blockBlack("resources/images/podea.jpeg");
     QPixmap blockGreen("resources/images/Wall.jpg");
 
     // Scalează imaginile pentru a se potrivi celulelor de 40x40 pixeli
@@ -96,7 +96,7 @@ void GameWindow::drawMap(QPainter& painter) {
     
     blockGreen = blockGreen.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
 
-    QPixmap vehicul("resources/images/vehicle.png");
+    QPixmap vehicul("resources/images/playerDown.jpg");
     vehicul=vehicul.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
     QPixmap currentBlock;
     // Desenează harta
