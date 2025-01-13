@@ -101,7 +101,7 @@ void Game::InputControll()
 		}
 	}
 
-	if (!m_v1.GetIsDead()) {
+	if (!m_v2.GetIsDead()) {
 
 		// Execute a system call to curl for HTTP GET request
 		std::string command = "curl -s http://localhost:8082/player";
@@ -128,22 +128,22 @@ void Game::InputControll()
 		char key = response[12];
 		if (key == 'w' || key == 'W') {
 			m_scene->MoveObject(&m_v2, m_v2.GetXStart() - 1, m_v2.GetYStart());
-			m_v1.SetAxis(key);
+			m_v2.SetAxis(key);
 
 		}
 		else if (key == 's' || key == 'S') {
 			m_scene->MoveObject(&m_v2, m_v2.GetXStart() + 1, m_v2.GetYStart());
-			m_v1.SetAxis(key);
+			m_v2.SetAxis(key);
 
 		}
 		else if (key == 'a' || key == 'A') {
 			m_scene->MoveObject(&m_v2, m_v2.GetXStart(), m_v2.GetYStart() - 1);
-			m_v1.SetAxis(key);
+			m_v2.SetAxis(key);
 
 		}
 		else if (key == 'd' || key == 'D') {
 			m_scene->MoveObject(&m_v2, m_v2.GetXStart(), m_v2.GetYStart() + 1);
-			m_v1.SetAxis(key);
+			m_v2.SetAxis(key);
 
 		}
 		else if (key == ' ') {
