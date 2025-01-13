@@ -17,6 +17,7 @@ void Game::startGame() {
 
 	// Crow server
 	crow::SimpleApp app;
+	app.loglevel(crow::LogLevel::Warning);
 
 	// Endpoint pentru hartă
 	CROW_ROUTE(app, "/map")([&]() {
@@ -52,7 +53,7 @@ void Game::InputControll()
 	if (!m_v.GetIsDead()) {
 		
 		// Execute a system call to curl for HTTP GET request
-		std::string command = "curl -s http://localhost:8080/p1";
+		std::string command = "curl -s http://localhost:8081/player";
 
 		// Use _popen on Windows to execute the curl command
 		FILE* fp = _popen(command.c_str(), "r");
