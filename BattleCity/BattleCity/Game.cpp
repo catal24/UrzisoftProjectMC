@@ -4,9 +4,10 @@
 Game::Game( Difficulty difficulty)
 	:m_scene{ new GameScene{randomMap()}}, m_playerCount{1}, m_difficulty{difficulty}
 {
-	m_v = { m_v.GetStartingPositions()[m_playerCount - 1].first,
-		m_v.GetStartingPositions()[m_playerCount - 1].second,0,false,true,3,5,false,Axis::down };
-	m_scene->AddObj(&m_v);
+	m_v1 = { 1,1,0,false,true,3,5,false,Axis::down };
+	m_v2 = { 1,18,0,false,true,3,5,false,Axis::down };
+	m_scene->AddObj(&m_v1);
+	m_scene->AddObj(&m_v2);
 }
 
 
@@ -50,7 +51,7 @@ void Game::startGame() {
 void Game::InputControll()
 {
 	// Controlul jucătorului
-	if (!m_v.GetIsDead()) {
+	if (!m_v1.GetIsDead()) {
 		
 		// Execute a system call to curl for HTTP GET request
 		std::string command = "curl -s http://localhost:8081/player";
@@ -76,29 +77,80 @@ void Game::InputControll()
 
 		char key = response[12];
 		if (key == 'w' || key == 'W') {
-			m_scene->MoveObject(&m_v, m_v.GetXStart() - 1, m_v.GetYStart());
-			m_v.SetAxis(key);
+			m_scene->MoveObject(&m_v1, m_v1.GetXStart() - 1, m_v1.GetYStart());
+			m_v1.SetAxis(key);
 
 		}
 		else if (key == 's' || key == 'S') {
-			m_scene->MoveObject(&m_v, m_v.GetXStart() + 1, m_v.GetYStart());
-			m_v.SetAxis(key);
+			m_scene->MoveObject(&m_v1, m_v1.GetXStart() + 1, m_v1.GetYStart());
+			m_v1.SetAxis(key);
 
 		}
 		else if (key == 'a' || key == 'A') {
-			m_scene->MoveObject(&m_v, m_v.GetXStart(), m_v.GetYStart() - 1);
-			m_v.SetAxis(key);
+			m_scene->MoveObject(&m_v1, m_v1.GetXStart(), m_v1.GetYStart() - 1);
+			m_v1.SetAxis(key);
 
 		}
 		else if (key == 'd' || key == 'D') {
-			m_scene->MoveObject(&m_v, m_v.GetXStart(), m_v.GetYStart() + 1);
-			m_v.SetAxis(key);
+			m_scene->MoveObject(&m_v1, m_v1.GetXStart(), m_v1.GetYStart() + 1);
+			m_v1.SetAxis(key);
 
 		}
 		else if (key == ' ') {
 			Shoot();
 		}
 	}
+
+	if (!m_v1.GetIsDead()) {
+
+		// Execute a system call to curl for HTTP GET request
+		std::string command = "curl -s http://localhost:8082/player";
+
+		// Use _popen on Windows to execute the curl command
+		FILE* fp = _popen(command.c_str(), "r");
+		if (fp == nullptr) {
+			std::cerr << "Failed to run curl command" << std::endl;
+			return;
+		}
+
+		// Read the response from curl
+		char buffer[128];
+		std::string response = "";
+		while (fgets(buffer, sizeof(buffer), fp) != nullptr) {
+			response += buffer;
+		}
+		_pclose(fp);
+
+		// Wait for 1 second before fetching again
+		std::this_thread::sleep_for(std::chrono::seconds(0));
+
+
+		char key = response[12];
+		if (key == 'w' || key == 'W') {
+			m_scene->MoveObject(&m_v2, m_v2.GetXStart() - 1, m_v2.GetYStart());
+			m_v1.SetAxis(key);
+
+		}
+		else if (key == 's' || key == 'S') {
+			m_scene->MoveObject(&m_v2, m_v2.GetXStart() + 1, m_v2.GetYStart());
+			m_v1.SetAxis(key);
+
+		}
+		else if (key == 'a' || key == 'A') {
+			m_scene->MoveObject(&m_v2, m_v2.GetXStart(), m_v2.GetYStart() - 1);
+			m_v1.SetAxis(key);
+
+		}
+		else if (key == 'd' || key == 'D') {
+			m_scene->MoveObject(&m_v2, m_v2.GetXStart(), m_v2.GetYStart() + 1);
+			m_v1.SetAxis(key);
+
+		}
+		else if (key == ' ') {
+			Shoot();
+		}
+	}
+
 }
 
 Map& Game::GetMap()
@@ -191,14 +243,14 @@ void Game::Shoot() {
 	}
 
 	// Coordonatele vehiculului curent
-	int currentX = m_v.GetXStart();
-	int currentY = m_v.GetYStart();
+	int currentX = m_v1.GetXStart();
+	int currentY = m_v1.GetYStart();
 
 	// Coordonatele țintei în funcție de direcția vehiculului
 	int targetX = currentX;
 	int targetY = currentY;
 
-	switch (m_v.GetAxis()) {
+	switch (m_v1.GetAxis()) {
 	case Axis::up:    targetX--; break;
 	case Axis::down:  targetX++; break;
 	case Axis::left:  targetY--; break;
@@ -214,7 +266,7 @@ void Game::Shoot() {
 	}
 
 	// Creăm un glonț nou și îl adăugăm în lista de gloanțe
-	auto newBullet = m_v.ShootBullet(currentX, currentY);
+	auto newBullet = m_v1.ShootBullet(currentX, currentY);
 	bullets.push_back(std::move(newBullet));
 
 	// Actualizăm timpul ultimei trageri

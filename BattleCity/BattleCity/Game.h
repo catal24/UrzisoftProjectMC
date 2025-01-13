@@ -40,7 +40,7 @@ public:
 	GameScene* GetScene();
 	std::vector<std::vector<int>> randomMap();
 private:
-	Vehicle m_v;
+	Vehicle m_v1,m_v2,m_v3,mv_4;
 	Map m_map;
 	Difficulty m_difficulty = EASY;
 	std::vector<std::vector<int>> m_initMap;
