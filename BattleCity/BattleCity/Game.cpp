@@ -1,5 +1,7 @@
 ﻿#include "Game.h"
-
+#include <regex>
+#include <iostream>
+#include <string>
 
 Game::Game( Difficulty difficulty)
 	:m_scene{ new GameScene{randomMap()}}, m_playerCount{1}, m_difficulty{difficulty}
@@ -48,6 +50,18 @@ void Game::startGame() {
 	appThread.join(); // Așteaptă firul de execuție să se termine
 }
 
+char extractCommand(const std::string& json) {
+	size_t pos = json.find("\"command\":\"");
+	if (pos != std::string::npos) {  // Găsește poziția unde începe "command"
+		pos += 11;  // Avansăm la primul caracter după "command":"
+		if (pos < json.size()) {
+			return json[pos]; // Returnează caracterul tastat
+		}
+	}
+	return '0'; // Default dacă nu găsim nimic valid
+}
+
+
 void Game::InputControll()
 {
 	// Controlul jucătorului
@@ -73,9 +87,12 @@ void Game::InputControll()
 
 		// Wait for 1 second before fetching again
 		std::this_thread::sleep_for(std::chrono::seconds(0));
-		
 
-		char key = response[12];
+		//std::cout << "Raw server response: " << response << std::endl; // Debug
+		
+		char key = extractCommand(response);
+		//std::cout << "Extracted key: " << key << std::endl;
+
 		if (key == 'w' || key == 'W') {
 			m_scene->MoveObject(&m_v1, m_v1.GetXStart() - 1, m_v1.GetYStart());
 			m_v1.SetAxis(key);
@@ -236,21 +253,21 @@ void Game::Shoot(Vehicle v) {
 	static unsigned long lastShotTime = 0;  // Timpul ultimei trageri
 	const unsigned long shootDelay = 500;  // Delay de 500ms între trageri
 	unsigned long currentTime = GetTickCount();
-	Vehicle m_v1 = v;
+	//Vehicle m_v1 = v;
 	// Verificăm dacă putem trage
 	if (currentTime - lastShotTime < shootDelay) {
 		return;  // Ieșim dacă nu a trecut suficient timp
 	}
 
 	// Coordonatele vehiculului curent
-	int currentX = m_v1.GetXStart();
-	int currentY = m_v1.GetYStart();
+	int currentX = v.GetXStart();
+	int currentY = v.GetYStart();
 
 	// Coordonatele țintei în funcție de direcția vehiculului
 	int targetX = currentX;
 	int targetY = currentY;
 
-	switch (m_v1.GetAxis()) {
+	switch (v.GetAxis()) {
 	case Axis::up:    targetX--; break;
 	case Axis::down:  targetX++; break;
 	case Axis::left:  targetY--; break;
@@ -266,7 +283,7 @@ void Game::Shoot(Vehicle v) {
 	}
 
 	// Creăm un glonț nou și îl adăugăm în lista de gloanțe
-	auto newBullet = m_v1.ShootBullet(currentX, currentY);
+	auto newBullet = v.ShootBullet(currentX, currentY);
 	bullets.push_back(std::move(newBullet));
 
 	// Actualizăm timpul ultimei trageri
