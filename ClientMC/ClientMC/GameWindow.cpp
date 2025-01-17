@@ -92,14 +92,18 @@ void GameWindow::drawMap(QPainter& painter) {
     int cellSize = 40;
 
     // Load images
-    QPixmap blockBlack("resources/images/podea.jpeg");
+    QPixmap floor("resources/images/podea.jpeg");
     QPixmap blockGreen("resources/images/Wall.jpg");
     QPixmap vehicul("resources/images/playerDown.jpg");
+    QPixmap bomb("resources/images/bomba.jpg");
+    QPixmap bullet("resources/images/bullet.jpg");
 
     // Scale images to fit 40x40 pixels
-    blockBlack = blockBlack.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    floor = floor.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
     blockGreen = blockGreen.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
     vehicul = vehicul.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    bomb = bomb.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
+    bullet = bullet.scaled(cellSize, cellSize, Qt::IgnoreAspectRatio, Qt::FastTransformation);
 
     QPixmap currentBlock;
 
@@ -108,11 +112,15 @@ void GameWindow::drawMap(QPainter& painter) {
         for (int x = 0; x < mapMatrix[y].size(); ++x) {
             // Choose the image based on the matrix value
             if (mapMatrix[y][x] == 0)
-                currentBlock = blockBlack;
+                currentBlock = floor;
             else if (mapMatrix[y][x] == 1)
                 currentBlock = blockGreen;
             else if (mapMatrix[y][x] == 2)
                 currentBlock = vehicul;
+            else if (mapMatrix[y][x] == 3)
+                currentBlock = bullet;
+            else if (mapMatrix[y][x] == 4)
+                currentBlock = bomb;
 
             // Draw the image at the corresponding position
             painter.drawPixmap(x * cellSize, y * cellSize, currentBlock);
