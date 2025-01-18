@@ -1,7 +1,7 @@
 #include "Bomb.h"
 
-Bomb::Bomb(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int radius)
-	: GameObject{xStart, yStart, id, isBreakable, isVisible},
+Bomb::Bomb(int xStart, int yStart, int x, int y, int id, bool isBreakable, bool isVisible, int radius)
+	: GameObject{xStart, yStart, x, y, id, isBreakable, isVisible},
 	m_radius{ radius } {}
 
 int Bomb::GetRadius() const { return m_radius; }

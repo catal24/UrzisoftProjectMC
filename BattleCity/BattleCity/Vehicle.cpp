@@ -3,8 +3,8 @@
 
 #include <iostream>
 
-Vehicle::Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives, int speed, bool isDead, Axis axis,int playerid) :
-	GameObject{ xStart, yStart, id, isBreakable, isVisible },
+Vehicle::Vehicle(int xStart, int yStart, int x, int y, int id, bool isBreakable, bool isVisible, int lives, int speed, bool isDead, Axis axis,int playerid) :
+	GameObject{ xStart, yStart, x, y, id, isBreakable, isVisible },
 	m_lives{ lives },
 	m_speed{ speed },
 	m_isDead{ isDead },
@@ -31,7 +31,7 @@ std::shared_ptr<Bullet> Vehicle::ShootBullet(int x, int y)
 
 	//std::cout << "Bullet position after adjustment: (" << bulletX << ", " << bulletY << ")" << std::endl;
 
-	return std::make_shared<Bullet>(bulletX, bulletY, 0, false, true, 1, 1, m_axis);
+	return std::make_shared<Bullet>(bulletX, bulletY, bulletX, bulletY, 0, false, true, 1, 1, m_axis);
 
 }
 
@@ -51,8 +51,6 @@ void Vehicle::SetAxis(char ax)
 void Vehicle::SetSpeed(int amount) { m_speed = amount; }
 void Vehicle::SetLives(int amount) { m_lives = amount; }
 void Vehicle::SetIsDead(bool flag) { m_isDead = flag; }
-void Vehicle::SetX(int x) { m_x = x; }
-void Vehicle::SetY(int y) { m_y = y; }
 
 void Vehicle::MoveTank(char dir)
 {
@@ -83,11 +81,10 @@ void Vehicle::MoveTank(char dir)
 }
 
 int Vehicle::GetSpeed() const { return m_speed; }
-int Vehicle::GetX() { return m_x; }
-int Vehicle::GetY() { return m_y; }
 int Vehicle::GetLives() const { return m_lives; }
 bool Vehicle::GetIsDead() const { return m_isDead; }
 Axis Vehicle::GetAxis() const { return m_axis; }
+
 
 void Vehicle::Die()
 {
@@ -107,16 +104,6 @@ std::vector<std::pair<int, int>> Vehicle::GetStartingPositions() { return m_star
 void Vehicle::Draw()
 {
 	std::cout << (char)254u;
-}
-
-void Vehicle::SetId(int id)
-{
-	m_id = id;
-}
-
-int Vehicle::GetId() const
-{
-	return m_id;
 }
 
 int Vehicle::GetPlayerId() const

@@ -68,12 +68,12 @@ Map::Map(std::vector<std::vector<int>> mat)
 		{
 			if (mat[i][j] == 0)
 			{
-				m_map[i][j] = new Road{ i,j,0,false,true };
+				m_map[i][j] = new Road{ i,j,i,j,0,false,true };
 				m_numberOfRoads++;
 			}
 			else
 			{
-				m_map[i][j] = new Wall{ i,j,0,true,true,false };
+				m_map[i][j] = new Wall{ i,j,i,j,0,true,true,false };
 				m_numberOfWalls++;
 			}
 		}
@@ -173,7 +173,7 @@ void Map::GenerateRandomBombsOnWalls(int numBombs)
 				if (hasAdjacentRoad)
 				{
 					delete m_map[i][j];
-					m_map[i][j] = new Bomb{ i, j, 0, true, true, 1 };
+					m_map[i][j] = new Bomb{ i, j,i,j, 0, true, true, 1 };
 					count++;
 				}
 			}

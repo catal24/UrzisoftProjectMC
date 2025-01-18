@@ -2,13 +2,10 @@
 #include "Wall.h"
 
 
-Wall::Wall(int xStart, int yStart, int id, bool isBreakable, bool isVisible, bool hasBomb)
-	:GameObject{ xStart, yStart, id, isBreakable, isVisible },
+Wall::Wall(int xStart, int yStart, int x, int y, int id, bool isBreakable, bool isVisible, bool hasBomb)
+	:GameObject{ xStart, yStart, x, y, id, isBreakable, isVisible },
 	m_hasBomb{ hasBomb }
 {}
-
-
-
 
 bool Wall::HasBomb() const
 {
@@ -16,23 +13,10 @@ bool Wall::HasBomb() const
 }
 
 
-void Wall::SetDestructible(bool destructible)
-{
-	m_isBreakable = destructible;
-}
-
-
 void Wall::SetBomb(bool hasBomb)
 {
 	m_hasBomb = hasBomb;
 }
-
-
-bool Wall::IsBreakable() const { return m_isBreakable; }
-void Wall::SetBreakable(bool isBreakable) { m_isBreakable = isBreakable; }
-
-bool Wall::IsVisible() const { return m_isVisible; }
-void Wall::SetVisible(bool isVisible) { m_isVisible = isVisible; }
 
 void Wall::Draw()
 {

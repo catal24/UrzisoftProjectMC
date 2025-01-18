@@ -2,8 +2,9 @@
 #include <string>
 #include "Vehicle.h"
 class Player
-{public:
-	Player(std::string name, int id, int credits=0, int rank=0);
+{
+public:
+	Player(std::string name, int id, int credits = 0, int rank = 0);
 	~Player() = default;
 
 	void SetName(std::string name);
@@ -15,7 +16,7 @@ class Player
 	int GetCredits()const;
 	int GetRank()const;
 
-	private:
+private:
 	std::string m_name;
 	int m_id;
 	int m_credits;

@@ -34,7 +34,7 @@
         MoveCursor(y, x);
    
         m_map.GetMap()[x][y] = nullptr;
-        m_map.GetMap()[x][y] = new Road{x,y,0,false,true};
+        m_map.GetMap()[x][y] = new Road{x,y,x,y,0,false,true};
         m_map.GetMap()[x][y]->Draw();
     }
 
@@ -55,13 +55,13 @@
     {
         if (CheckObj(x, y))
         {
-            RemoveObj(obj->GetXStart(), obj->GetYStart());
+            RemoveObj(obj->GetX(), obj->GetY());
 
             m_map.GetMap()[x][y] = obj;
             MoveCursor(y, x);
             m_map.GetMap()[x][y]->Draw();
-            obj->SetXStart(x);
-            obj->SetYStart(y);
+            obj->SetX(x);
+            obj->SetY(y);
        
             if (Vehicle* vehicle = dynamic_cast<Vehicle*>(obj)) {
                 // Setăm coordonatele specifice vehiculului
@@ -73,8 +73,8 @@
             }
 
             if (Bullet* bullet = dynamic_cast<Bullet*>(obj)) {
-                bullet->SetXStart(x);
-                bullet->SetYStart(y);
+                bullet->SetX(x);
+                bullet->SetY(y);
             }
            GetMap().EncodeMap();
 

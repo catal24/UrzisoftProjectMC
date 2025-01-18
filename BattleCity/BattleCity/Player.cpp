@@ -5,7 +5,7 @@ Player::Player(std::string name, int id, int credits, int rank):
 	m_id{ id },
 	m_credits{ credits },
 	m_rank{rank}, 
-	m_v{ 0,0,1,false,true }
+	m_v{ 0,0,0,0,1,false,true }
 {}
 
 void Player::SetName(std::string name)	{m_name = name;}

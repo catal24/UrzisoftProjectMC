@@ -8,7 +8,7 @@ class Vehicle :public GameObject
 {
 public:
 	
-	Vehicle(int xStart, int yStart, int id, bool isBreakable, bool isVisible, int lives=3, int speed=5, bool isDead = false, Axis axis=Axis::left,int playerid=0);
+	Vehicle(int xStart, int yStart, int x, int y, int id, bool isBreakable, bool isVisible, int lives=3, int speed=5, bool isDead = false, Axis axis=Axis::left,int playerid=0);
 
 	Vehicle() = default;
 
@@ -23,12 +23,8 @@ public:
 	void SetSpeed(int amount);
 	void SetLives(int amount);
 	void SetIsDead(bool flag);
-	void SetX(int x);
-	void SetY(int y);
 	void MoveTank(char dir);
 	int GetSpeed()const;
-	int GetX();
-	int GetY();
 	int GetLives()const;
 	bool GetIsDead()const;
 	Axis GetAxis()const;
@@ -36,8 +32,6 @@ public:
 	void Respawn();
 	std::vector<std::pair<int, int>> GetStartingPositions();
 	void Draw()override;
-	void SetId(int id);
-	int GetId() const;
 	int GetPlayerId() const;
 	void SetPlayerId(int playerid);
 private:
@@ -45,6 +39,8 @@ private:
 	int m_playerid;
 	int m_x;
 	int m_y;
+	int m_xStart;
+	int m_yStart;
 	Axis m_axis;
 	int m_lives;
 	int m_speed;

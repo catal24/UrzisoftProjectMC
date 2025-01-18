@@ -6,8 +6,8 @@
 Game::Game( Difficulty difficulty)
 	:m_scene{ new GameScene{randomMap()}}, m_playerCount{1}, m_difficulty{difficulty}
 {
-	m_v1 = { 1,1,0,false,true,3,5,false,Axis::down };
-	m_v2 = { 1,18,0,false,true,3,5,false,Axis::down };
+	m_v1 = { 1,1,1,1,0,false,true,3,5,false,Axis::down };
+	m_v2 = { 1,18,1,18,0,false,true,3,5,false,Axis::down };
 	m_scene->AddObj(&m_v1);
 	m_scene->AddObj(&m_v2);
 }
@@ -94,22 +94,22 @@ void Game::InputControll()
 		//std::cout << "Extracted key: " << key << std::endl;
 
 		if (key == 'w' || key == 'W') {
-			m_scene->MoveObject(&m_v1, m_v1.GetXStart() - 1, m_v1.GetYStart());
+			m_scene->MoveObject(&m_v1, m_v1.GetX() - 1, m_v1.GetY());
 			m_v1.SetAxis(key);
 
 		}
 		else if (key == 's' || key == 'S') {
-			m_scene->MoveObject(&m_v1, m_v1.GetXStart() + 1, m_v1.GetYStart());
+			m_scene->MoveObject(&m_v1, m_v1.GetX() + 1, m_v1.GetY());
 			m_v1.SetAxis(key);
 
 		}
 		else if (key == 'a' || key == 'A') {
-			m_scene->MoveObject(&m_v1, m_v1.GetXStart(), m_v1.GetYStart() - 1);
+			m_scene->MoveObject(&m_v1, m_v1.GetX(), m_v1.GetY() - 1);
 			m_v1.SetAxis(key);
 
 		}
 		else if (key == 'd' || key == 'D') {
-			m_scene->MoveObject(&m_v1, m_v1.GetXStart(), m_v1.GetYStart() + 1);
+			m_scene->MoveObject(&m_v1, m_v1.GetX(), m_v1.GetY() + 1);
 			m_v1.SetAxis(key);
 
 		}
@@ -144,22 +144,22 @@ void Game::InputControll()
 
 		char key = response[12];
 		if (key == 'w' || key == 'W') {
-			m_scene->MoveObject(&m_v2, m_v2.GetXStart() - 1, m_v2.GetYStart());
+			m_scene->MoveObject(&m_v2, m_v2.GetX() - 1, m_v2.GetY());
 			m_v2.SetAxis(key);
 
 		}
 		else if (key == 's' || key == 'S') {
-			m_scene->MoveObject(&m_v2, m_v2.GetXStart() + 1, m_v2.GetYStart());
+			m_scene->MoveObject(&m_v2, m_v2.GetX() + 1, m_v2.GetY());
 			m_v2.SetAxis(key);
 
 		}
 		else if (key == 'a' || key == 'A') {
-			m_scene->MoveObject(&m_v2, m_v2.GetXStart(), m_v2.GetYStart() - 1);
+			m_scene->MoveObject(&m_v2, m_v2.GetX(), m_v2.GetY() - 1);
 			m_v2.SetAxis(key);
 
 		}
 		else if (key == 'd' || key == 'D') {
-			m_scene->MoveObject(&m_v2, m_v2.GetXStart(), m_v2.GetYStart() + 1);
+			m_scene->MoveObject(&m_v2, m_v2.GetX(), m_v2.GetY() + 1);
 			m_v2.SetAxis(key);
 
 		}
@@ -260,8 +260,8 @@ void Game::Shoot(Vehicle v) {
 	}
 
 	// Coordonatele vehiculului curent
-	int currentX = v.GetXStart();
-	int currentY = v.GetYStart();
+	int currentX = v.GetX();
+	int currentY = v.GetY();
 
 	// Coordonatele țintei în funcție de direcția vehiculului
 	int targetX = currentX;
@@ -295,8 +295,8 @@ void Game::BulletMoving() {
 	// Iterate through bullets
 	for (auto it = bullets.begin(); it != bullets.end();) {
 		auto bullet = it->get();
-		int newX = bullet->GetXStart();
-		int newY = bullet->GetYStart();
+		int newX = bullet->GetX();
+		int newY = bullet->GetY();
 
 		// Determine new position based on direction
 		if (!bullet->IsFirstMove()) {
@@ -315,8 +315,8 @@ void Game::BulletMoving() {
 		if (m_scene->CheckObj(newX, newY)) {
 			// Move the bullet if no collision occurs
 			m_scene->MoveObject(bullet, newX, newY);
-			bullet->SetXStart(newX);
-			bullet->SetYStart(newY);
+			bullet->SetX(newX);
+			bullet->SetY(newY);
 			++it;  // Advance the iterator
 		}
 		else {
@@ -355,7 +355,7 @@ void Game::HandleBombCollision(Bomb* bomb, int bombX, int bombY)
 		}
 		//verificam daca este vehicul si il distrugem
 		if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->GetObjectAt(checkX, checkY))) {
-			m_scene->RespawnObj(vehicle, 1, 1);
+			m_scene->RespawnObj(vehicle, vehicle->GetXStart(), vehicle->GetYStart());
 			if (vehicle->GetLives() == 0)
 			{
 				isStart = false;
@@ -376,9 +376,10 @@ void Game::HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator&
 	// Dacă lovește un tanc
 	if (Vehicle* vehicle = dynamic_cast<Vehicle*>(m_scene->GetObjectAt(newX, newY))) {
 		// Respawn the vehicle
-		m_scene->RespawnObj(vehicle, 1, 1); 
+		//std::cout << vehicle->GetXStart() << " " << vehicle->GetYStart() << " ";
+		m_scene->RespawnObj(vehicle, vehicle->GetXStart(), vehicle->GetYStart());
 		m_scene->RemoveObj(newX, newY);                  
-		m_scene->RemoveObj(bullet->GetXStart(), bullet->GetYStart()); 
+		m_scene->RemoveObj(bullet->GetX(), bullet->GetY()); 
 		
 		it = bullets.erase(it);
 		if (vehicle->GetLives() == 0)
@@ -390,7 +391,7 @@ void Game::HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator&
 	// Dacă lovește un alt glonț
 	if (dynamic_cast<Bullet*>(m_scene->GetObjectAt(newX, newY))) {
 		m_scene->RemoveObj(newX, newY);
-		m_scene->RemoveObj(bullet->GetXStart(), bullet->GetYStart());
+		m_scene->RemoveObj(bullet->GetX(), bullet->GetY());
 		it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
 		return;
 	}
@@ -400,7 +401,7 @@ void Game::HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator&
 		if (wall->IsBreakable()) {
 			m_scene->RemoveObj(newX, newY);
 		}
-		m_scene->RemoveObj(bullet->GetXStart(), bullet->GetYStart());
+		m_scene->RemoveObj(bullet->GetX(), bullet->GetY());
 		it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
 		return;
 	}
@@ -409,7 +410,7 @@ void Game::HandleBulletCollision(std::vector<std::shared_ptr<Bullet>>::iterator&
 	if (Bomb* bomb = dynamic_cast<Bomb*>(m_scene->GetObjectAt(newX, newY))) {
 		HandleBombCollision(bomb, newX, newY);
 		m_scene->RemoveObj(newX, newY);
-		m_scene->RemoveObj(bullet->GetXStart(), bullet->GetYStart());
+		m_scene->RemoveObj(bullet->GetX(), bullet->GetY());
 		it = bullets.erase(it);  // Ștergem și actualizăm iteratorul
 		return;
 	}
