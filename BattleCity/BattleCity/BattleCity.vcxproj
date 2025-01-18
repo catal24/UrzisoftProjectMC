@@ -154,6 +154,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="PlayerDatabase.h" />
     <ClInclude Include="Road.h" />
+    <ClInclude Include="Utilities.h" />
     <ClInclude Include="Vehicle.h" />
     <ClInclude Include="Wall.h" />
   </ItemGroup>
