@@ -42,8 +42,5 @@ void Login::handleLogin()
         emit loginSuccess();
         // afisam un mesaj ca logarea a fost realizata cu succes
         QMessageBox::information(this, "Login", "Login successful!");
-
-        // daca nu exista un cont pentru username-ul respectiv, vom crea unul nou
-        QMessageBox::information(this, "Login", "A new account with your username was created");
     }
 }

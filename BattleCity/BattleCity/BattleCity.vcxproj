@@ -130,6 +130,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Axis.cpp" />
+    <ClCompile Include="axis.cppm" />
     <ClCompile Include="Bomb.cpp" />
     <ClCompile Include="Bullet.cpp" />
     <ClCompile Include="Game.cpp" />
