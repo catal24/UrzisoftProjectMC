@@ -1,1 +1,1 @@
-#include "Axis.h"
+module axis;

@@ -94,7 +94,7 @@ void GameWindow::drawMap(QPainter& painter) {
     // Load images
     QPixmap floor("resources/images/podea.jpeg");
     QPixmap blockGreen("resources/images/Wall.jpg");
-    QPixmap vehicul("resources/images/playerDown.jpg");
+    QPixmap vehicul("resources/images/vehicle.jpg");
     QPixmap bomb("resources/images/bomba.jpg");
     QPixmap bullet("resources/images/bullet.jpg");
 
@@ -108,22 +108,22 @@ void GameWindow::drawMap(QPainter& painter) {
     QPixmap currentBlock;
 
     // Draw the map based on the matrix
-    for (int y = 0; y < mapMatrix.size(); ++y) {
-        for (int x = 0; x < mapMatrix[y].size(); ++x) {
+    for (int i = 0; i < mapMatrix.size(); i++) {
+        for (int j = 0; j < mapMatrix[i].size(); j++) {
             // Choose the image based on the matrix value
-            if (mapMatrix[y][x] == 0)
+            if (mapMatrix[i][j] == 0)
                 currentBlock = floor;
-            else if (mapMatrix[y][x] == 1)
+            else if (mapMatrix[i][j] == 1)
                 currentBlock = blockGreen;
-            else if (mapMatrix[y][x] == 2)
+            else if (mapMatrix[i][j] == 2)
                 currentBlock = vehicul;
-            else if (mapMatrix[y][x] == 3)
+            else if (mapMatrix[i][j] == 3)
                 currentBlock = bullet;
-            else if (mapMatrix[y][x] == 4)
+            else if (mapMatrix[j][j] == 4)
                 currentBlock = bomb;
 
             // Draw the image at the corresponding position
-            painter.drawPixmap(x * cellSize, y * cellSize, currentBlock);
+            painter.drawPixmap(j * cellSize, i * cellSize, currentBlock);
         }
     }
 }
