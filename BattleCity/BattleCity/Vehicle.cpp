@@ -1,5 +1,5 @@
 ﻿#include "Vehicle.h"
-#include "Axis.h"
+import axis;
 
 #include <iostream>
 

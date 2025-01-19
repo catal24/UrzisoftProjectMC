@@ -9,7 +9,7 @@
 #include <conio.h> 
 #include <windows.h>
 #include <utility>
-#include "Axis.h"
+import axis;
 #include <random>
 #include <fstream>
 

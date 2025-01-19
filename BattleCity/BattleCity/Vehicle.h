@@ -1,7 +1,7 @@
 #pragma once
+import axis;
 #include "GameObject.h"
 #include "Bullet.h"
-#include "Axis.h"
 #include <vector>
 #include <memory>
 class Vehicle :public GameObject

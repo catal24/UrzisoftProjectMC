@@ -1,7 +1,7 @@
 #pragma once
 #include "GameObject.h"
-#include "Axis.h"
-
+import axis;
+using enum Axis;
 class Bullet:public GameObject
 {
 
