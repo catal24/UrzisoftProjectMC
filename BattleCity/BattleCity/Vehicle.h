@@ -23,13 +23,10 @@ public:
 	void SetSpeed(int amount);
 	void SetLives(int amount);
 	void SetIsDead(bool flag);
-	void MoveTank(char dir);
 	int GetSpeed()const;
 	int GetLives()const;
 	bool GetIsDead()const;
 	Axis GetAxis()const;
-	void Die();
-	void Respawn();
 	std::vector<std::pair<int, int>> GetStartingPositions();
 	void Draw()override;
 	int GetPlayerId() const;
@@ -45,7 +42,7 @@ private:
 	int m_lives;
 	int m_speed;
 	bool m_isDead;
-	std::vector<std::pair<int, int>> m_startingPositions = { {1,1},{18,18},{1,18},{18,1} };// in constructor default
+	std::vector<std::pair<int, int>> m_startingPositions;
 
 };
 

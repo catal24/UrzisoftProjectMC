@@ -11,6 +11,7 @@ Vehicle::Vehicle(int xStart, int yStart, int x, int y, int id, bool isBreakable,
 	m_axis{ axis },
 	m_playerid{playerid}
 {
+	m_startingPositions = { {1,1},{18,18},{1,18},{18,1} };
 }
 
 
@@ -52,52 +53,11 @@ void Vehicle::SetSpeed(int amount) { m_speed = amount; }
 void Vehicle::SetLives(int amount) { m_lives = amount; }
 void Vehicle::SetIsDead(bool flag) { m_isDead = flag; }
 
-void Vehicle::MoveTank(char dir)
-{
-	if (dir == 'w') {
-		m_x--;
-		m_axis = Axis::up;
-		std::cout << "move direction up " << static_cast<int>(m_axis) << std::endl;
-
-
-	}
-	else if (dir == 's') {
-		m_x++;
-		m_axis = Axis::down;
-		std::cout << "move direction down" << static_cast<int>(m_axis) << std::endl;
-
-
-	}
-	else if (dir == 'a') {
-		m_y--;
-		m_axis = Axis::left;
-
-	}
-	else if (dir == 'd') {
-		m_y++;
-		m_axis = Axis::right;
-
-	}
-}
 
 int Vehicle::GetSpeed() const { return m_speed; }
 int Vehicle::GetLives() const { return m_lives; }
 bool Vehicle::GetIsDead() const { return m_isDead; }
 Axis Vehicle::GetAxis() const { return m_axis; }
-
-
-void Vehicle::Die()
-{
-	m_lives -= 1;
-	if (m_lives > 0)
-		Respawn();
-	else
-		m_isDead = true;
-}
-
-void Vehicle::Respawn()
-{
-}
 
 std::vector<std::pair<int, int>> Vehicle::GetStartingPositions() { return m_startingPositions; }
 
