@@ -35,10 +35,13 @@ void Login::handleLogin()
 
     // Definim regex-ul: cel puțin 5 caractere
     QRegularExpression regex(R"(^.{5,}$)");
+
     // Verificăm dacă username-ul se potrivește cu regex-ul
-    while(!regex.match(username).hasMatch())
+    if (!regex.match(username).hasMatch()) {
         QMessageBox::warning(this, "Invalid username", "Username must be at least 5 characters long.");
- 
+        return;
+    }
+
     // Dacă este valid, emitem semnalul de login
     emit loginSuccess();
     QMessageBox::information(this, "Login", "Login successful!");
