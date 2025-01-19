@@ -108,8 +108,8 @@ void GameWindow::drawMap(QPainter& painter) {
     QPixmap currentBlock;
 
     // Draw the map based on the matrix
-    for (int i = 0; i < mapMatrix.size(); i++) {
-        for (int j = 0; j < mapMatrix[i].size(); j++) {
+    for (int i = 0; i < mapMatrix.size(); ++i) {
+        for (int j = 0; j < mapMatrix[i].size(); ++j) {
             // Choose the image based on the matrix value
             if (mapMatrix[i][j] == 0)
                 currentBlock = floor;
@@ -119,7 +119,7 @@ void GameWindow::drawMap(QPainter& painter) {
                 currentBlock = vehicul;
             else if (mapMatrix[i][j] == 3)
                 currentBlock = bullet;
-            else if (mapMatrix[j][j] == 4)
+            else if (mapMatrix[i][j] == 4)
                 currentBlock = bomb;
 
             // Draw the image at the corresponding position

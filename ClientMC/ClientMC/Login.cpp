@@ -1,8 +1,10 @@
-#include "Login.h"
+﻿#include "Login.h"
 #include <QLineEdit>
 #include <QPushButton>
 #include <QVBoxLayout>
 #include <QMessageBox>
+#include <QRegularExpression>
+
 
 Login::Login(QWidget* parent) : QWidget(parent)
 {
@@ -29,18 +31,19 @@ Login::~Login() {}
 //ce facem la click
 void Login::handleLogin()
 {
-    
     QString username = m_usernameField->text();
 
-    // verificam daca username e gol
-    if (username.isEmpty())
-    {
-        
-        QMessageBox::warning(this, "Invalid username", "Enter a valid username");
+    // Definim regex-ul: cel puțin 5 caractere
+    QRegularExpression regex(R"(^.{5,}$)");
+
+    // Verificăm dacă username-ul se potrivește cu regex-ul
+    if (!regex.match(username).hasMatch()) {
+        QMessageBox::warning(this, "Invalid username", "Username must be at least 5 characters long.");
+        return;
     }
-    else {
-        emit loginSuccess();
-        // afisam un mesaj ca logarea a fost realizata cu succes
-        QMessageBox::information(this, "Login", "Login successful!");
-    }
+
+    // Dacă este valid, emitem semnalul de login
+    emit loginSuccess();
+    QMessageBox::information(this, "Login", "Login successful!");
 }
+
